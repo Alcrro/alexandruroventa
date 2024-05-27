@@ -1,0 +1,162 @@
+.about-container {
+  display: block;
+
+  .contacts-container {
+    display: block;
+    margin: 10px auto;
+
+    @media (min-width: 500px) {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .contact-inner {
+      display: block;
+      max-width: 180px;
+      margin: 10px auto;
+      a {
+        display: block;
+        padding: 0.75rem 1rem;
+        margin: 10px auto;
+
+        border-radius: 28px;
+        font-weight: 600;
+        font-size: 18px;
+
+        @media (max-width: 190px) {
+          padding: 10px;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          gap: 10px;
+          @media (max-width: 190px) {
+            flex-wrap: wrap;
+            display: block;
+            margin: 0 auto;
+
+            justify-content: center;
+            vertical-align: middle;
+            text-align: center;
+          }
+        }
+        span:after {
+          content: "\F138";
+          font-family: "Bootstrap-icons";
+          vertical-align: middle;
+          @media (max-width: 200px) {
+            width: 20%;
+            padding-left: 10px;
+            width: unset;
+          }
+        }
+      }
+    }
+  }
+  .cv-container {
+    display: block;
+    padding: 10px 0;
+    .cv-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 0.657rem 1rem;
+      margin: 10px auto;
+      border-radius: 28px;
+      font-weight: 600;
+      font-size: 18px;
+      max-width: 180px;
+
+      .cv-download-button {
+        text-align: center;
+        padding: 0 10px;
+      }
+      .cv-download-button::after {
+        content: "\F30A";
+        font-family: "Bootstrap-icons";
+      }
+
+      @media (max-width: 200px) {
+        display: block;
+        margin: 0 auto;
+        justify-content: center;
+        text-align: center;
+
+        .cv-download-button {
+          display: block;
+          width: unset;
+        }
+      }
+    }
+  }
+}
+
+html.dark .contact-inner {
+  a {
+    background-color: rgb(173, 230, 240);
+    color: rgb(0, 0, 0);
+  }
+
+  a:hover {
+    background-color: rgb(42, 120, 156);
+    color: rgb(255, 255, 255);
+  }
+}
+html.light .contact-inner {
+  a {
+    background-color: rgba(0, 0, 0, 0.856);
+    color: white;
+  }
+
+  a:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: rgb(0, 0, 0);
+    // border: 1px solid #000;
+  }
+}
+
+html.dark .cv-container {
+  .cv-inner {
+    background-color: rgb(240, 248, 255);
+    color: rgb(0, 0, 0);
+  }
+
+  .cv-inner:hover {
+    background-color: rgb(126, 179, 214);
+    color: white;
+    cursor: pointer;
+  }
+
+  .cv-download-button:hover {
+    background-color: white;
+    border-radius: 16px;
+    padding: 0 10px;
+    color: rgb(0, 0, 0);
+  }
+}
+
+html.light .cv-container {
+  .cv-inner {
+    background-color: rgb(22, 198, 230);
+    color: white;
+  }
+
+  .cv-inner:hover {
+    background-color: rgb(251, 251, 252);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
+
+  .cv-download-button:hover {
+    background-color: rgb(0, 0, 0);
+    border-radius: 16px;
+    padding: 0 10px;
+    color: rgb(255, 255, 255);
+  }
+}

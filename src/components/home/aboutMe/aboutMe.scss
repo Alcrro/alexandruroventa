@@ -1,0 +1,15 @@
+.about-me-container {
+  display: block;
+  padding: 1rem 0;
+  .about-me-inner {
+    display: block;
+    margin: 0 auto;
+    max-width: fit-content;
+
+    .title {
+      display: block;
+      font-size: 26px;
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+html.light {
+  background: #e7e7e7;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  display: block;
+  max-width: 96rem;
+  margin: 0 auto;
+}
+
+.main {
+  position: relative;
+  margin: 20px 0;
+}

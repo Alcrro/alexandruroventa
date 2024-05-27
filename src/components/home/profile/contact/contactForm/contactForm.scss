@@ -1,0 +1,54 @@
+.contact-form-container {
+  .body {
+    display: block;
+    max-width: 35rem;
+    margin: 0 auto;
+
+    .form {
+      transform: perspective(2000px) translate3d(0px, -66px, 198px)
+        rotateX(-55deg) scale3d(0.86, 0.75, 1) translateY(50px);
+      border-radius: 5px;
+      will-change: transform;
+      transition: 0.4s ease-in-out transform;
+
+      padding: 1rem;
+
+      border-radius: 20px;
+
+      &:hover {
+        transform: scale3d(1, 1, 1);
+        box-shadow: 1px 1px 10px rgb(255, 255, 255);
+        border-radius: 20px;
+      }
+    }
+
+    .form:focus-within {
+      transform: scale3d(1, 1, 1);
+      border-radius: 20px;
+      box-shadow: 1px 1px 10px rgb(255, 255, 255);
+    }
+  }
+}
+
+html.light .form {
+  box-shadow: 1px 1px 10px rgb(77, 76, 76);
+}
+html.dark .form {
+  box-shadow: 1px 1px 10px rgb(180, 177, 177);
+}
+
+html.dark .form:focus-within {
+  transform: scale3d(1, 1, 1);
+  box-shadow: 1px 1px 10px rgb(0, 0, 0);
+  border-radius: 20px;
+}
+
+html.light .form-modal {
+  .label-group {
+  }
+  .description,
+  .label-group,
+  .title {
+    color: white;
+  }
+}

@@ -1,0 +1,61 @@
+.social-container {
+  display: block;
+
+  .li-social {
+    display: block;
+    max-width: fit-content;
+    margin: 0 auto;
+    border-radius: 50%;
+    .image-linkedin {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 50px;
+      height: 50px;
+      margin: 0 auto;
+    }
+
+    .image-linkedin::after {
+      position: absolute;
+      content: "\F472";
+      font-family: "bootstrap-icons";
+      font-size: 24px;
+      font-style: normal;
+      font-weight: normal;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      border-radius: 12px;
+    }
+  }
+}
+html.dark .li-social {
+  background-color: white;
+  .image-linkedin::after {
+    color: #000;
+  }
+}
+html.dark .li-social:hover {
+  background-color: white;
+  transform: scale(1.2);
+  .image-linkedin::after {
+    color: #0a95f1;
+  }
+}
+html.light .li-social {
+  background-color: black;
+  .image-linkedin::after {
+    color: #fff;
+  }
+}
+
+html.light .li-social:hover {
+  background-color: black;
+  transform: scale(1.2);
+
+  .image-linkedin::after {
+    color: rgb(22, 198, 230);
+  }
+}

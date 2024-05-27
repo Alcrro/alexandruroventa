@@ -1,0 +1,23 @@
+.navbar-container {
+  display: block;
+  padding: 20px 0;
+  padding-bottom: 5rem;
+
+  @media (max-width: 349px) {
+    padding-bottom: 2rem;
+  }
+  @media (max-width: 200px) {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 2rem;
+  }
+
+  .navbar-inner {
+    display: block;
+    padding: 0 10px;
+
+    @media (max-width: 200px) {
+      padding: 0;
+    }
+  }
+}
