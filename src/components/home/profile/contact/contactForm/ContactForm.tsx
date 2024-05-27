@@ -2,7 +2,7 @@
 import React, { useRef, useState } from "react";
 import "./contactForm.scss";
 import ButtonForm from "./buttonForm/ButtonForm";
-import sendEmail from "../../../../../_lib/send";
+// import sendEmail from "../../../../../_lib/send";
 export default function ContactForm() {
   const [isActive, setIsActive] = useState();
   const ref = useRef<HTMLFormElement>(null);
