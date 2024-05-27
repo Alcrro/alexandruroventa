@@ -1,5 +1,9 @@
 import React from "react";
 
-export default function page({ params }: { params: { experience: string } }) {
+export default async function page({
+  params,
+}: {
+  params: { experience: string };
+}) {
   return <div>{params.experience}</div>;
 }

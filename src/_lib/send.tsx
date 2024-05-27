@@ -1,6 +1,6 @@
 export default async function sendEmail(data: {}) {
   try {
-    const response = await fetch(`${process.env.HOST_URL}/api/send`, {
+    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/send`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
