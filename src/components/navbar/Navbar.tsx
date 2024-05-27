@@ -4,7 +4,9 @@ import "./navbar.scss";
 import NavbarMenu from "./menu/NavbarMenu";
 
 export default async function Navbar() {
-  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/navbar/menu`);
+  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/navbar/menu`, {
+    headers: { "Content-Type": "application/json" },
+  });
   const data = await response.json();
 
   return (
