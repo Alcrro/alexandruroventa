@@ -3,13 +3,12 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - npm i
     build:
       commands:
-        - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env.local
-          - npm run build
+        - npm run build
   artifacts:
-    baseDirectory: .next
+    baseDirectory: build
     files:
       - "**/*"
   cache:
