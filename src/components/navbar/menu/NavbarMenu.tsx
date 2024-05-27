@@ -1,33 +1,17 @@
-"use client";
 import { INavbarMenuProps } from "@/_lib/navbar/menu";
-import Link from "next/link";
 import React from "react";
 import "./navbarMenu.scss";
 import ThemeSwitch from "../../../app/ThemeSwitch";
-import { usePathname } from "next/navigation";
+import ListItem from "./ListItem";
 
 export default function NavbarMenu({ data }: { data: INavbarMenuProps[] }) {
-  const pathname = usePathname();
-
   return (
     <>
       <div className="navbar-menu">
         <ul className="">
-          {data.map((item, key) => {
-            let isActive;
-            if (item.name === "home" && pathname.split("/")[1] === "") {
-              isActive = pathname.startsWith(`/`);
-            } else {
-              isActive = pathname.startsWith(`/${item.name}`);
-            }
-            return (
-              <li key={key} className={`${isActive ? "active" : ""}`}>
-                <Link href={`/${item.link}`}>
-                  <span className="navbar-text">{item.name}</span>
-                </Link>
-              </li>
-            );
-          })}
+          {data.map((item, key) => (
+            <ListItem item={item} key={key} />
+          ))}
           <li className="dark-theme-button">
             <label className="flex justify-center align-middle items-center cursor-pointer self-center">
               <input type="checkbox" value="" className="sr-only peer" />
