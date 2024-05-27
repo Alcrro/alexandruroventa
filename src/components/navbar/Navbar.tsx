@@ -4,7 +4,9 @@ import "./navbar.scss";
 import NavbarMenu from "./menu/NavbarMenu";
 
 export default async function Navbar() {
-  const response = await fetch("http://localhost:3000/api/navbar/menu");
+  const response = await fetch("http://localhost:3000/api/navbar/menu", {
+    cache: "force-cache",
+  });
   const data = await response.json();
 
   return (
