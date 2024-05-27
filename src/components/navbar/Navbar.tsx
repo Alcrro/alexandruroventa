@@ -1,15 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./navbar.scss";
-
 import NavbarMenu from "./menu/NavbarMenu";
+import getNavbar from "@/_lib/navbar/getNavbar";
 
 export default async function Navbar() {
-  const response = await fetch(`${process.env.NEXTAUTH_URL}/api/navbar/menu`, {
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
+  const data = await getNavbar();
 
   return (
     <nav className="nav navbar navbar-container">
