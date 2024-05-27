@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
   env: {
-    HOST_URL: process.env.HOST_URL,
+    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
 };

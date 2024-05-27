@@ -6,6 +6,7 @@ frontend:
         - npm ci
     build:
       commands:
+       - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env.local
         - npm run build
   artifacts:
     baseDirectory: .next
