@@ -4,7 +4,7 @@ import "./navbarMenu.scss";
 import ThemeSwitch from "../../../app/ThemeSwitch";
 import ListItem from "./ListItem";
 
-export default function NavbarMenu({ data }: { data: INavbarMenuProps[] }) {
+export default async function NavbarMenu({ data }: { data: INavbarMenuProps[] }) {
   return (
     <>
       <div className="navbar-menu">
