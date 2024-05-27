@@ -1,5 +1,5 @@
-import AboutMe from "@/components/home/aboutMe/AboutMe";
-import Profile from "@/components/home/profile/Profile";
+import AboutMe from "../components/home/aboutMe/AboutMe";
+import Profile from "../components/home/profile/Profile";
 
 export default function Home() {
   return (

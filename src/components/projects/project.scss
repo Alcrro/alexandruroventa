@@ -1,12 +1,18 @@
 .projects-inner {
   display: block;
   margin: 0 auto;
+  max-width: fit-content;
 
+  border-radius: 12px;
   .head {
     display: block;
     text-align: center;
+    max-width: fit-content;
+    margin: 0 auto;
   }
   .body {
+    display: block;
+    max-width: fit-content;
     .image {
       display: block;
       position: relative;
@@ -46,6 +52,7 @@
         border-radius: 12px;
         padding: 0.5rem;
         font-size: 14px;
+        color: #fff;
       }
 
       .link {
@@ -60,4 +67,17 @@
       }
     }
   }
+}
+
+html.light .projects-inner {
+  box-shadow: 1px 1px 10px rgb(46, 46, 46);
+}
+html.dark .projects-inner {
+  box-shadow: 1px 1px 10px rgb(143, 143, 143);
+}
+html.light .projects-inner:hover {
+  box-shadow: 1px 1px 10px rgb(255, 255, 255);
+}
+html.dark .projects-inner:hover {
+  box-shadow: 1px 1px 10px rgb(255, 255, 255);
 }

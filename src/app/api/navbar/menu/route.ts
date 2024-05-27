@@ -1,4 +1,4 @@
-import { navbarMenu } from "@/_lib/navbar/menu";
+import { navbarMenu } from "../../../../_lib/navbar/menu";
 
 export async function GET() {
   try {

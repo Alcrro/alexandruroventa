@@ -1,4 +1,4 @@
-import ContactForm from "@/components/home/profile/contact/contactForm/ContactForm";
+import ContactForm from "../../components/home/profile/contact/contactForm/ContactForm";
 import React from "react";
 
 export default function page() {

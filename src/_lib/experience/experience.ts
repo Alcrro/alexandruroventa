@@ -31,7 +31,7 @@ export const experience = [
     link: "system-design",
   },
   {
-    id: 5,
+    id: 6,
     skillName: "design pattern",
     link: "system-design",
   },

@@ -3,7 +3,7 @@ import { INavbarMenuProps } from "@/_lib/navbar/menu";
 import Link from "next/link";
 import React from "react";
 import "./navbarMenu.scss";
-import ThemeSwitch from "@/app/ThemeSwitch";
+import ThemeSwitch from "../../../app/ThemeSwitch";
 import { usePathname } from "next/navigation";
 
 export default function NavbarMenu({ data }: { data: INavbarMenuProps[] }) {
@@ -21,14 +21,7 @@ export default function NavbarMenu({ data }: { data: INavbarMenuProps[] }) {
               isActive = pathname.startsWith(`/${item.name}`);
             }
             return (
-              <li
-                key={key}
-                className={`${
-                  isActive
-                    ? "active"
-                    : ""
-                }`}
-              >
+              <li key={key} className={`${isActive ? "active" : ""}`}>
                 <Link href={`/${item.link}`}>
                   <span className="navbar-text">{item.name}</span>
                 </Link>

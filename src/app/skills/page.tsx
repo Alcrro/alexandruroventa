@@ -1,4 +1,4 @@
-import { skills } from "@/_lib/skills/skills";
+import { skills } from "../../_lib/skills/skills";
 import React from "react";
 import "./skills.scss";
 export default function page() {
