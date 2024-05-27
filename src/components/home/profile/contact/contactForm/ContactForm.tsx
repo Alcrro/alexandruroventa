@@ -6,14 +6,14 @@ import sendEmail from "../../../../../_lib/send";
 export default function ContactForm() {
   const [isActive, setIsActive] = useState();
   const ref = useRef<HTMLFormElement>(null);
-  async function formHandler(formData: FormData) {
-    const email = formData.get("email");
-    const textarea = formData.get("textarea");
+  // async function formHandler(formData: FormData) {
+  //   const email = formData.get("email");
+  //   const textarea = formData.get("textarea");
 
-    await sendEmail({ email, textarea });
+  //   await sendEmail({ email, textarea });
 
-    ref.current?.reset();
-  }
+  //   ref.current?.reset();
+  // }
   return (
     <div className="contact-form-container">
       <div className="contact-form-inner text-center py-8">
@@ -32,7 +32,7 @@ export default function ContactForm() {
           <div className="form">
             <form
               ref={ref}
-              action={formHandler}
+              // action={formHandler}
               className={`${isActive ? "active" : ""}`}
             >
               <div className="label-group py-2 flex flex-col justify-center mx-auto">

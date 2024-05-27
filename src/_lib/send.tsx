@@ -1,19 +1,19 @@
-export default async function sendEmail(data: {}) {
-  try {
-    const response = await fetch(`${process.env.NEXTAUTH_URL}/api/send`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
+// export default async function sendEmail(data: {}) {
+//   try {
+//     const response = await fetch(`${process.env.NEXTAUTH_URL}/api/send`, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(data),
+//     });
 
-    if (response.status === 200) {
-      console.log("merge");
+//     if (response.status === 200) {
+//       console.log("merge");
 
-      await response.json();
-    }
-  } catch (error) {
-    console.log(error);
-  }
-}
+//       return response.json();
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
