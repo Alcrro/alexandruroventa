@@ -4,6 +4,7 @@ const nextConfig = {
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
+    MONGO_URI: process.env.MONGO_URI,
   },
 
   webpack: (config, { isServer }) => {

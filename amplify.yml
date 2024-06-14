@@ -9,6 +9,7 @@ frontend:
       commands:
         - echo "NEXTAUTH_URL=$NEXTAUTH_URL" >> .env.local
         - echo "RESEND_API_KEY=$RESEND_API_KEY" >> .env.local
+        - echo "MONGO_URI=$MONGO_URI" >> .env.local
         - npm run build
   artifacts:
     baseDirectory: .next
