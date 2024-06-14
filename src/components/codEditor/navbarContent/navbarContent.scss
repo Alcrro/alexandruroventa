@@ -1,0 +1,18 @@
+.navbar-content-inner {
+  display: flex;
+  max-width: 86rem;
+  margin: 0 auto;
+  justify-content: space-between;
+  .icon-previous::before {
+    display: block;
+    content: "\F12D";
+    font-family: "Bootstrap-icons";
+    font-size: 29px;
+  }
+  .icon-next::before {
+    display: block;
+    content: "\F136";
+    font-family: "Bootstrap-icons";
+    font-size: 29px;
+  }
+}

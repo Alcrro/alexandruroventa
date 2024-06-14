@@ -1,0 +1,33 @@
+.current-filter-container {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  position: relative;
+
+  .current-filter-inner {
+    display: block;
+    position: relative;
+
+    .current-filter {
+      display: block;
+      width: 182px;
+      text-align: center;
+      border: 1px solid;
+      border-radius: 8px;
+      padding: 2px 0;
+    }
+    .current-filter:hover {
+      cursor: pointer;
+    }
+  }
+
+  .current-filter.active {
+    display: block;
+    width: 182px;
+    padding: 2px 0;
+    border-bottom: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}

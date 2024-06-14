@@ -5,6 +5,23 @@ const nextConfig = {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,
   },
+
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve = {
+        ...config.resolve,
+        fallback: {
+          net: false,
+          dns: false,
+          tls: false,
+          fs: false,
+          request: false,
+        },
+      };
+    }
+
+    return config;
+  },
 };
 
 export default nextConfig;

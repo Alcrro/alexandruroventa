@@ -4,8 +4,52 @@
 
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
+.chakra-ui-dark :host:not([data-theme]),
+.chakra-ui-dark :root:not([data-theme]),
+.chakra-ui-dark {
+  background: unset;
+  color: unset;
+}
+
+:root.light {
+  ---background-color: #e7e7e7;
+  ---background-div-color: #000;
+  ---text-color: #000;
+  ---text-div-color: #fff;
+  ---border-light-color: #000;
+  ---border-color: #fff;
+}
+:root.dark {
+  ---background-color: #1b2538;
+  ---background-div-color: #fff;
+  ---text-color: #fff;
+  ---text-div-color: #000;
+  ---border-light-color: #000;
+  ---border-color: #fff;
+}
+
 html.light {
-  background: #e7e7e7;
+  background: var(---background-color);
+  color: var(---text-color);
+  border-color: var(---border-color);
+}
+html.dark {
+  background: var(---background-color);
+  color: var(---text-color);
+  border-color: var(---border-color);
+}
+
+html.dark .navbar-menu,
+html.light .navbar-menu,
+html.dark[data-darkreader-scheme="dark"] .navbar-menu,
+html.light[data-darkreader-scheme="dark"] .navbar-menu {
+  background-color: rgba(0, 174, 255, 0.377);
+  color: #fff;
+}
+html.dark[data-darkreader-scheme="dimmed"] .navbar-menu,
+html.light[data-darkreader-scheme="dimmed"] .navbar-menu {
+  background-color: rgb(0, 153, 255);
+  color: #fff;
 }
 
 body {
@@ -23,4 +67,8 @@ main {
 .main {
   position: relative;
   margin: 20px 0;
+
+  @media (min-width: 400px) and (max-width: 96rem) {
+    margin: 20px;
+  }
 }

@@ -1,0 +1,241 @@
+.my-experience {
+  @import url("https://fonts.googleapis.com/css?family=Poppins:400,700,900");
+  font-family: "Poppins", sans-serif;
+
+  position: relative;
+  margin: 0 auto;
+
+  .timeline {
+    position: relative;
+    margin: 50px auto;
+
+    @media (max-width: 760px) {
+      margin: 25px auto;
+    }
+  }
+
+  .timeline::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 100%;
+    background: #fff;
+    border-radius: 18px;
+    top: 0%;
+    left: 50%;
+    z-index: -1;
+    margin-left: -2px;
+    animation: moveline 3s linear forwards;
+
+    @media (max-width: 760px) {
+      left: 31px;
+    }
+  }
+
+  @keyframes moveline {
+    0% {
+      height: 0%;
+    }
+    100% {
+      height: 100%;
+    }
+  }
+
+  .container {
+    padding: 10px 50px;
+    position: relative;
+    width: 50%;
+    animation: movedown 1s linear forwards;
+    opacity: 0;
+    max-width: unset;
+
+    @media (max-width: 760px) {
+      width: 100%;
+      padding-left: 80px;
+      padding-right: 25px;
+    }
+
+    .text-box {
+      padding: 20px;
+      background: #fff;
+      position: relative;
+      border-radius: 12px;
+      font-size: 15px;
+      color: #000;
+      height: 240px;
+
+      @media (max-width: 760px) {
+        font-size: 13px;
+        max-width: 100%;
+      }
+      h2 {
+        display: block;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      small {
+        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 14px;
+
+        @media (max-width: 760px) {
+          margin-bottom: 10px;
+        }
+      }
+
+      .text {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        // white-space: nowrap;
+      }
+    }
+    .text-box.collapse-in {
+      animation: collapseIn 2s ease;
+      height: 400px;
+      .sticky {
+        position: absolute;
+        right: 10px;
+        top: calc(100% - 20px);
+      }
+    }
+
+    @keyframes collapseIn {
+      0% {
+        height: 220px;
+      }
+      100% {
+        height: 400px;
+      }
+    }
+    .text-box.collapse-out {
+      height: 220px;
+      // animation: collapseOut 2s reverse;
+      .sticky {
+        position: absolute;
+        right: 10px;
+        top: calc(100% - 20px);
+      }
+    }
+
+    @keyframes collapseOut {
+      100% {
+        height: 220px;
+      }
+      0% {
+        height: 400px;
+      }
+    }
+
+    .logo-company {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      // padding: 1rem;
+      background-color: white;
+      z-index: 99;
+      top: 32px;
+    }
+    .logo-company::after {
+      font-family: "Bootstrap-icons";
+      font-size: 24px;
+      color: #000;
+    }
+
+    .school:after {
+      content: "\F6FD";
+    }
+    .job:after {
+      content: "\F3F0";
+    }
+    .amazon:after {
+      content: "\F68D";
+    }
+    .facebook:after {
+      content: "\F344";
+    }
+  }
+
+  @keyframes movedown {
+    0% {
+      opacity: 1;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  .container:nth-child(odd) {
+    left: 0;
+
+    .arrow-container {
+      height: 0;
+      width: 0;
+      position: absolute;
+      top: 28px;
+      z-index: 1;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-left: 15px solid white;
+      right: -15px;
+
+      @media (max-width: 760px) {
+        border-right: 15px solid white;
+        border-left: 0;
+        left: -15px;
+      }
+    }
+
+    .logo-company {
+      right: -20px;
+
+      @media (max-width: 760px) {
+        left: 10px;
+      }
+    }
+  }
+  .container:nth-child(even) {
+    left: 50%;
+
+    .arrow-container {
+      height: 0;
+      width: 0;
+      position: absolute;
+      top: 28px;
+      z-index: 1;
+      border-top: 15px solid transparent;
+      border-bottom: 15px solid transparent;
+      border-right: 15px solid white;
+      left: -15px;
+    }
+    .logo-company {
+      left: -20px;
+
+      @media (max-width: 760px) {
+        left: 10px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      left: 0;
+    }
+  }
+  .container:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .container:nth-child(2) {
+    animation-delay: 1s;
+  }
+  .container:nth-child(3) {
+    animation-delay: 2s;
+  }
+  .container:nth-child(4) {
+    animation-delay: 3s;
+  }
+}

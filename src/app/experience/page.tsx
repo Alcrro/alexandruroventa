@@ -1,22 +1,19 @@
-import Link from "next/link";
 import React from "react";
-import { experience } from "../../_lib/experience/experience";
 import "./experience.scss";
+import Experience from "@/components/experience/Experience";
+import { Metadata } from "next/types";
+import getExperience from "@/_lib/experience/getExperience";
 
-export default function page() {
+export const metadata: Metadata = {
+  title: "Alexandru Roventa - My experience",
+  description: "Home",
+};
+
+export default async function page() {
+  const experiences = await getExperience();
   return (
     <div className="experience-container">
-      <div className="experience-inner">
-        <ul>
-          {experience.map((skill) => (
-            <li key={skill.id}>
-              <Link href={`/experience/${skill.link}`} className={skill.link}>
-                {skill.skillName}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <Experience experiences={experiences} />
     </div>
   );
 }

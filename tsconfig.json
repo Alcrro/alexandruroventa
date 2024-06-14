@@ -27,6 +27,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/api/navbar/menu/route.ts"
-  ],
+, "src/_lib/performance/systemDesign/getModule.ts"  ],
   "exclude": ["node_modules"]
 }

@@ -2,18 +2,18 @@
 import React, { useRef, useState } from "react";
 import "./contactForm.scss";
 import ButtonForm from "./buttonForm/ButtonForm";
-// import sendEmail from "../../../../../_lib/send";
+import sendEmail from "../../../../../_lib/send";
 export default function ContactForm() {
   const [isActive, setIsActive] = useState();
   const ref = useRef<HTMLFormElement>(null);
-  // async function formHandler(formData: FormData) {
-  //   const email = formData.get("email");
-  //   const textarea = formData.get("textarea");
+  async function formHandler(formData: FormData) {
+    const email = formData.get("email");
+    const textarea = formData.get("textarea");
 
-  //   await sendEmail({ email, textarea });
+    await sendEmail({ email, textarea });
 
-  //   ref.current?.reset();
-  // }
+    ref.current?.reset();
+  }
   return (
     <div className="contact-form-container">
       <div className="contact-form-inner text-center py-8">
@@ -22,8 +22,7 @@ export default function ContactForm() {
           <div className="description py-4 text-xl">
             Please contact me directly at
             <span className="font-semibold break-words">
-              {" "}
-              alex.roventa94@gmail.com{" "}
+              alex.roventa94@gmail.com
             </span>
             or through this form
           </div>
@@ -32,7 +31,7 @@ export default function ContactForm() {
           <div className="form">
             <form
               ref={ref}
-              // action={formHandler}
+              action={formHandler}
               className={`${isActive ? "active" : ""}`}
             >
               <div className="label-group py-2 flex flex-col justify-center mx-auto">

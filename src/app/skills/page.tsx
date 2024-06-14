@@ -1,15 +1,21 @@
-import { skills } from "../../_lib/skills/skills";
 import React from "react";
 import "./skills.scss";
-export default function page() {
+import { GetStaticProps, Metadata } from "next/types";
+import SkillsList from "@/components/skills/SkillsList";
+import getSkillsList from "@/_lib/skills/getSkills";
+
+export const metadata: Metadata = {
+  title: "Alexandru Roventa - My skills",
+  description: "Home",
+};
+
+export default async function page() {
+  const skillList = await getSkillsList();
+
   return (
     <div className="skills-container">
       <div className="skills-inner">
-        <ul>
-          {skills.map((skill) => (
-            <li key={skill.id}>{skill.skillName}</li>
-          ))}
-        </ul>
+        <SkillsList skills={skillList} />
       </div>
     </div>
   );

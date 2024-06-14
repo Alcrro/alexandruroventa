@@ -3,6 +3,7 @@ import { Roboto } from "next/font/google";
 import "./globals.scss";
 import Navbar from "../components/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
+import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterContext";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -29,8 +30,12 @@ export default function RootLayout({
         <DarkThemeProvider>
           <main>
             <Navbar />
-            {children}
-            {modal}
+            <NavbarFilterProvider>
+              <div className="main">
+                {children}
+                {modal}
+              </div>
+            </NavbarFilterProvider>
           </main>
         </DarkThemeProvider>
       </body>

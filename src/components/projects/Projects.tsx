@@ -7,6 +7,11 @@ export default function Projects() {
     <>
       <div className="head">
         <div className="title text-2xl py-4">Gym website</div>
+        <div className="title domain text-2xl py-1">
+          <Link href={"https://primagym.lucruri-utile.ro"} target="_blank">
+            primagym.lucruri-utile.ro
+          </Link>
+        </div>
       </div>
       <div className="body">
         <div className="image">
@@ -40,7 +45,7 @@ export default function Projects() {
                 </div>
               </li>
             </ul>
-            <span className="max-w-[160px] ">
+            <span className="hosted">
               Hosted on: <span className="block">Shared Host</span>
             </span>
           </div>

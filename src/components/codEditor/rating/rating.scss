@@ -1,0 +1,41 @@
+.rating-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 20px;
+
+  .star-inner {
+    display: inline-block;
+    position: relative;
+    white-space: nowrap;
+    vertical-align: top;
+    height: 32px;
+    line-height: 32px;
+    font-size: 18px;
+    color: #ccc;
+    letter-spacing: 2px;
+  }
+
+  .star {
+    white-space: nowrap;
+    position: absolute;
+    line-height: inherit;
+    height: inherit;
+    top: 0;
+    left: 0;
+    // z-index: 1;
+    overflow: hidden;
+  }
+  .star-inner::before {
+    position: relative;
+    content: "\F586\F586\F586\F586\F586";
+    color: #ccc;
+    font-family: "Bootstrap-icons";
+  }
+  .star::before {
+    position: relative;
+    content: "\F586\F586\F586\F586\F586";
+    font-family: "Bootstrap-icons";
+    color: #f9bf3b;
+  }
+}
