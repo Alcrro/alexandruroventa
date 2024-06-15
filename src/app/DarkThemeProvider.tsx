@@ -8,7 +8,7 @@ export default function DarkThemeProvider({
   children: React.ReactNode;
 }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="white">
+    <ThemeProvider attribute="class" defaultTheme="light">
       {children}
     </ThemeProvider>
   );
