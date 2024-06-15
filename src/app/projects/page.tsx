@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Metadata } from "next/types";
 import Projects from "../../components/projects/Projects";
 import React from "react";

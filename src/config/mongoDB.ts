@@ -2,8 +2,6 @@ import mongoose, { connection } from "mongoose";
 
 export const connectDB = async () => {
   try {
-    console.log(`${process.env.MONGO_URI}`);
-
     mongoose.set("strictQuery", false);
     const conn = await mongoose.connect(process.env.MONGO_URI!);
     connection.on("Connected", () => {

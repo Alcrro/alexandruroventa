@@ -4,6 +4,7 @@ import "./globals.scss";
 import Navbar from "../components/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
 import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterContext";
+import getNavbar from "@/_lib/navbar/getNavbar";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
   description: "Home",
 };
 
+export const dynamic = "force-dynamic";
 export default function RootLayout({
   children,
   modal,

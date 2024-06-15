@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import Performance from "@/app/performance/components/Performance";
 import { Metadata } from "next/types";

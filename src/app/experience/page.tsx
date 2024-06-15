@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import "./experience.scss";
 import Experience from "@/components/experience/Experience";

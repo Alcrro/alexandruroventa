@@ -1,6 +1,6 @@
 import CodeEditorComponent from "@/components/codEditor/CodeEditorComponent";
 import NavbarContentComponent from "@/components/codEditor/navbarContent/NavbarContentComponent";
-
+export const dynamic = "force-dynamic";
 import React from "react";
 
 export default async function page({ params }: { params: { slug: string } }) {

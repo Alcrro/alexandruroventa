@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { Metadata } from "next/types";
 import ContactForm from "../../components/home/profile/contact/contactForm/ContactForm";
 import React from "react";

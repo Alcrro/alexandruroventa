@@ -1,6 +1,7 @@
+export const dynamic = "force-dynamic";
 import React from "react";
 import "./skills.scss";
-import { GetStaticProps, Metadata } from "next/types";
+import { Metadata } from "next/types";
 import SkillsList from "@/components/skills/SkillsList";
 import getSkillsList from "@/_lib/skills/getSkills";
 

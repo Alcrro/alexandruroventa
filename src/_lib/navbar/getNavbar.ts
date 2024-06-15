@@ -3,9 +3,11 @@ export default async function getNavbar() {
     const response = await fetch(
       `${process.env.NEXTAUTH_URL}/api/navbar/menu`,
       {
+        method: "GET",
+        cache: "no-cache",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json",
+          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
       }
     );
