@@ -1,11 +1,14 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./contactForm.scss";
 import ButtonForm from "./buttonForm/ButtonForm";
 import sendEmail from "../../../../../_lib/send";
 export default function ContactForm() {
   const [isActive, setIsActive] = useState();
+  const [isCopied, setIsCopied] = useState(false);
+  const [copyAddress, setCopyAddress] = useState("");
   const ref = useRef<HTMLFormElement>(null);
+  const refCopy = useRef<HTMLDivElement>(null);
   async function formHandler(formData: FormData) {
     const email = formData.get("email");
     const textarea = formData.get("textarea");
@@ -14,17 +17,37 @@ export default function ContactForm() {
 
     ref.current?.reset();
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 5000);
+  }, [isCopied]);
+
+  const copiedHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    setIsCopied(true);
+    navigator.clipboard.writeText(e.currentTarget.innerText);
+  };
+
   return (
     <div className="contact-form-container">
       <div className="contact-form-inner text-center py-8">
         <div className="header">
           <div className="title text-3xl">Contact Me</div>
           <div className="description py-4 text-xl">
-            Please contact me directly at
-            <span className="font-semibold break-words">
-              alex.roventa94@gmail.com
-            </span>
-            or through this form
+            Please contact me directly at this form or at this email:
+            <div
+              className={`border w-fit mx-auto p-4 m-1 rounded-lg border-gray-600 cursor-pointer `}
+              onClick={(e) => copiedHandler(e)}
+            >
+              <span
+                className={`my-email${isCopied ? " isCopied" : ""}`}
+                ref={refCopy}
+              >
+                business@alexandru-roventa.ro
+              </span>
+            </div>
+            <span className="block py-2">Thank you!</span>
           </div>
         </div>
         <div className="body">

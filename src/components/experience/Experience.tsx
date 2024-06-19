@@ -1,8 +1,14 @@
 "use client";
 import React, { useState } from "react";
 import "./myExperience.scss";
+import { iExperience } from "@/types";
+import YearCount from "./YearCount";
 
-export default function Experience({ experiences }: { experiences: any[] }) {
+export default function Experience({
+  experiences,
+}: {
+  experiences: iExperience[];
+}) {
   const [compId, setCompId] = useState<number>();
 
   const moreDescriptionHandler = (companyId: number) => {
@@ -13,49 +19,46 @@ export default function Experience({ experiences }: { experiences: any[] }) {
     }
   };
 
+  experiences.map((item) => console.log(item.currentYear));
+
   return (
     <div className="my-experience">
       <div className="timeline ">
         {experiences
           .map((company) => (
-            <div className="container " key={company.id}>
+            <div className="container " key={company.idIncNumber}>
               <div className={`logo-company ${company.className}`}></div>
               <div
                 className={`text-box flex flex-col justify-start${
-                  compId === company.id ? " collapse-in" : " collapse-out"
+                  compId === company.idIncNumber
+                    ? " collapse-in"
+                    : " collapse-out"
                 }`}
               >
-                <h2>{company.description.title}</h2>
+                <h2>{company.titleDescription}</h2>
                 <small>
-                  <span>{company.year.start}</span> <span> - </span>
+                  <span>{new Date(company?.startYear).getFullYear()}</span>{" "}
+                  <span> - </span>
                   <span>
-                    {company.year.current === undefined
-                      ? company.year.end
+                    {company.currentYear === null
+                      ? new Date(company?.endYear!).getFullYear()
                       : "current"}
                   </span>
-                  <span className="total px-2 relative">
-                    {Number(company.year.end) - Number(company.year.start) > 1
-                      ? `(${
-                          Number(company.year.end) - Number(company.year.start)
-                        } years)`
-                      : `(${
-                          Number(company.year.end) - Number(company.year.start)
-                        } year)`}
-                  </span>
+                  <YearCount company={company} />
                 </small>
-                <div className="text h-[100%]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Facilis repudiandae cumque dolorem odio voluptatum repellendus
-                  animi fugiat illum esse quam explicabo distinctio possimus
-                  vitae ducimus, itaque commodi modi in minus.
-                </div>
+                <div
+                  className="text h-[100%]"
+                  dangerouslySetInnerHTML={{
+                    __html: `${company.descriptionMore}`,
+                  }}
+                ></div>
                 <span className="arrow-container"></span>
 
                 <div
                   className="more block text-right"
-                  onClick={() => moreDescriptionHandler(company.id)}
+                  onClick={() => moreDescriptionHandler(company.idIncNumber)}
                 >
-                  {compId !== company.id ? (
+                  {compId !== company.idIncNumber ? (
                     <span className="">more</span>
                   ) : (
                     <span className="">less</span>

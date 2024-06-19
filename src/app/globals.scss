@@ -59,7 +59,9 @@ body {
 }
 
 main {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   max-width: 96rem;
   margin: 0 auto;
 }
@@ -67,6 +69,7 @@ main {
 .main {
   position: relative;
   margin: 20px 0;
+  min-height: 70vh;
 
   @media (min-width: 400px) and (max-width: 96rem) {
     margin: 20px;

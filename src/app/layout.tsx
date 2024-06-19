@@ -4,7 +4,7 @@ import "./globals.scss";
 import Navbar from "../components/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
 import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterContext";
-import getNavbar from "@/_lib/navbar/getNavbar";
+import Footer from "@/components/footer/Footer";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -16,6 +16,9 @@ const roboto = Roboto({
 export const metadata: Metadata = {
   title: "Alexandru Roventa - Home",
   description: "Home",
+  icons: {
+    icon: "/public/eu.png",
+  },
 };
 
 export const dynamic = "force-dynamic";
@@ -28,6 +31,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="icon" href="/eu.png" sizes="any" />
+      </head>
       <body className={roboto.className}>
         <DarkThemeProvider>
           <main>
@@ -38,6 +44,8 @@ export default function RootLayout({
                 {modal}
               </div>
             </NavbarFilterProvider>
+
+            <Footer />
           </main>
         </DarkThemeProvider>
       </body>

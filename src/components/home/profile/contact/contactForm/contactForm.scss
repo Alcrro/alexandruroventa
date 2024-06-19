@@ -1,4 +1,27 @@
 .contact-form-container {
+  .header {
+    .my-email {
+      position: relative;
+    }
+    .my-email:hover::after {
+      content: "\F759";
+      font-family: "Bootstrap-icons";
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      color: #eee;
+      font-size: 14px;
+    }
+
+    .my-email.isCopied::after {
+      content: "Copied";
+      position: absolute;
+      top: -20px;
+      right: -10px;
+      color: #03a842;
+      font-size: 14px;
+    }
+  }
   .body {
     display: block;
     max-width: 35rem;

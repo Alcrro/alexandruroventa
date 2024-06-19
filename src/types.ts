@@ -16,3 +16,15 @@ export interface iModuleType {
   description: string;
   dataCreated: string;
 }
+
+export interface iExperience {
+  _id: object;
+  idIncNumber: number;
+  startYear: Date;
+  currentYear: Date | null;
+  endYear: Date | null;
+  isEnded: boolean;
+  className: string;
+  titleDescription: string;
+  descriptionMore: string;
+}

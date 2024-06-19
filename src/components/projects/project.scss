@@ -1,8 +1,8 @@
 .projects-inner {
   display: block;
-  margin: 0 auto;
+  margin: 1rem auto;
   padding: 5px;
-  max-width: fit-content;
+  max-width: 46rem;
   border-radius: 12px;
 
   .head {
@@ -14,7 +14,7 @@
   .body {
     display: block;
     max-width: fit-content;
-
+    margin: 0 auto;
     .image {
       display: block;
       position: relative;
@@ -53,7 +53,7 @@
       img {
         display: block;
         margin: 0 auto;
-        width: 600px;
+        // width: fit-content;
         height: 300px;
         border-radius: 12px;
 
@@ -106,6 +106,87 @@
           margin: 5px 0;
           span {
             padding: 5px;
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    display: block;
+    margin: 10px 0;
+    .description {
+      display: block;
+      padding: 1rem;
+      ul {
+        display: block;
+        padding: 1rem 0;
+        border-top: 1px solid #aaa;
+        text-align: center;
+        li {
+          display: block;
+          margin: 0.5rem 0;
+          padding: 0.5rem 0;
+
+          .col {
+            display: block;
+            margin: 0 auto;
+            text-align: center;
+
+            @media (min-width: 680px) {
+              display: flex;
+              align-items: center;
+            }
+            .prop {
+              display: block;
+              width: 30%;
+              padding: 0 10px;
+              margin: 0 auto;
+              font-weight: 600;
+
+              @media (min-width: 680px) {
+                display: flex;
+                align-items: center;
+                margin: unset;
+                font-weight: 500;
+              }
+
+              div {
+                display: block;
+                // width: 100%;
+                max-width: fit-content;
+                padding: 0.5rem;
+                background: var(---background-div-color);
+                border-radius: 12px;
+                color: var(---text-div-color);
+                text-align: center;
+                margin: 0 auto;
+
+                @media (max-width: 400px) {
+                  word-break: break-all;
+                }
+              }
+            }
+
+            .content {
+              display: flex;
+              padding: 0 0.5rem;
+              flex-wrap: wrap;
+              justify-content: center;
+              gap: 0.5rem;
+              max-width: 70%;
+              margin: 0 auto;
+              div {
+                padding: 0.5rem;
+                background: var(---background-div-color);
+                color: var(---text-div-color);
+                border-radius: 12px;
+                text-align: center;
+              }
+
+              div.underline:hover {
+                color: #aaa;
+              }
+            }
           }
         }
       }

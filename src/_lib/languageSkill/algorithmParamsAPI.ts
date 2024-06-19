@@ -1,12 +1,15 @@
 export default function algorithmParamsAPI(array: string[]) {
-  if (array.length < 1) {
+  const newArray = array;
+  newArray.unshift("category");
+
+  if (newArray.length < 1) {
     return;
   } else {
     let obj: any = {};
 
-    for (let i = 1; i < array.length; i += 2) {
+    for (let i = 0; i < newArray.length - 1; i += 2) {
       let j = i + 1;
-      obj[array[i]] = array[j];
+      obj[newArray[i]] = newArray[j];
     }
 
     let str = "";
