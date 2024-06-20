@@ -9,7 +9,7 @@ export default function ProfileImage() {
       <div className="profile-image-container">
         <Image
           src={"/eu.png"}
-          alt=""
+          alt="my-image"
           width={500}
           height={500}
           priority

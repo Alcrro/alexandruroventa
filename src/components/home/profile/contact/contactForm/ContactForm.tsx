@@ -6,9 +6,9 @@ import sendEmail from "../../../../../_lib/send";
 export default function ContactForm() {
   const [isActive, setIsActive] = useState();
   const [isCopied, setIsCopied] = useState(false);
-  const [copyAddress, setCopyAddress] = useState("");
   const ref = useRef<HTMLFormElement>(null);
   const refCopy = useRef<HTMLDivElement>(null);
+
   async function formHandler(formData: FormData) {
     const email = formData.get("email");
     const textarea = formData.get("textarea");

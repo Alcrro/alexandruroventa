@@ -10,6 +10,7 @@ export default function CurrentFilter({
   setActive,
   currentItemValue,
   setCurrentItemValue,
+  params,
 }: {
   data: any;
   filterBy: string;
@@ -17,10 +18,13 @@ export default function CurrentFilter({
   setActive: React.Dispatch<SetStateAction<boolean>>;
   currentItemValue: string;
   setCurrentItemValue: React.Dispatch<SetStateAction<string>>;
+  params: any;
 }) {
   const activeHandler = () => {
     setActive((prev) => !prev);
   };
+
+
 
   return (
     <div className="current-filter-container">
@@ -37,7 +41,7 @@ export default function CurrentFilter({
           active={active}
           setActive={setActive}
           setCurrentFilter={setCurrentItemValue}
-         
+          params={params}
         />
       </div>
     </div>

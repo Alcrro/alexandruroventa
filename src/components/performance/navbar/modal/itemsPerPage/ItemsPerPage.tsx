@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CurrentFilter from "../currentFIlter/CurrentFilter";
 import { useNavbarFilterContext } from "@/context/navbarFilterContext/NavbarFilterContext";
 
-export default function ItemsPerPage() {
+export default function ItemsPerPage({ params }: { params: any }) {
   const [activeItemPerPage, setActiveItemPerPage] = useState(false);
   const counterPerPage = [
     { name: 20, link: "limit/20-per-page" },
@@ -22,6 +22,7 @@ export default function ItemsPerPage() {
         setActive={setActiveItemPerPage}
         currentItemValue={currentItemPerPage}
         setCurrentItemValue={setCurrentItemPerPage}
+        params={params}
       />
     </div>
   );

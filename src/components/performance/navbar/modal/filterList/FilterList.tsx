@@ -10,11 +10,13 @@ export default function FilterList({
   active,
   setActive,
   setCurrentFilter,
+  params,
 }: {
   data: any;
   active: boolean;
   setActive: Dispatch<SetStateAction<boolean>>;
   setCurrentFilter: Dispatch<SetStateAction<string>>;
+  params: any;
 }) {
   const pathname = usePathname();
   let currentPathname = pathname.split("/")[2];
@@ -27,6 +29,8 @@ export default function FilterList({
     setCurrentFilter(name);
   };
 
+  console.log("gg", pathname);
+
   return (
     <div className={`filter-list${active ? " active" : ""}`}>
       <ul>
@@ -35,7 +39,9 @@ export default function FilterList({
             {item.link === "all" || item.link === 20 ? (
               <Link href={`/performance/${currentPathname}/`}>{item.name}</Link>
             ) : (
-              <Link href={`${pathname}/${item.link}`}>{item.name}</Link>
+              <Link href={`/performance/${params.str}/${item.link}`}>
+                {item.name}
+              </Link>
             )}
           </li>
         ))}

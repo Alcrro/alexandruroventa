@@ -5,13 +5,12 @@ import Navbar from "../components/Navbar";
 
 export default async function page({ params }: { params: any }) {
   const urlSlug = algorithmTest(params.filter);
-  console.log(urlSlug);
 
   const documents = await getModule(params, urlSlug?.str);
 
   return (
     <>
-      <Navbar />
+      <Navbar params ={urlSlug}/>
       <Main documents={documents.languageSkillContent} />
     </>
   );

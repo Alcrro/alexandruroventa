@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import CurrentFilter from "../currentFIlter/CurrentFilter";
 import { useNavbarFilterContext } from "@/context/navbarFilterContext/NavbarFilterContext";
 
-export default function CategoryFilter() {
+export default function CategoryFilter({params}:{params:any}) {
   const [activeCategoryFilter, setCategoryFilter] = useState(false);
   const categoryData = [
     { name: "All", link: "all" },
@@ -23,6 +23,7 @@ export default function CategoryFilter() {
         setActive={setCategoryFilter}
         currentItemValue={currentCategoryValue}
         setCurrentItemValue={setCurrentCategoryValue}
+        params={params}
       />
     </div>
   );
