@@ -56,6 +56,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-height: 100vh;
 }
 
 main {
@@ -73,5 +74,37 @@ main {
 
   @media (min-width: 400px) and (max-width: 96rem) {
     margin: 20px;
+  }
+}
+
+html.light {
+  ::-webkit-scrollbar {
+    overflow: auto;
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    overflow: auto;
+    background: #000000;
+    border-radius: 20px;
+  }
+}
+
+html.dark {
+  ::-webkit-scrollbar {
+    overflow: auto;
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #000000;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    overflow: auto;
+    background: #ffffff;
+    border-radius: 20px;
   }
 }

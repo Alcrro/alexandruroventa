@@ -1,17 +1,49 @@
 .footer-container {
   display: block;
   padding-top: 4rem;
+  padding-bottom: 1rem;
 
   .footer-inner {
     .row {
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
       gap: 1rem;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 
-      .contact {
-        display: block;
+      div {
         text-align: center;
+        flex: 1 1 32%;
+        display: block;
+
+        text-align: center;
+      }
+
+      .contact,
+      .projects,
+      .social-media {
+        text-align: center;
+      }
+
+      .social-media {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .social-media-icon::before {
+          content: "\F472";
+          font-family: "bootstrap-icons";
+          font-size: 28px;
+        }
+      }
+
+      .footer-copy {
+        font-size: 10px;
+        color: #888888;
       }
     }
   }
+}
+html.light .social-media-icon:hover::before {
+  background-color: rgb(3, 202, 63);
+}
+html.dark .social-media-icon:hover::before {
+  background-color: rgb(3, 146, 202);
 }

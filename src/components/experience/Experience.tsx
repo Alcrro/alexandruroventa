@@ -1,26 +1,17 @@
-"use client";
+
 import React, { useState } from "react";
 import "./myExperience.scss";
 import { iExperience } from "@/types";
 import YearCount from "./YearCount";
+import ExperienceContent from "./myExperience/ExperienceContent";
+import ExperienceMoreContent from "./myExperience/ExperienceMoreContent";
+import ExperienceContainer from "./myExperience/ExperienceContainer";
 
 export default function Experience({
   experiences,
 }: {
   experiences: iExperience[];
 }) {
-  const [compId, setCompId] = useState<number>();
-
-  const moreDescriptionHandler = (companyId: number) => {
-    if (compId === companyId) {
-      setCompId(-1);
-    } else {
-      setCompId(companyId);
-    }
-  };
-
-  experiences.map((item) => console.log(item.currentYear));
-
   return (
     <div className="my-experience">
       <div className="timeline ">
@@ -28,13 +19,7 @@ export default function Experience({
           .map((company) => (
             <div className="container " key={company.idIncNumber}>
               <div className={`logo-company ${company.className}`}></div>
-              <div
-                className={`text-box flex flex-col justify-start${
-                  compId === company.idIncNumber
-                    ? " collapse-in"
-                    : " collapse-out"
-                }`}
-              >
+              <ExperienceContainer company={company}>
                 <h2>{company.titleDescription}</h2>
                 <small>
                   <span>{new Date(company?.startYear).getFullYear()}</span>{" "}
@@ -46,25 +31,9 @@ export default function Experience({
                   </span>
                   <YearCount company={company} />
                 </small>
-                <div
-                  className="text h-[100%]"
-                  dangerouslySetInnerHTML={{
-                    __html: `${company.descriptionMore}`,
-                  }}
-                ></div>
+                <ExperienceContent company={company} />
                 <span className="arrow-container"></span>
-
-                <div
-                  className="more block text-right"
-                  onClick={() => moreDescriptionHandler(company.idIncNumber)}
-                >
-                  {compId !== company.idIncNumber ? (
-                    <span className="">more</span>
-                  ) : (
-                    <span className="">less</span>
-                  )}
-                </div>
-              </div>
+              </ExperienceContainer>
             </div>
           ))
           .sort((a, b) => (a > b ? 1 : -1))}
