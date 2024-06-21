@@ -1,18 +1,28 @@
 "use client";
 import React, { useState } from "react";
 import ExperienceMoreContent from "./ExperienceMoreContent";
-
+import "./myExperienceContainer.scss";
 export default function ExperienceContainer({
-  children,
   company,
+  children,
 }: {
-  children: React.ReactNode;
   company: any;
+  children: React.ReactNode;
 }) {
-  const [compId, setCompId] = useState<number | undefined>();
+  const [compId, setCompId] = useState<number | null>(null);
+
+  const handlerMore = (id: number | null) => {
+    if (compId === null) {
+      setCompId(id);
+    } else {
+      setCompId(null);
+    }
+    console.log(compId);
+  };
+
   return (
     <div
-      className={`text-box flex flex-col justify-start${
+      className={`experience-container text-box${
         compId === company.idIncNumber ? " collapse-in" : " collapse-out"
       }`}
     >
@@ -20,7 +30,7 @@ export default function ExperienceContainer({
       <ExperienceMoreContent
         company={company}
         compId={compId}
-        addButtonHandler={() => setCompId(undefined)}
+        setCompId={() => handlerMore(company.idIncNumber)}
       />
     </div>
   );

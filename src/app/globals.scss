@@ -10,6 +10,9 @@
   background: unset;
   color: unset;
 }
+:root {
+  --lh: 1.4rem;
+}
 
 :root.light {
   ---background-color: #e7e7e7;
@@ -65,12 +68,19 @@ main {
   justify-content: space-between;
   max-width: 96rem;
   margin: 0 auto;
+  min-height: 100vh;
+
+  .footer-container {
+    margin-top: auto;
+  }
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   position: relative;
   margin: 20px 0;
-  min-height: 70vh;
 
   @media (min-width: 400px) and (max-width: 96rem) {
     margin: 20px;

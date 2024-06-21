@@ -1,5 +1,15 @@
 .what-started-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
   .dropdown-list.inActive {
     display: none;
+  }
+
+  .dropdown-list.active {
+    display: block;
+    position: absolute;
+    z-index: 22;
+    background: white;
   }
 }

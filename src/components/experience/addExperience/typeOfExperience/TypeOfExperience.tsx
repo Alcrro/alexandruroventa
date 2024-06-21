@@ -15,6 +15,7 @@ export default function TypeOfExperience() {
           className="dropdown-current-value flex gap-2 items-center justify-center border border-gray-400 w-[120px] text-center p-2 rounded-lg"
           onClick={() => setDropdownActive((prev) => !prev)}
         >
+          <input type="hidden" name="experienceType" value={currentValue} />
           <span>{currentValue}</span>
           {dropdownActive ? (
             <span className="h-5 text-xl">^</span>

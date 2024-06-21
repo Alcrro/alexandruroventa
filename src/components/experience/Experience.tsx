@@ -1,11 +1,10 @@
-
 import React, { useState } from "react";
 import "./myExperience.scss";
 import { iExperience } from "@/types";
 import YearCount from "./YearCount";
 import ExperienceContent from "./myExperience/ExperienceContent";
-import ExperienceMoreContent from "./myExperience/ExperienceMoreContent";
 import ExperienceContainer from "./myExperience/ExperienceContainer";
+import AddExperienceButton from "./addExperience/addExperiencebutton/AddExperienceButton";
 
 export default function Experience({
   experiences,
@@ -14,6 +13,7 @@ export default function Experience({
 }) {
   return (
     <div className="my-experience">
+      <AddExperienceButton />
       <div className="timeline ">
         {experiences
           .map((company) => (

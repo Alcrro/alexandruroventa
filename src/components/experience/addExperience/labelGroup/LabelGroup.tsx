@@ -19,10 +19,11 @@ export default function LabelGroup({ date }: { date: any }) {
           id="start"
           defaultValue={"2000-01-01"}
           min={"2000-01-01"}
+          max={date}
         />
       </div>
       <div className="label-group">
-        <label htmlFor="ended">Ended:</label>
+        <label htmlFor="ended">End:</label>
 
         {ifJobIsEnded ? (
           <input
@@ -31,6 +32,7 @@ export default function LabelGroup({ date }: { date: any }) {
             name="end-date"
             disabled
             id="ended"
+            min={"2000-01-01"}
             defaultValue={date}
           />
         ) : (

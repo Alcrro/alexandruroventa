@@ -1,12 +1,5 @@
 import React from "react";
-
+import "./experienceContent.scss";
 export default function ExperienceContent({ company }: { company: any }) {
-  return (
-    <div
-      className="text h-[100%]"
-      dangerouslySetInnerHTML={{
-        __html: `${company.descriptionMore}`,
-      }}
-    ></div>
-  );
+  return <div className="text-content text">{company.descriptionMore}</div>;
 }

@@ -1,19 +1,17 @@
-import React from "react";
+"use client";
+import React, { SetStateAction } from "react";
 
 export default function ExperienceMoreContent({
   company,
   compId,
-  addButtonHandler,
+  setCompId,
 }: {
   company: any;
-  compId: number | undefined;
-  addButtonHandler: (param: number | undefined) => void;
+  compId: number | null;
+  setCompId: React.MouseEventHandler<any>;
 }) {
   return (
-    <div
-      className="more block text-right"
-      onClick={() => addButtonHandler(company.idIncNumber)}
-    >
+    <div className="more block text-right" onClick={setCompId}>
       {compId !== company.idIncNumber ? (
         <span className="">more</span>
       ) : (
