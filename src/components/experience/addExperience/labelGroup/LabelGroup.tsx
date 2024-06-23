@@ -3,11 +3,7 @@ import React, { useState } from "react";
 
 export default function LabelGroup({ date }: { date: any }) {
   const [ifJobIsEnded, setIfJobIsEnded] = useState(false);
-  const isCheckedHandler = (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>
-  ) => {
-    setIfJobIsEnded(e.currentTarget.checked);
-  };
+
   return (
     <div className="dates-start-to-end">
       <div className="label-group">
@@ -48,10 +44,10 @@ export default function LabelGroup({ date }: { date: any }) {
       <div className="label-group">
         <input
           type="checkbox"
-          defaultChecked={false}
           className="date"
+          defaultChecked={ifJobIsEnded}
           name="isChecked"
-          onClick={(e) => isCheckedHandler(e)}
+          onClick={() => setIfJobIsEnded((prev) => !prev)}
         />
       </div>
     </div>

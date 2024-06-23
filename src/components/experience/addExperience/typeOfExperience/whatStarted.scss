@@ -2,6 +2,7 @@
   display: flex;
   gap: 1rem;
   justify-content: center;
+
   .dropdown-list.inActive {
     display: none;
   }
@@ -11,5 +12,25 @@
     position: absolute;
     z-index: 22;
     background: white;
+  }
+
+  .dropdown-current-value {
+    .icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .icon.inActive::after,
+    .icon.active::after {
+      font-family: "Bootstrap-icons";
+      color: #ccc;
+    }
+    .icon.inActive::after {
+      content: "\F229";
+    }
+    .icon.active::after {
+      content: "\F235";
+    }
   }
 }

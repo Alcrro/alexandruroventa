@@ -4,7 +4,7 @@ import React from "react";
 
 export default function ProfileDescription() {
   const pathname = usePathname();
-  console.log(pathname);
+
   return (
     <div className="profile-description max-w-[56rem] mx-auto text-center my-4">
       <p

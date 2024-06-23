@@ -17,7 +17,6 @@ export default function ExperienceContainer({
     } else {
       setCompId(null);
     }
-    console.log(compId);
   };
 
   return (

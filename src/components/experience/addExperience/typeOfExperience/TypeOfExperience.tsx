@@ -5,7 +5,6 @@ export default function TypeOfExperience() {
   const [currentValue, setCurrentValue] = useState("noValue");
   const [dropdownActive, setDropdownActive] = useState(false);
   const dropdownValues = ["School", "Job", "Internship"];
-  console.log(dropdownActive);
 
   return (
     <div className="what-started-container flex gap-2">
@@ -16,12 +15,13 @@ export default function TypeOfExperience() {
           onClick={() => setDropdownActive((prev) => !prev)}
         >
           <input type="hidden" name="experienceType" value={currentValue} />
-          <span>{currentValue}</span>
-          {dropdownActive ? (
-            <span className="h-5 text-xl">^</span>
-          ) : (
-            <span className="h-5 text-xl rotate-180">^</span>
-          )}
+          <div className="value">
+            <span
+              className={`icon${!dropdownActive ? " inActive" : " active"}`}
+            >
+              {currentValue}
+            </span>
+          </div>
         </div>
 
         <div

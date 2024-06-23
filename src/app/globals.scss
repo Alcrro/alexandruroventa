@@ -76,9 +76,7 @@ main {
 }
 
 .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: block;
   position: relative;
   margin: 20px 0;
 

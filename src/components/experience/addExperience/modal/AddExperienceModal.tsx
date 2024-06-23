@@ -1,10 +1,7 @@
 import React from "react";
 import "./addExperienceModal.scss";
-import LabelGroup from "../labelGroup/LabelGroup";
-import TypeOfExperience from "../typeOfExperience/TypeOfExperience";
 import Link from "next/link";
-import AddTextContent from "./AddTextContent/AddTextContent";
-import addExperienceAction from "@/components/actions/addExperienceAction";
+import AddContentForm from "./AddTextContent/AddContentForm";
 
 export default async function AddExperienceModal() {
   const dateObj = new Date();
@@ -23,24 +20,7 @@ export default async function AddExperienceModal() {
             <div className="title">Add your experience</div>
             <Link href={"/experience"} className="close-button"></Link>
           </div>
-          <form action={addExperienceAction}>
-            <div className="body">
-              <LabelGroup date={shortDate} />
-              <TypeOfExperience />
-              <AddTextContent />
-            </div>
-            <div className="footer">
-              <div className="message">
-                <div
-                  name="message"
-                  className="bg-transparent text-black border-gray-50 text-center"
-                />
-              </div>
-              <div className="add-experience-button">
-                <button>Add Experience</button>
-              </div>
-            </div>
-          </form>
+          <AddContentForm date={shortDate} />
         </div>
       </div>
     </div>

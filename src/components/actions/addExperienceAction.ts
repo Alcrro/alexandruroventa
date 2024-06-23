@@ -1,40 +1,30 @@
 "use server";
 
-export default async function addExperienceAction(formData: FormData) {
-  try {
-    const dataStart = formData.get("start-date");
-    const dataEnd = formData.get("end-date");
-    const experienceType = formData.get("experienceType");
-    const textContent = formData.get("textContent");
-    const message = formData.set("message", "test");
+const addExperienceAction = async (formData: FormData) => {
+  const dataStart = formData.get("start-date");
+  const dataEnd = formData.get("end-date");
+  const experienceType = formData.get("experienceType");
+  const textContent = formData.get("textContent");
+  const isChecked = formData.get("isChecked");
 
-    if (experienceType === "noValue") {
-      console.log("You must to choose one of the experience types");
-    } else if (!textContent || dataStart === "2000-01-01") {
-      console.log("something problem");
-    } else {
-      const response = await fetch("http://localhost:3000/api/experience", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: JSON.stringify({
-          startYear: dataStart,
-          endYear: dataEnd,
-          isEnded: false,
-          className: experienceType,
-          titleDescription: "bbg",
-          descriptionMore: textContent,
-        }),
-      });
-      if (response.status === 200) {
-        formData.set("message", "successfully added");
-      }
-    }
+  const response = await fetch("http://localhost:3000/api/experience", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify({
+      startYear: dataStart,
+      endYear: dataEnd,
+      isEnded: isChecked === "on" ? true : false,
+      className: String(experienceType).toLocaleLowerCase(),
+      titleDescription: "bbg",
+      descriptionMore: textContent,
+    }),
+  });
+  const data = await response.json();
+  console.log(isChecked);
 
-    console.log(dataStart, dataEnd, experienceType, textContent);
-  } catch (e: any) {
-    throw new Error(e.message);
-  }
-}
+  return data;
+};
+export default addExperienceAction;
