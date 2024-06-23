@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import "./about.scss";
 import Link from "next/link";
@@ -18,7 +17,7 @@ export default function About() {
         <div className="cv-container">
           <div className="cv-inner">
             <Link
-              href={`/assets/cv/CV-Alexandru-Roventa-web-developer.pdf`}
+              href={`https://alexandru-roventa.s3.eu-central-1.amazonaws.com/CV-Alexandru-Roventa-web-developer.pdf`}
               rel="noopener noreferrer"
               target="_blank"
               className="li-cv"

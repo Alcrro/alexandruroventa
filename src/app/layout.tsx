@@ -5,6 +5,7 @@ import Navbar from "../components/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
 import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterContext";
 import Footer from "@/components/footer/Footer";
+import { Toaster } from "react-hot-toast";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -48,6 +49,7 @@ export default function RootLayout({
             <Footer />
           </main>
         </DarkThemeProvider>
+        <Toaster position="top-right" />
       </body>
     </html>
   );

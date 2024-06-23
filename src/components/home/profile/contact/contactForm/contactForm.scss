@@ -1,25 +1,31 @@
 .contact-form-container {
   .header {
-    .my-email {
+    .my-email-container {
       position: relative;
     }
-    .my-email:hover::after {
+    .my-email-container:hover::after {
       content: "\F759";
       font-family: "Bootstrap-icons";
       position: absolute;
-      top: -20px;
-      right: -10px;
-      color: #eee;
+      top: -5px;
+      right: 4px;
+
       font-size: 14px;
     }
 
-    .my-email.isCopied::after {
+    .my-email-container.isCopied::after {
+      display: inline;
       content: "Copied";
+      font-family: "Bootstrap-icons";
       position: absolute;
-      top: -20px;
-      right: -10px;
+      top: -5px;
+      right: 4px;
       color: #03a842;
-      font-size: 14px;
+      font-size: 12px;
+    }
+
+    .my-email-container.isCopied:hover::after {
+      font-size: 12px;
     }
   }
   .body {
@@ -53,25 +59,31 @@
   }
 }
 
-html.light .form {
-  box-shadow: 1px 1px 10px rgb(77, 76, 76);
-}
-html.dark .form {
-  box-shadow: 1px 1px 10px rgb(180, 177, 177);
-}
-
-html.dark .form:focus-within {
-  transform: scale3d(1, 1, 1);
-  box-shadow: 1px 1px 10px rgb(0, 0, 0);
-  border-radius: 20px;
-}
-
-html.light .form-modal {
-  .label-group {
+html.light {
+  .form {
+    box-shadow: 1px 1px 10px rgb(77, 76, 76);
   }
-  .description,
-  .label-group,
-  .title {
-    color: white;
+  .form-modal {
+    .label-group {
+    }
+    .description,
+    .label-group,
+    .title {
+      color: white;
+    }
+  }
+}
+html.dark {
+  .form {
+    box-shadow: 1px 1px 10px rgb(180, 177, 177);
+  }
+  .form:focus-within {
+    transform: scale3d(1, 1, 1);
+    box-shadow: 1px 1px 10px rgb(0, 0, 0);
+    border-radius: 20px;
+  }
+
+  .my-email-container:hover::after {
+    color: #eee;
   }
 }

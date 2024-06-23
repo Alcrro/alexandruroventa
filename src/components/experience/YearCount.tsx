@@ -26,8 +26,8 @@ export default function YearCount({ company }: { company: iExperience }) {
             getDifferenceMonth1 < 1
               ? ""
               : getDifferenceMonth1 === 1
-              ? "; month"
-              : getDifferenceMonth1 > 1 && "; months"
+              ? `; ${getDifferenceMonth1} month`
+              : getDifferenceMonth1 > 1 && `; ${getDifferenceMonth1} months`
           })`
         : company.currentYear !== null &&
           company.endYear === null &&

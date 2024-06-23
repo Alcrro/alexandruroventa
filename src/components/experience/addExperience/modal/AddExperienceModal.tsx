@@ -1,10 +1,9 @@
 import React from "react";
 import "./addExperienceModal.scss";
-import LabelGroup from "../labelGroup/LabelGroup";
-import TypeOfExperience from "../typeOfExperience/TypeOfExperience";
 import Link from "next/link";
+import AddContentForm from "./AddTextContent/AddContentForm";
 
-export default function AddExperienceModal() {
+export default async function AddExperienceModal() {
   const dateObj = new Date();
   // get the month in this format of 04, the same for months
   const month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
@@ -12,25 +11,16 @@ export default function AddExperienceModal() {
   const year = dateObj.getFullYear();
 
   const shortDate = `${year}-${month}-${day}`;
+
   return (
     <div className="add-experience-modal-container">
       <div className="add-experience-modal-inner">
         <div className="add-experience-modal-content">
           <div className="header">
             <div className="title">Add your experience</div>
-            <Link href={"/experience"} className="close-button">
-              X
-            </Link>
+            <Link href={"/experience"} className="close-button"></Link>
           </div>
-          <div className="body">
-            <LabelGroup date={shortDate} />
-            <TypeOfExperience />
-          </div>
-          <div className="footer">
-            <div className="add-experience-button">
-              <button>Add Experience</button>
-            </div>
-          </div>
+          <AddContentForm date={shortDate} />
         </div>
       </div>
     </div>

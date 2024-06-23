@@ -12,7 +12,7 @@ export default function Footer() {
             <div>business@alexandru-roventa.ro</div>
             <div>alex.roventa94@gmail.com</div>
           </div>
-          <div className="contact">
+          <div className="projects">
             <div className="title">PROJECTS</div>
             <div>
               <Link href={"https://www.alexandru-roventa.ro/"}>
@@ -26,7 +26,16 @@ export default function Footer() {
               <Link href={"https://alcrro.ro"}>alcrro.ro</Link>
             </div>
           </div>
-          <div className="footer-copy"></div>
+          <div className="social-media">
+            <Link
+              href={"https://www.linkedin.com/in/alexandru-roventa/"}
+              target="_blank"
+              className="social-media-icon"
+            ></Link>
+          </div>
+        </div>
+        <div className="row text-center py-3">
+          <div className="footer-copy">Copyright © 2003-2024 alcrro.ro</div>
         </div>
       </div>
     </div>

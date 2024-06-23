@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 const experienceSchema = new mongoose.Schema<iExperience>({
   idIncNumber: { type: Number },
   startYear: { type: Date },
-  currentYear: { type: Date },
+  currentYear: { type: Date, default: null },
   endYear: { type: Date },
   isEnded: { type: Boolean },
   className: { type: String },
@@ -13,7 +13,7 @@ const experienceSchema = new mongoose.Schema<iExperience>({
 });
 
 experienceSchema.pre("save", function (next) {
-  if (this.isEnded === false) {
+  if (this.isEnded === true) {
     this.currentYear = new Date();
 
     this.endYear = null;

@@ -62,7 +62,6 @@
       border-radius: 12px;
       font-size: 15px;
       color: #000;
-      height: 240px;
 
       @media (max-width: 760px) {
         font-size: 13px;
@@ -83,47 +82,13 @@
           margin-bottom: 10px;
         }
       }
-
-      .text {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        // white-space: nowrap;
-      }
     }
     .text-box.collapse-in {
-      animation: collapseIn 2s ease;
-      height: 400px;
+      height: 100%;
       .sticky {
         position: absolute;
         right: 10px;
         top: calc(100% - 20px);
-      }
-    }
-
-    @keyframes collapseIn {
-      0% {
-        height: 220px;
-      }
-      100% {
-        height: 400px;
-      }
-    }
-    .text-box.collapse-out {
-      height: 220px;
-      // animation: collapseOut 2s reverse;
-      .sticky {
-        position: absolute;
-        right: 10px;
-        top: calc(100% - 20px);
-      }
-    }
-
-    @keyframes collapseOut {
-      100% {
-        height: 220px;
-      }
-      0% {
-        height: 400px;
       }
     }
 
