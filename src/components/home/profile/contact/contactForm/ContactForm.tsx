@@ -39,7 +39,7 @@ export default function ContactForm() {
             <div
               className={`my-email-container${
                 isCopied ? " isCopied" : ""
-              } border w-fit mx-auto p-4 m-1 rounded-lg border-gray-600 cursor-pointer `}
+              } border w-fit mx-auto p-4 m-1 rounded-lg border-white cursor-pointer `}
               onClick={(e) => copiedHandler(e)}
             >
               <span className={`my-email`} ref={refCopy}>

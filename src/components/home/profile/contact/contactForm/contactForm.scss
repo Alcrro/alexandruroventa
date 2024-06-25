@@ -2,6 +2,7 @@
   .header {
     .my-email-container {
       position: relative;
+      border-color: white;
     }
     .my-email-container:hover::after {
       content: "\F759";

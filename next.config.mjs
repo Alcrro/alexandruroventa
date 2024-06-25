@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   reactStrictMode: true,
   env: {
@@ -7,6 +8,16 @@ const nextConfig = {
     MONGO_URI: process.env.MONGO_URI,
   },
 
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "alexandru-roventa.s3.eu-central-1.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve = {

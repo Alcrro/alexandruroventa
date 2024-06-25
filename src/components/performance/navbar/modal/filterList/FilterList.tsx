@@ -29,8 +29,6 @@ export default function FilterList({
     setCurrentFilter(name);
   };
 
-  console.log("gg", pathname);
-
   return (
     <div className={`filter-list${active ? " active" : ""}`}>
       <ul>

@@ -5,7 +5,6 @@ import React from "react";
 
 export default function AboutMeContent() {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <>

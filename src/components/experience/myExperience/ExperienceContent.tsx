@@ -1,5 +1,16 @@
+"use client";
 import React from "react";
 import "./experienceContent.scss";
+import { useExperienceContext } from "@/context/experienceContext/ExperienceContext";
 export default function ExperienceContent({ company }: { company: any }) {
-  return <div className="text-content text">{company.descriptionMore}</div>;
+  const { compId } = useExperienceContext();
+  return (
+    <div
+      className={`text-content ${
+        compId === company.idIncNumber ? " show-more" : ""
+      } text`}
+    >
+      {company.descriptionMore}
+    </div>
+  );
 }
