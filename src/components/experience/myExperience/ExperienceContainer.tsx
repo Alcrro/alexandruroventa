@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import ExperienceMoreContent from "./ExperienceMoreContent";
 import "./myExperienceContainer.scss";
+import { useExperienceContext } from "@/context/experienceContext/ExperienceContext";
 export default function ExperienceContainer({
   company,
   children,
@@ -9,7 +10,7 @@ export default function ExperienceContainer({
   company: any;
   children: React.ReactNode;
 }) {
-  const [compId, setCompId] = useState<number | null>(null);
+  const {compId, setCompId} = useExperienceContext();
 
   const handlerMore = (id: number | null) => {
     if (compId === null) {
@@ -28,7 +29,7 @@ export default function ExperienceContainer({
       {children}
       <ExperienceMoreContent
         company={company}
-        compId={compId}
+      
         setCompId={() => handlerMore(company.idIncNumber)}
       />
     </div>

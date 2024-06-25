@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../components/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
 import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterContext";
 import Footer from "@/components/footer/Footer";
 import { Toaster } from "react-hot-toast";
+import { ExperienceContextProvider } from "@/context/experienceContext/ExperienceContext";
 
 const roboto = Roboto({
   weight: ["400", "700"],
@@ -40,10 +42,12 @@ export default function RootLayout({
           <main>
             <Navbar />
             <NavbarFilterProvider>
-              <div className="main">
-                {children}
-                {modal}
-              </div>
+              <ExperienceContextProvider>
+                <div className="main">
+                  {children}
+                  {modal}
+                </div>
+              </ExperienceContextProvider>
             </NavbarFilterProvider>
 
             <Footer />

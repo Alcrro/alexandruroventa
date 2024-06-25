@@ -1,17 +1,22 @@
 "use client";
-import React, { SetStateAction } from "react";
+import { useExperienceContext } from "@/context/experienceContext/ExperienceContext";
+import React, { Dispatch, SetStateAction } from "react";
 
 export default function ExperienceMoreContent({
   company,
-  compId,
   setCompId,
 }: {
   company: any;
-  compId: number | null;
-  setCompId: React.MouseEventHandler<any>;
+  setCompId: (number: number) => void;
 }) {
+  const { compId } = useExperienceContext();
+  console.log(compId);
+
   return (
-    <div className="more block text-right" onClick={setCompId}>
+    <div
+      className="more block text-right"
+      onClick={() => setCompId(company.idIncNumber)}
+    >
       {compId !== company.idIncNumber ? (
         <span className="">more</span>
       ) : (

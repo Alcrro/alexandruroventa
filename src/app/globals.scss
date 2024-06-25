@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "~bootstrap-icons/font/bootstrap-icons.css";
+// @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 .chakra-ui-dark :host:not([data-theme]),
 .chakra-ui-dark :root:not([data-theme]),
@@ -46,7 +46,7 @@ html.dark .navbar-menu,
 html.light .navbar-menu,
 html.dark[data-darkreader-scheme="dark"] .navbar-menu,
 html.light[data-darkreader-scheme="dark"] .navbar-menu {
-  background-color: rgba(0, 174, 255, 0.377);
+  background-color: rgba(0, 174, 255, 0.822);
   color: #fff;
 }
 html.dark[data-darkreader-scheme="dimmed"] .navbar-menu,
@@ -80,7 +80,10 @@ main {
   position: relative;
   margin: 20px 0;
 
-  @media (min-width: 400px) and (max-width: 96rem) {
+  @media (min-width: 400px) and (max-width: 539rem) {
+    margin: 10px;
+  }
+  @media (min-width: 540px) and (max-width: 96rem) {
     margin: 20px;
   }
 }
