@@ -2,6 +2,7 @@
   position: relative;
   margin: 0 auto;
   width: 100%;
+
   .timeline {
     position: relative;
     margin: 50px auto;
@@ -17,7 +18,7 @@
     position: absolute;
     width: 4px;
     height: 100%;
-    background: #fff;
+    background: white;
     border-radius: 18px;
     top: 0%;
     left: 50%;
@@ -55,7 +56,7 @@
 
     .text-box {
       padding: 20px;
-      background: #fff;
+      background: white;
       position: relative;
       border-radius: 12px;
       font-size: 15px;
@@ -99,8 +100,7 @@
       height: 40px;
       border-radius: 50%;
       // padding: 1rem;
-      background-color: white;
-      z-index: 99;
+      background: white;
       top: 32px;
     }
     .logo-company::after {

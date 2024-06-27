@@ -11,7 +11,11 @@ export default function Projects({ projects }: { projects: any }) {
           <div className="head">
             <div className="title text-2xl py-4">{project.title}</div>
             <div className="title domain text-2xl py-2">
-              <Link href={`https://${project.link}`} target="_blank">
+              <Link
+                href={`https://${project.link}`}
+                target="_blank"
+                className="underline underline-offset-4"
+              >
                 {project.link}
               </Link>
             </div>

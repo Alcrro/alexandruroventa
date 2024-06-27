@@ -30,6 +30,7 @@ export default function LabelGroup({ date }: { date: any }) {
             id="ended"
             min={"2000-01-01"}
             defaultValue={date}
+            max={date}
           />
         ) : (
           <input
@@ -38,17 +39,19 @@ export default function LabelGroup({ date }: { date: any }) {
             name="end-date"
             min={"2000-01-01"}
             defaultValue={date}
+            max={date}
           />
         )}
       </div>
       <div className="label-group">
         <input
           type="checkbox"
-          className="date"
+          className="date check"
           defaultChecked={ifJobIsEnded}
           name="isChecked"
           onClick={() => setIfJobIsEnded((prev) => !prev)}
         />
+        <span className="check-background"></span>
       </div>
     </div>
   );

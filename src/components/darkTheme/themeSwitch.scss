@@ -11,7 +11,7 @@
   }
 
   .dark-theme {
-    background-color: #fff;
+    background: var(---background-div-color);
 
     span {
       position: absolute;
@@ -28,7 +28,7 @@
   }
 
   .light-theme {
-    background-color: #000;
+    background-color: var(---background-div-color);
 
     span {
       position: absolute;
@@ -41,7 +41,7 @@
       content: "\F494";
       font-family: "Bootstrap-icons";
       background-color: #000;
-      color: #fff;
+      color: var(---text-div-color);
       padding: 0.25rem;
       border-radius: 12px;
       cursor: pointer;

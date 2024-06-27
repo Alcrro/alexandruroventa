@@ -8,11 +8,14 @@ export async function GET(req: NextRequest) {
   try {
     const experiences = await Experience.find();
 
-    return NextResponse.json({
-      success: true,
-      message: "Experiences loaded successfully experiences",
-      experiences,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Experiences loaded successfully experiences",
+        experiences,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ error: error }, { status: 400 });
   }
@@ -69,11 +72,14 @@ export async function POST(req: NextRequest) {
       descriptionMore,
     });
     const experienceSaved = await experiences.save();
-    return NextResponse.json({
-      success: true,
-      message: "Experiences saved successfully!",
-      experienceSaved,
-    });
+    return NextResponse.json(
+      {
+        success: true,
+        message: "Experiences saved successfully!",
+        experienceSaved,
+      },
+      { status: 201 }
+    );
   } catch (error: any) {
     return NextResponse.json({ error: error.errors }, { status: 500 });
   }

@@ -3,6 +3,12 @@
   gap: 1rem;
   justify-content: center;
 
+  @media (max-width: 450px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
   .dropdown-list.inActive {
     display: none;
   }
@@ -11,7 +17,12 @@
     display: block;
     position: absolute;
     z-index: 22;
-    background: white;
+    background: var(---background-color);
+
+    li:hover {
+      background-color: #ccc;
+      cursor: pointer;
+    }
   }
 
   .dropdown-current-value {

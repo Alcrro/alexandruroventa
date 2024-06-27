@@ -11,7 +11,7 @@ export default function TypeOfExperience() {
       <div className="what-started pt-2">What did you start?</div>
       <div className="dropdown-container">
         <div
-          className="dropdown-current-value flex gap-2 items-center justify-center border border-gray-400 w-[120px] text-center p-2 rounded-lg"
+          className="dropdown-current-value flex gap-2 items-center justify-center border w-[120px] text-center p-2 rounded-lg"
           onClick={() => setDropdownActive((prev) => !prev)}
         >
           <input type="hidden" name="experienceType" value={currentValue} />
@@ -37,7 +37,7 @@ export default function TypeOfExperience() {
                     setCurrentValue(values), setDropdownActive((prev) => !prev);
                   }}
                 >
-                  <span>{values} </span>
+                  <span>{values}</span>
                 </span>
               </li>
             ))}

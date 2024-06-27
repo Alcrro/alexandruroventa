@@ -48,7 +48,7 @@
             max-width: unset;
           }
           span {
-            background-color: white;
+            background-color: var(---background-div-color);
             color: #000;
             font-size: 16px;
             padding: 0.5rem;
@@ -111,7 +111,7 @@
         border-radius: 12px;
         padding: 0.5rem;
         font-size: 14px;
-        color: #fff;
+        color: var(---text-color);
       }
 
       .hosted {
@@ -225,14 +225,16 @@
 }
 
 html.light .projects-inner {
-  box-shadow: 1px 1px 10px rgb(46, 46, 46);
-}
-html.dark .projects-inner {
   box-shadow: 1px 1px 10px rgb(143, 143, 143);
 }
 html.light .projects-inner:hover {
-  box-shadow: 1px 1px 10px rgb(255, 255, 255);
+  box-shadow: 1px 1px 10px rgb(46, 46, 46);
 }
+
+html.dark .projects-inner {
+  box-shadow: 1px 1px 10px rgb(143, 143, 143);
+}
+
 html.dark .projects-inner:hover {
   box-shadow: 1px 1px 10px rgb(255, 255, 255);
 }

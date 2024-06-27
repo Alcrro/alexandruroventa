@@ -11,7 +11,7 @@ export default function TypeOfExperienceModal({
   return (
     <>
       <div
-        className="dropdown-current-value flex gap-2 items-center justify-center border border-gray-400 w-[120px] text-center p-2 rounded-lg"
+        className="dropdown-current-value flex gap-2 items-center justify-center w-[120px] text-center p-2 rounded-lg"
         onClick={() => setDropdownActive((prev) => !prev)}
       >
         <span>{currentValue}</span>
