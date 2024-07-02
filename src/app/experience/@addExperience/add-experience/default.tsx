@@ -1,6 +1,5 @@
-import AddExperience from "@/components/experience/addExperience/AddExperience";
-import React from "react";
+import AddExperienceModal from "@/components/experience/addExperience/modal/AddExperienceModal";
 
 export default function defaultAddExperience() {
-  return <AddExperience />;
+  return;
 }

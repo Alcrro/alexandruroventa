@@ -11,7 +11,7 @@ export default function TypeOfExperience() {
       <div className="what-started pt-2">What did you start?</div>
       <div className="dropdown-container">
         <div
-          className="dropdown-current-value flex gap-2 items-center justify-center border w-[120px] text-center p-2 rounded-lg"
+          className="dropdown-current-value flex gap-2 items-center justify-center  w-[120px] text-center p-2 "
           onClick={() => setDropdownActive((prev) => !prev)}
         >
           <input type="hidden" name="experienceType" value={currentValue} />
@@ -29,7 +29,7 @@ export default function TypeOfExperience() {
             dropdownActive ? " active " : " inActive "
           } w-[120px]`}
         >
-          <ul className="text-center border border-gray-400 rounded-lg">
+          <ul className="text-center">
             {dropdownValues.map((values, key) => (
               <li className="py-1" key={key}>
                 <span

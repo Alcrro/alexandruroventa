@@ -10,7 +10,7 @@ export default function ExperienceContainer({
   company: any;
   children: React.ReactNode;
 }) {
-  const {compId, setCompId} = useExperienceContext();
+  const { compId, setCompId } = useExperienceContext();
 
   const handlerMore = (id: number | null) => {
     if (compId === null) {
@@ -22,14 +22,13 @@ export default function ExperienceContainer({
 
   return (
     <div
-      className={`experience-container text-box${
+      className={`experience-container 1  text-box${
         compId === company.idIncNumber ? " collapse-in" : " collapse-out"
       }`}
     >
       {children}
       <ExperienceMoreContent
         company={company}
-      
         setCompId={() => handlerMore(company.idIncNumber)}
       />
     </div>

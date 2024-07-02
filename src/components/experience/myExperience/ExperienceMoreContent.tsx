@@ -10,7 +10,6 @@ export default function ExperienceMoreContent({
   setCompId: (number: number) => void;
 }) {
   const { compId } = useExperienceContext();
-  console.log(compId);
 
   return (
     <div

@@ -5,17 +5,22 @@ import TypeOfExperience from "../../typeOfExperience/TypeOfExperience";
 import AddTextContent from "./AddTextContent";
 import addExperienceAction from "@/components/actions/addExperienceAction";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function AddContentForm({ date }: { date: any }) {
-  const [codActivator, setCodActivator] = useState(false);
+  const router = useRouter();
   async function clientAddExperienceAction(formData: FormData) {
     try {
       const response = await addExperienceAction(formData);
-
-      response.error
-        ? toast.error(response.error)
-        : toast.success(response.message);
-    } catch (error: any) {}
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        toast.success(response.message);
+        router.push("/experience/add-experience/activate");
+      }
+    } catch (error: any) {
+      console.log(error);
+    }
   }
 
   return (

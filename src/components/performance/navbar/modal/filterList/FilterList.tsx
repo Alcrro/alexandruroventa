@@ -37,7 +37,7 @@ export default function FilterList({
             {item.link === "all" || item.link === 20 ? (
               <Link href={`/performance/${currentPathname}/`}>{item.name}</Link>
             ) : (
-              <Link href={`/performance/${params.str}/${item.link}`}>
+              <Link href={`/performance/${params.category}/${item.link}`}>
                 {item.name}
               </Link>
             )}

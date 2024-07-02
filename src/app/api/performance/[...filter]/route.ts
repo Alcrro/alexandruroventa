@@ -10,7 +10,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
 
   try {
     const languageSkillContent = await LanguageSKillContent.find(filter?.obj);
-    // console.log(languageSkillContent);
+    console.log(languageSkillContent);
 
     return NextResponse.json({
       success: true,
@@ -28,11 +28,12 @@ export async function POST(
 ) {
   try {
     const reqBody = await req.json();
-    const { name, description, category, languageType } = reqBody;
+    const { contentDescription, category, languageType, contentTitle } =
+      reqBody;
     const newLanguageSkillContent = new LanguageSKillContent({
-      name,
-      description,
+      contentDescription,
       category,
+      contentTitle,
       languageType,
     });
     const languageSkillContentSaved = await newLanguageSkillContent.save();
