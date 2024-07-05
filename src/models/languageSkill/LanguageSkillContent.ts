@@ -32,7 +32,7 @@ const LanguageSkillContentSchema = new mongoose.Schema({
 LanguageSkillContentSchema.pre("save", function (next) {
   let slug = this.contentTitle + "-" + this.contentDescription;
 
-  this.slug = slug.split(" ").join("-");
+  this.slug = slug.split(" ").join("-").toLocaleLowerCase();
   next();
 });
 

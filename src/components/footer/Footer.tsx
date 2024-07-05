@@ -15,15 +15,19 @@ export default function Footer() {
           <div className="projects">
             <div className="title">PROJECTS</div>
             <div>
-              <Link href={"https://www.alexandru-roventa.ro/"}>
+              <Link href={"https://alexandru-roventa.ro/"} target="_blank">
                 alexandru-roventa.ro
               </Link>
             </div>
             <div>
-              <Link href={"https://lucruri-utile.ro"}>lucruri-utile.ro</Link>
+              <Link href={"https://lucruri-utile.ro"} target="_blank">
+                lucruri-utile.ro
+              </Link>
             </div>
             <div>
-              <Link href={"https://alcrro.ro"}>alcrro.ro</Link>
+              <Link href={"https://alcrro.ro"} target="_blank">
+                alcrro.ro
+              </Link>
             </div>
           </div>
           <div className="social-media">

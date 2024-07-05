@@ -6,11 +6,9 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   const filter = algorithmParamsAPI(params.filter);
-  console.log("api", filter?.obj);
 
   try {
     const languageSkillContent = await LanguageSKillContent.find(filter?.obj);
-    console.log(languageSkillContent);
 
     return NextResponse.json({
       success: true,

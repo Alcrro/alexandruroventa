@@ -5,10 +5,17 @@
   gap: 1rem;
   position: relative;
 
+  @media (max-width: 350px) {
+    flex-direction: column;
+  }
+
   .current-filter-inner {
     display: block;
     position: relative;
 
+    @media (max-width: 350px) {
+      width: 100%;
+    }
     .current-filter {
       display: block;
       width: 182px;
@@ -16,6 +23,10 @@
       border: 1px solid;
       border-radius: 8px;
       padding: 2px 0;
+
+      @media (max-width: 350px) {
+        width: 100%;
+      }
     }
     .current-filter:hover {
       cursor: pointer;
@@ -29,5 +40,13 @@
     border-bottom: 0;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+
+    @media (max-width: 350px) {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 350px) {
+    justify-content: center;
   }
 }

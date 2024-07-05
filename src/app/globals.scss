@@ -12,7 +12,6 @@
 }
 :root {
   --lh: 1.4rem;
- 
 }
 
 :root.light {
@@ -22,6 +21,7 @@
   ---text-div-color: #fff;
   ---border-light-color: #000;
   ---border-color: #fff;
+  ---text-version: #555555;
 }
 
 :root.dark {
@@ -31,6 +31,7 @@
   ---text-div-color: #000;
   ---border-light-color: #000;
   ---border-color: #fff;
+  ---text-version: #d8d8d8;
 }
 
 // :root[data-darkreader-scheme="dark"] {

@@ -35,10 +35,12 @@ export default function FilterList({
         {data.map((item: any, key: number) => (
           <li key={key} onClick={() => handler(item.name)}>
             {item.link === "all" || item.link === 20 ? (
-              <Link href={`/performance/${currentPathname}/`}>{item.name}</Link>
+              <Link href={`/performance/${currentPathname}/`}>
+                <span>{item.name}</span>
+              </Link>
             ) : (
               <Link href={`/performance/${params.category}/${item.link}`}>
-                {item.name}
+                <span>{item.name}</span>
               </Link>
             )}
           </li>
