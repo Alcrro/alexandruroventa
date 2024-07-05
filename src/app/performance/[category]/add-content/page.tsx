@@ -1,5 +1,10 @@
+import AddContent from "@/components/performance/main/addContent/AddContent";
 import React from "react";
 
 export default function page() {
-  return <div>Add to content</div>;
+  return (
+    <div>
+      <AddContent />
+    </div>
+  );
 }
