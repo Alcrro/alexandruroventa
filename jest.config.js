@@ -17,6 +17,7 @@ const config = {
       statements: -10,
     },
   },
+
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   preset: "ts-jest",

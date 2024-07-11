@@ -9,3 +9,4 @@ describe("Footer", () => {
     expect(textElement).toBeInTheDocument();
   });
 });
+/* eslint-env jest */

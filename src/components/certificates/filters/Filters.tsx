@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import "./filter.scss";
 export default function Filters() {
-  const [active, setActive] = useState(false);
+const [active, setActive] = useState(false);
   const [currentFilter, setCurrentFilter] = useState("filter");
   return (
     <div className="filter-container">
