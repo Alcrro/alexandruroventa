@@ -11,8 +11,14 @@ const CodeVersionSchema = new mongoose.Schema({
     // minLength: [20, "You need to write at least 20 characters"],
     // maxLength: [100, "Your name is to long, 100 characters are allowed"], },
   },
-  data: {
-    type: new Date(),
+  date: {
+    type: Date,
+    default: new Date(),
+  },
+
+  title_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "languageSKillContent",
   },
 });
 

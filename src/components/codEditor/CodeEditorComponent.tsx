@@ -30,7 +30,7 @@ export default function CodeEditorComponent({
   const [collapse, setCollapse] = useState(false);
   const [imageIsOpen, setImageIsOpen] = useState(false);
 
-  const [documentContent] = document;
+  const [documentContent]: any = document;
   const [documentS] = contentSD;
 
   const collapseEditor = () => {
@@ -44,12 +44,12 @@ export default function CodeEditorComponent({
     <div className="editor-container">
       <div className="header-editor">
         <div className="title">
-          {documentContent.name.charAt(0).toUpperCase() +
-            documentContent.name.slice(1)}
+          {documentContent?.name.charAt(0).toUpperCase() +
+            documentContent?.name.slice(1)}
         </div>
         <div className="version-code">
-          <span>{documentS.version.name}: </span>
-          <span>{documentS.version.version}</span>
+          <span>{documentS?.version.name}: </span>
+          <span>{documentS?.version.version}</span>
         </div>
       </div>
 
@@ -80,7 +80,7 @@ export default function CodeEditorComponent({
           <div className="title py-4">Explanation: </div>
 
           <Image
-            src={`/contentImages/${documentS.image}`}
+            src={`/contentImages/${documentS?.image}`}
             alt=""
             width={1000}
             height={1000}
@@ -95,7 +95,7 @@ export default function CodeEditorComponent({
       {imageIsOpen ? (
         <div className="wrapper-image-container">
           <Image
-            src={`/contentImages/${documentS.image}`}
+            src={`/contentImages/${documentS?.image}`}
             alt=""
             width={1000}
             height={1000}

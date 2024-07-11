@@ -27,6 +27,11 @@ const LanguageSkillContentSchema = new mongoose.Schema({
   slug: {
     type: String,
   },
+
+  versionCode_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CodeVersion",
+  },
 });
 
 LanguageSkillContentSchema.pre("save", function (next) {

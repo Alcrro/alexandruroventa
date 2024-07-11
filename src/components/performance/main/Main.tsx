@@ -1,26 +1,15 @@
 import React from "react";
 import "./contentList.scss";
-import Link from "next/link";
 
-export default function Main({ documents }: { documents: string[] }) {
-  let isNotIncluded = ["_id", "category", "__v", "slug"];
+interface iDocument {
+  languageType: string;
+  contentTitle: string;
+  contentDescription: string;
+  codVersion: string;
+  dateVersion: Date;
+}
 
-  let isFiltered = Object.keys(documents[0]).filter(
-    (filter) => !isNotIncluded.includes(filter)
-  );
-
-  let headerArray = ["type", "title", "description"];
-
-  let test: any = [];
-
-  let addElement = isFiltered.map((item) => test.push({ category: item }));
-  headerArray.map((header, index) => test.push({ name: header }));
-  console.log("gg", addElement);
-  console.log("gg", test);
-
-  let headers = Object.keys(documents[0]);
-  // console.log(headers);
-
+export default function Main({ documents }: { documents: iDocument[] }) {
   return (
     <div className="main-content-container">
       <div className="main-content-inner">
@@ -28,20 +17,19 @@ export default function Main({ documents }: { documents: string[] }) {
           <li>Type</li>
           <li>Title</li>
           <li>Description</li>
-          {/* <li>Data</li> */}
+          <li>version</li>
+          <li>date</li>
         </ul>
         <ul className="body-ul">
-          {documents.map((item, rowIndex) => (
-            <>
-              <li key={rowIndex} className="">
-                {isFiltered.map((header, colIndex) => (
-                  <div className="content-group">
-                    <div className="content-body-header">{header}:</div>
-                    <div key={colIndex}>{item[header]}</div>
-                  </div>
-                ))}
-              </li>
-            </>
+          {documents.map((item: iDocument, rowIndex: number) => (
+            <li key={rowIndex} className="flex">
+              <div>{item.languageType}</div>
+              <div>{item.contentTitle}</div>
+              <div>{item.contentDescription}</div>
+              <div> {item.codVersion}</div>
+
+              <div>{new Date(item?.dateVersion)?.toLocaleDateString()}</div>
+            </li>
           ))}
         </ul>
       </div>

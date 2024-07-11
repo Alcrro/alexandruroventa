@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-// @import "~bootstrap-icons/font/bootstrap-icons.css";
-
 .chakra-ui-dark :host:not([data-theme]),
 .chakra-ui-dark :root:not([data-theme]),
 .chakra-ui-dark {
@@ -111,18 +109,7 @@ main {
   }
 }
 
-.main {
-  display: block;
-  position: relative;
-  margin: 20px 0;
 
-  @media (min-width: 400px) and (max-width: 539rem) {
-    margin: 10px;
-  }
-  @media (min-width: 540px) and (max-width: 96rem) {
-    margin: 20px;
-  }
-}
 
 html.light {
   ::-webkit-scrollbar {

@@ -1,0 +1,37 @@
+.filter-container {
+  @media (max-width: 420px) {
+    display: block;
+    width: 100%;
+  }
+  .filters {
+    display: block;
+    width: 160px;
+    max-width: 100%;
+    color: #000;
+    text-align: center;
+    position: relative;
+
+    @media (max-width: 420px) {
+      display: block;
+      width: 100%;
+    }
+
+    .currentFilter {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      background-color: #fff;
+      border: 1px solid var(---border-color);
+      text-transform: capitalize;
+
+      cursor: pointer;
+      text-align: center;
+
+      span {
+        margin: 0 auto;
+      }
+    }
+  }
+}

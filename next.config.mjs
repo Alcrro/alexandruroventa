@@ -16,6 +16,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "link.ro",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   webpack: (config, { isServer }) => {

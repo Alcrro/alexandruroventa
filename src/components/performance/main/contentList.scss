@@ -7,7 +7,7 @@
 
     .header-ul {
       display: grid;
-      grid-template-columns: 100px repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 0.2rem;
       text-align: center;
       li {
@@ -42,7 +42,8 @@
         border-radius: 12px;
         word-break: break-all;
 
-        div:first-child {
+        div:first-child,
+        div:last-child {
           max-width: fit-content;
           margin: 0 auto;
 

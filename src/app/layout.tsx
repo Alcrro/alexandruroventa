@@ -8,7 +8,7 @@ import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterCont
 import Footer from "@/components/footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { ExperienceContextProvider } from "@/context/experienceContext/ExperienceContext";
-
+import "./layout.scss"
 const roboto = Roboto({
   weight: ["400", "700"],
   style: ["normal", "italic"],
@@ -43,7 +43,7 @@ export default function RootLayout({
             <Navbar />
             <NavbarFilterProvider>
               <ExperienceContextProvider>
-                <div className="main">
+                <div className="main root">
                   {children}
                   {modal}
                 </div>
