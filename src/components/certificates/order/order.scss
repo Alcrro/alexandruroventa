@@ -5,7 +5,7 @@
   }
   .orderBy {
     display: block;
-    width: 160px;
+    width: 180px;
     max-width: 100%;
     color: #000;
 
@@ -31,48 +31,74 @@
       }
     }
 
-    // .currentValue.isActive {
-    //   border-bottom: 0;
-    //   border-bottom-left-radius: 0;
-    //   border-bottom-right-radius: 0;
+    .currentValue.isNotActive ~ .ul-order {
+      display: none;
+    }
 
-    //   &:after {
-    //     content: "\F235";
-    //     font-family: "Bootstrap-icons";
-    //   }
-    // }
+    .ul-order {
+      display: block;
+      position: absolute;
+      text-align: center;
+      background-color: #fff;
+      top: 40px;
+      width: 100%;
+      padding: 0.5rem 0.25rem;
+      border-radius: 12px;
+      border: 1px solid var(---border-color);
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      text-transform: capitalize;
+      cursor: pointer;
 
-    // ul.isNotActive {
-    //   display: none;
-    // }
+      .li-order {
+        display: block;
 
-    // ul.isActive {
-    //   display: block;
-    //   position: absolute;
-    //   text-align: center;
-    //   background-color: #fff;
-    //   top: 40px;
-    //   width: 100%;
-    //   padding: 0.5rem 0.25rem;
-    //   border-radius: 12px;
-    //   border: 1px solid var(---border-color);
-    //   border-top-left-radius: 0;
-    //   border-top-right-radius: 0;
-    //   text-transform: capitalize;
-    //   cursor: pointer;
+        padding: 0.25rem;
+        width: 100%;
 
-    //   .li-order {
-    //     padding: 0.25rem;
+        a {
+          display: flex;
+          // gap: 15px;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          // padding: 0.5rem;
+        }
+      }
 
-    //     a {
-    //       padding: 0.5rem;
-    //     }
-    //   }
-    //   .li-order.active {
-    //     background-color: #75757581;
-    //     border-radius: 10px;
-    //     color: #fff;
-    //   }
-    // }
+      .ordered-name {
+        display: block;
+        width: 100%;
+        opacity: 0.8;
+        // margin: 0 auto;
+      }
+      .orderedByAsc::after {
+        content: "\F128";
+        font-family: "Bootstrap-icons";
+        font-size: 10px;
+      }
+      .orderedByDesc::after {
+        content: "\F148";
+        font-family: "Bootstrap-icons";
+        font-size: 10px;
+      }
+
+      .orderedByAsc.active,
+      .orderedByDesc.active {
+        font-weight: 900;
+        opacity: 1;
+      }
+
+      .ordered-name.active {
+        font-weight: 500;
+        opacity: 1;
+      }
+
+      .ordered-name.active {
+        background-color: #e2e2e25b;
+        border-radius: 10px;
+        color: #000;
+      }
+    }
   }
 }

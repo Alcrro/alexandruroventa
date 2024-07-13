@@ -1,5 +1,5 @@
 import React from "react";
-
+import "../certificates.scss";
 export default function layout({
   filter,
   main,

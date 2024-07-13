@@ -9,6 +9,8 @@ import Footer from "@/components/footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { ExperienceContextProvider } from "@/context/experienceContext/ExperienceContext";
 import "./layout.scss"
+
+
 const roboto = Roboto({
   weight: ["400", "700"],
   style: ["normal", "italic"],

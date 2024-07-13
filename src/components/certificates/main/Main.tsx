@@ -16,7 +16,7 @@ export default function Main({ documents }: { documents: iCertificate[] }) {
     <div className="certificates-container">
       <div className="certificates">
         <ul>
-          {documents.map((certificate: iCertificate, key: any) => (
+          {documents?.map((certificate: iCertificate, key: any) => (
             <li key={key}>
               <div className="image-container">
                 <Link href={`/certificates/${certificate.slug}`}>
