@@ -9,7 +9,7 @@ const LanguageSkillContentSchema = new mongoose.Schema({
     required: [true, "Please provide the type of this category"],
     enum: ["course", "project"],
   },
-  name: {
+  contentTitle: {
     type: String,
     required: [true, "Please provide the name of this course"],
     // minLength: [20, "You need to write at least 20 characters"],
@@ -17,23 +17,27 @@ const LanguageSkillContentSchema = new mongoose.Schema({
 
     trim: true,
   },
-  description: {
+  contentDescription: {
     type: String,
     required: [true, "Please provide a description of this category"],
     // minLength: [100, "You need to write at least 100 characters"],
     // maxLength: [400, "Your description is to long, 400 characters are allowed"],
     trim: true,
   },
-
-  dataCreated: {
+  slug: {
     type: String,
+  },
+
+  versionCode_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "CodeVersion",
   },
 });
 
 LanguageSkillContentSchema.pre("save", function (next) {
-  const today = new Date();
+  let slug = this.contentTitle + "-" + this.contentDescription;
 
-  this.dataCreated = today.toLocaleDateString("en-US");
+  this.slug = slug.split(" ").join("-").toLocaleLowerCase();
   next();
 });
 

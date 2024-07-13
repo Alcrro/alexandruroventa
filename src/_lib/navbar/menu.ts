@@ -4,10 +4,11 @@ export interface INavbarMenuProps {
 }
 export const navbarMenu: INavbarMenuProps[] = [
   { name: "home", link: "/" },
-  { name: "about", link: "about" },
+
   { name: "projects", link: "projects" },
   { name: "skills", link: "skills" },
   { name: "experience", link: "experience" },
   { name: "performance", link: "performance" },
+  { name: "certificates", link: "certificates" },
   { name: "contact", link: "contact" },
 ];

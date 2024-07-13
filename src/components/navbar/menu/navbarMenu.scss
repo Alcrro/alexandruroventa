@@ -2,7 +2,8 @@
   max-width: fit-content;
   position: relative;
   margin: 0 auto;
-
+  background-color: rgba(0, 174, 255, 0.822);
+  color: #fff;
   border-radius: 30px;
 
   @media (max-width: 200px) {
@@ -59,4 +60,3 @@
     }
   }
 }
-

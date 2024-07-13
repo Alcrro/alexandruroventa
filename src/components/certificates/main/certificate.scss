@@ -1,0 +1,76 @@
+.certificates-container {
+  display: block;
+
+  .certificates {
+    display: block;
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+      gap: 1rem;
+
+      @media (max-width: 900px) {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+      }
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: center;
+
+        a {
+          img {
+            display: block;
+            // width: 100%;
+            border-radius: 9px;
+            // height: 420px;
+            @media (max-width: 599px) {
+              width: 100%;
+              height: unset;
+            }
+          }
+        }
+
+        .description-container {
+          display: grid;
+          // width: 60%;
+          grid-template-columns: repeat(
+            auto-fit,
+            minmax(min(100%, 220px), 1fr)
+          );
+          gap: 0.5rem;
+          width: 100%;
+        }
+        .organization,
+        .language-learnt,
+        .author,
+        .date {
+          display: grid;
+          grid-template-columns: 50% 50%;
+          gap: 1rem;
+
+          @media (max-width: 599px) {
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0.25rem;
+            margin-bottom: 10px;
+          }
+          @media (max-width: 300px) {
+            grid-template-columns: 100%;
+          }
+
+          div:first-child {
+            text-align: right;
+
+            @media (max-width: 599px) {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}

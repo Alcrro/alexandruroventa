@@ -29,18 +29,18 @@ export default function FilterList({
     setCurrentFilter(name);
   };
 
-  console.log("gg", pathname);
-
   return (
     <div className={`filter-list${active ? " active" : ""}`}>
       <ul>
         {data.map((item: any, key: number) => (
           <li key={key} onClick={() => handler(item.name)}>
             {item.link === "all" || item.link === 20 ? (
-              <Link href={`/performance/${currentPathname}/`}>{item.name}</Link>
+              <Link href={`/performance/${currentPathname}/`}>
+                <span>{item.name}</span>
+              </Link>
             ) : (
-              <Link href={`/performance/${params.str}/${item.link}`}>
-                {item.name}
+              <Link href={`/performance/${params.category}/${item.link}`}>
+                <span>{item.name}</span>
               </Link>
             )}
           </li>

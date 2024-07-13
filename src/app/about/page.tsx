@@ -1,4 +1,5 @@
 export const dynamic = "force-dynamic";
+
 import { Metadata } from "next/types";
 import React from "react";
 
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function page() {
-  return <div>About</div>;
+  return <div className="about"></div>;
 }

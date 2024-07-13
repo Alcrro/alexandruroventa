@@ -1,0 +1,13 @@
+.collapse-out .text-content {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  // word-break: break-all;
+}
+
+.collapse-in .text-content {
+  word-wrap: break-word;
+}

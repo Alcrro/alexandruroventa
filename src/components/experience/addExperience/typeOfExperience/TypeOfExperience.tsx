@@ -5,22 +5,23 @@ export default function TypeOfExperience() {
   const [currentValue, setCurrentValue] = useState("noValue");
   const [dropdownActive, setDropdownActive] = useState(false);
   const dropdownValues = ["School", "Job", "Internship"];
-  console.log(dropdownActive);
 
   return (
     <div className="what-started-container flex gap-2">
       <div className="what-started pt-2">What did you start?</div>
       <div className="dropdown-container">
         <div
-          className="dropdown-current-value flex gap-2 items-center justify-center border border-gray-400 w-[120px] text-center p-2 rounded-lg"
+          className="dropdown-current-value flex gap-2 items-center justify-center  w-[120px] text-center p-2 "
           onClick={() => setDropdownActive((prev) => !prev)}
         >
-          <span>{currentValue}</span>
-          {dropdownActive ? (
-            <span className="h-5 text-xl">^</span>
-          ) : (
-            <span className="h-5 text-xl rotate-180">^</span>
-          )}
+          <input type="hidden" name="experienceType" value={currentValue} />
+          <div className="value">
+            <span
+              className={`icon${!dropdownActive ? " inActive" : " active"}`}
+            >
+              {currentValue}
+            </span>
+          </div>
         </div>
 
         <div
@@ -28,7 +29,7 @@ export default function TypeOfExperience() {
             dropdownActive ? " active " : " inActive "
           } w-[120px]`}
         >
-          <ul className="text-center border border-gray-400 rounded-lg">
+          <ul className="text-center">
             {dropdownValues.map((values, key) => (
               <li className="py-1" key={key}>
                 <span
@@ -36,7 +37,7 @@ export default function TypeOfExperience() {
                     setCurrentValue(values), setDropdownActive((prev) => !prev);
                   }}
                 >
-                  <span>{values} </span>
+                  <span>{values}</span>
                 </span>
               </li>
             ))}

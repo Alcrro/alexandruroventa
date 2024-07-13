@@ -37,13 +37,12 @@ export default function ContactForm() {
           <div className="description py-4 text-xl">
             Please contact me directly at this form or at this email:
             <div
-              className={`border w-fit mx-auto p-4 m-1 rounded-lg border-gray-600 cursor-pointer `}
+              className={`my-email-container${
+                isCopied ? " isCopied" : ""
+              } border w-fit mx-auto p-4 m-1 rounded-lg border-white cursor-pointer `}
               onClick={(e) => copiedHandler(e)}
             >
-              <span
-                className={`my-email${isCopied ? " isCopied" : ""}`}
-                ref={refCopy}
-              >
+              <span className={`my-email`} ref={refCopy}>
                 business@alexandru-roventa.ro
               </span>
             </div>
@@ -58,7 +57,7 @@ export default function ContactForm() {
               className={`${isActive ? "active" : ""}`}
             >
               <div className="label-group py-2 flex flex-col justify-center mx-auto">
-                <label htmlFor="email">Add an email:</label>
+                <label htmlFor="email">Send an email:</label>
                 <input
                   type="email"
                   id="email"

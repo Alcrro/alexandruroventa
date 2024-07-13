@@ -4,7 +4,8 @@ export default async function getNavbar() {
       `${process.env.NEXTAUTH_URL}/api/navbar/menu`,
       {
         method: "GET",
-        cache: "force-cache",
+        // cache: "force-cache",
+        cache: "no-cache",
         headers: {
           "Content-Type": "application/json",
           // 'Content-Type': 'application/x-www-form-urlencoded',

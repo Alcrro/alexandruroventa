@@ -17,9 +17,9 @@
       li {
         display: block;
         padding: 0.5rem 1rem;
-        background-color: white;
+        background-color: var(---background-div-color);
         border-radius: 12px;
-        color: black;
+        color: var(---text-div-color);
         word-break: break-all;
       }
       li:hover {

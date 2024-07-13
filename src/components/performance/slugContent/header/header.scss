@@ -1,0 +1,22 @@
+.content-header-container {
+  .content-header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 640px) {
+    .content-header-inner {
+      gap: 1rem;
+    }
+    .title-and-description,
+    .content-version {
+      text-align: center;
+      flex: 100%;
+    }
+  }
+  .version-number {
+    color: var(---text-version);
+  }
+}

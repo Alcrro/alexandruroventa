@@ -1,5 +1,71 @@
 .what-started-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  @media (max-width: 450px) {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+  }
   .dropdown-list.inActive {
     display: none;
+  }
+
+  .dropdown-list.active {
+    display: block;
+    position: absolute;
+    z-index: 22;
+    background: var(---background-div-color);
+
+    span {
+      display: block;
+    }
+
+    li:hover {
+      background-color: #ccc;
+      cursor: pointer;
+    }
+
+    .text-center {
+      border: 1px solid #e5e7eb;
+      border-top: none;
+      border-radius: 0.5rem;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .dropdown-current-value {
+    &:has(.inActive) {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+    }
+
+    &:has(.active) {
+      border: 1px solid #e5e7eb;
+      border-radius: 0.5rem;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .icon.inActive::after,
+    .icon.active::after {
+      font-family: "Bootstrap-icons";
+      color: #ccc;
+    }
+    .icon.inActive::after {
+      content: "\F229";
+    }
+    .icon.active::after {
+      content: "\F235";
+    }
   }
 }

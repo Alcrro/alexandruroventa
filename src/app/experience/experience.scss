@@ -1,11 +1,10 @@
 .experience-container {
   display: block;
-  // max-width: 96rem;
+  position: relative;
+  // height: 60vh;
   .experience-inner {
     display: block;
     max-width: 45rem;
     margin: 0 auto;
-
-    
   }
 }

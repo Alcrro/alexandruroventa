@@ -10,8 +10,12 @@ export default function Projects({ projects }: { projects: any }) {
         <div className="projects-inner" key={key}>
           <div className="head">
             <div className="title text-2xl py-4">{project.title}</div>
-            <div className="title domain text-2xl py-1">
-              <Link href={`https://${project.link}`} target="_blank">
+            <div className="title domain text-2xl py-2">
+              <Link
+                href={`https://${project.link}`}
+                target="_blank"
+                className="underline underline-offset-4"
+              >
                 {project.link}
               </Link>
             </div>
@@ -36,7 +40,7 @@ export default function Projects({ projects }: { projects: any }) {
                     <div className="prop languageTitle">
                       <div>Language used</div>
                     </div>
-                    :
+                    <span className="equal">:</span>
                     <div className="content languagesUsedList">
                       {project.languagesUsed.map((language, key) => (
                         <div key={key}>{language}</div>
@@ -49,7 +53,7 @@ export default function Projects({ projects }: { projects: any }) {
                     <div className="prop githubTitle">
                       <div>GitHub repository</div>
                     </div>
-                    :
+                    <span className="equal">:</span>
                     <div className="content">
                       <Link
                         href={`https://${project.gitRepository}`}
@@ -67,7 +71,7 @@ export default function Projects({ projects }: { projects: any }) {
                     <div className="prop hostedOnTitle">
                       <div>Hosted on</div>
                     </div>
-                    :
+                    <span className="equal">:</span>
                     <div className="content">
                       <div className="capitalize">{project.hosted}</div>
                     </div>
@@ -79,7 +83,7 @@ export default function Projects({ projects }: { projects: any }) {
                       <div className="prop hostedOnTitle">
                         <div>more description</div>
                       </div>
-                      :
+                      <span className="equal">:</span>
                       <div className="content">
                         <div className="capitalize">
                           {project.moreDescription}

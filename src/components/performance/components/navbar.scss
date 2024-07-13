@@ -1,0 +1,32 @@
+.navbar-content {
+  display: flex;
+  gap: 10px;
+
+  .add-button-container {
+    margin-top: auto;
+  }
+  @media (max-width: 520px) {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+
+    .add-button-container {
+      margin: 0 auto;
+      padding: 10px 0;
+    }
+
+    .text-filter {
+      width: 120px;
+      padding: 0 10px;
+      text-align: center;
+    }
+
+    .current-filter-inner,
+    .current-filter {
+      margin: 0 auto;
+    }
+  }
+
+ 
+}

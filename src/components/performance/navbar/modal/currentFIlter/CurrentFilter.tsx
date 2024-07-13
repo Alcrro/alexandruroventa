@@ -24,8 +24,6 @@ export default function CurrentFilter({
     setActive((prev) => !prev);
   };
 
-
-
   return (
     <div className="current-filter-container">
       <div className="text-filter">{filterBy}: </div>
