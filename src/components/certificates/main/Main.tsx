@@ -13,7 +13,7 @@ interface iCertificate {
 }
 export default function Main({ documents }: { documents: iCertificate[] }) {
   return (
-    <div className="certificates-container">
+    <div className="certificates-container break-all text-center">
       <div className="certificates">
         <ul>
           {documents?.map((certificate: iCertificate, key: any) => (

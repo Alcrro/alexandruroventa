@@ -10,7 +10,7 @@ import CurrentOrder from "./CurrentOrder";
 
 export default function Order() {
   return (
-    <div className="orderBy-container">
+    <div className="orderBy-container ">
       <div className="orderBy relative">
         <OrderModal>
           <CurrentOrder />

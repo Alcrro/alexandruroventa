@@ -13,23 +13,6 @@
       display: block;
       width: 100%;
     }
-    .currentValue {
-      display: flex;
-      gap: 0.5rem;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      background-color: #fff;
-      border: 1px solid var(---border-color);
-      text-transform: capitalize;
-
-      cursor: pointer;
-      position: relative;
-
-      span {
-        margin: 0 auto;
-      }
-    }
 
     .currentValue.isNotActive ~ .ul-order {
       display: none;
@@ -49,6 +32,11 @@
       border-top-right-radius: 0;
       text-transform: capitalize;
       cursor: pointer;
+     
+
+      @media (max-width: 320px) {
+        top: 32px;
+      }
 
       .li-order {
         display: block;
