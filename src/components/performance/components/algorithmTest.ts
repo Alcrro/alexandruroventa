@@ -28,8 +28,7 @@ export default function algorithmTest(array: string[]) {
       }
     }
 
-    console.log("str", str);
-    console.log("obj", obj);
+
 
     return { obj, str };
   }

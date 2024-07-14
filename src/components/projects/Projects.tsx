@@ -7,14 +7,14 @@ export default function Projects({ projects }: { projects: any }) {
   return (
     <>
       {projects.map((project: IProjectsSchema, key: number) => (
-        <div className="projects-inner" key={key}>
+        <div className="projects-inner break-all" key={key}>
           <div className="head">
             <div className="title text-2xl py-4">{project.title}</div>
             <div className="title domain text-2xl py-2">
               <Link
                 href={`https://${project.link}`}
                 target="_blank"
-                className="underline underline-offset-4"
+                className="underline underline-offset-4 "
               >
                 {project.link}
               </Link>

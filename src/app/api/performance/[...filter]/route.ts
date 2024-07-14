@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   const filter = algorithmParamsAPI(params.filter);
-  console.log(filter?.obj.languageType);
+
 
   try {
     const languageSkillContent = await LanguageSKillContent.aggregate([
@@ -62,7 +62,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
       },
     ]);
 
-    console.log(languageSkillContent);
+  
 
     return NextResponse.json({
       success: true,

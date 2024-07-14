@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   try {
-    console.log(params.filters[0] === "undefined");
+ 
 
     let orderedBy = params.filters[0]?.split(",");
     let objN: any = {};
@@ -18,7 +18,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
           },
         },
       ]);
-      // console.log(certificates);
+
 
       return NextResponse.json({
         success: true,

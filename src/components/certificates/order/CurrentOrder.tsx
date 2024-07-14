@@ -14,9 +14,9 @@ export default function CurrentOrder() {
 
   let currentOrder = check[checkIndex - 1];
 
-  console.log(currentOrder);
-
   return (
-    <span>{currentOrder === undefined ? "Organization" : currentOrder}</span>
+    <span className="">
+      {currentOrder === undefined ? "Organization" : currentOrder}
+    </span>
   );
 }
