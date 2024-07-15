@@ -13,7 +13,6 @@ export default function SetRatingModal({
   const [submit, setSubmit] = useState(false);
 
   const arrayRating = [1, 2, 3, 4, 5];
-  console.log(starNumber);
 
   const setNumberHandler = (star: number) => {
     setStarNumber(star);

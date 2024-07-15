@@ -2,7 +2,8 @@
   display: block;
   position: relative;
   margin: 20px 0;
-
+  height: 100%;
+  flex: 1 1 auto;
   @media (min-width: 400px) and (max-width: 539rem) {
     margin: 10px;
   }

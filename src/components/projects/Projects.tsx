@@ -2,7 +2,8 @@ import Image from "next/image";
 import React from "react";
 import "./project.scss";
 import Link from "next/link";
-import { IProjectsSchema } from "@/models/projects/Projects";
+import { IProjectsSchema } from "@/types";
+
 export default function Projects({ projects }: { projects: any }) {
   return (
     <>

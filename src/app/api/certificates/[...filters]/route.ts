@@ -2,16 +2,39 @@ import { connectDB } from "@/config/mongoDB";
 import Certificates from "@/models/certificates/Certificates";
 import { NextRequest, NextResponse } from "next/server";
 connectDB();
-export async function GET(req: NextRequest, { params }: { params: any }) {
+export async function GET(
+  req: NextRequest,
+  { params, searchParams }: { params: any; searchParams: string }
+) {
   try {
- 
+    const { searchParams } = new URL(req.url);
+    const searchParam = searchParams.get("search");
+    const pageNumber = searchParams.get("page");
+    let page: number = Number(pageNumber) || 1;
+    let docPerPage = 12;
+    let skip = docPerPage * (page - 1);
+    let limit = docPerPage;
 
     let orderedBy = params.filters[0]?.split(",");
     let objN: any = {};
     objN[orderedBy[0]] = params.filters[1] === "asc" ? 1 : -1;
 
-    if (params.filters[0] === "undefined") {
+    if (params.filters[0] === "undefined" && searchParam === null) {
       const certificates = await Certificates.aggregate([
+        {
+          $facet: {
+            data: [{ $skip: skip }, { $limit: limit }],
+            dataInfo: [{ $group: { _id: null, count: { $sum: 1 } } }],
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            doc: "$data",
+            totalDocuments: { $first: "$dataInfo.count" },
+            page: `${page}`,
+          },
+        },
         {
           $sort: {
             organization: 1,
@@ -19,18 +42,34 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
         },
       ]);
 
-
       return NextResponse.json({
         success: true,
         message: "Certificates Loaded Successfully",
         certificates,
       });
     } else {
-      const certificates = await Certificates.aggregate([
-        {
-          $sort: objN,
-        },
-      ]);
+      const certificates = await Certificates.aggregate(
+        searchParam !== null
+          ? [
+              {
+                $search: {
+                  index: "search",
+                  text: {
+                    query: "2022-02-02T21:00:00.000+00:00",
+                    path: { wildcard: "*" },
+                  },
+                },
+              },
+              {
+                $sort: objN,
+              },
+            ]
+          : [
+              {
+                $sort: objN,
+              },
+            ]
+      );
       return NextResponse.json({
         success: true,
         message: "Certificates Loaded Successfully",

@@ -1,19 +1,25 @@
 import getCertificates from "@/_lib/certificates/getCertificates";
-import Filters from "@/components/certificates/filters/Filters";
 import Main from "@/components/certificates/main/Main";
 import Order from "@/components/certificates/order/Order";
 import "./certificates.scss";
+import Search from "@/components/certificates/filters/Search";
 
-export default async function page({ params }: { params: any }) {
-  const main = await getCertificates(params);
+export default async function page({
+  params,
+  searchParams,
+}: {
+  params: any;
+  searchParams?: string;
+}) {
+  const main = await getCertificates(params, searchParams);
 
   return (
-    <>
+    <div className="certificates-container relative">
       <div className="filters-container">
-        <Filters />
+        <Search />
         <Order />
       </div>
-      <Main documents={main?.certificates} />
-    </>
+      <Main documents={main.certificates} />
+    </div>
   );
 }

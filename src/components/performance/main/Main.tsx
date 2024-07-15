@@ -1,15 +1,12 @@
 import React from "react";
 import "./contentList.scss";
+import { iPerformanceDocument } from "@/types";
 
-interface iDocument {
-  languageType: string;
-  contentTitle: string;
-  contentDescription: string;
-  codVersion: string;
-  dateVersion: Date;
-}
-
-export default function Main({ documents }: { documents: iDocument[] }) {
+export default function Main({
+  documents,
+}: {
+  documents: iPerformanceDocument[];
+}) {
   return (
     <div className="main-content-container">
       <div className="main-content-inner">
@@ -21,7 +18,7 @@ export default function Main({ documents }: { documents: iDocument[] }) {
           <li>date</li>
         </ul>
         <ul className="body-ul">
-          {documents.map((item: iDocument, rowIndex: number) => (
+          {documents.map((item: iPerformanceDocument, rowIndex: number) => (
             <li key={rowIndex} className="flex">
               <div>{item.languageType}</div>
               <div>{item.contentTitle}</div>

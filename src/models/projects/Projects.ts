@@ -1,14 +1,5 @@
+import { IProjectsSchema } from "@/types";
 import mongoose from "mongoose";
-
-export interface IProjectsSchema {
-  title: string;
-  link: string;
-  thumbnailPhoto: string;
-  languagesUsed: [];
-  gitRepository: string;
-  hosted: string;
-  moreDescription: string;
-}
 
 const projectsSchema = new mongoose.Schema<IProjectsSchema>({
   title: {

@@ -1,0 +1,37 @@
+.search-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+
+  .search {
+    display: block;
+
+    @media (max-width: 520px) {
+      display: block;
+      width: 100%;
+    }
+
+    .label-group input {
+      padding: 0.25rem;
+      border-radius: 10px;
+      background-color: white;
+      color: var(---text-div-color);
+    }
+
+    .label-group:focus {
+      border: 1px solid transparent;
+    }
+  }
+
+  .clear-button-container {
+    display: block;
+
+    .clear-button {
+      display: block;
+      background-color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 8px;
+      color: black;
+    }
+  }
+}
