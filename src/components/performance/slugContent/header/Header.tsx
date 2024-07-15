@@ -1,14 +1,8 @@
 import React from "react";
 import "./header.scss";
 import algorithmTest from "../../components/algorithmTest";
+import { IHeader } from "@/types";
 
-interface IHeader {
-  category: string;
-  languageType: string;
-  contentTitle: string;
-  contentDescription: string;
-  slug: string;
-}
 export default async function Header({ params }: { params: any }) {
   const header = await fetch(
     `${process.env.NEXTAUTH_URL}/api/performance/${params.category}/slug/${params.slug}`
@@ -17,7 +11,6 @@ export default async function Header({ params }: { params: any }) {
   const dataResponse = await header.json();
 
   const data: IHeader = dataResponse.languageSkillContent[0];
-  console.log(data);
 
   return (
     <div className="content-header-container">

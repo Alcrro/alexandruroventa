@@ -9,8 +9,6 @@ export default async function sendEmail(data: {}) {
     });
 
     if (response.status === 200) {
-      console.log("merge");
-
       return response.json();
     }
   } catch (error) {

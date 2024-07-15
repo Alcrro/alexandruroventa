@@ -2,7 +2,7 @@
   .header {
     .my-email-container {
       position: relative;
-      border-color: white;
+      border-color: var(---border-div-color);
     }
     .my-email-container:hover::after {
       content: "\F759";

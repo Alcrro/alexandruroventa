@@ -22,7 +22,6 @@ const CertificatesSchema = new mongoose.Schema({
 
 CertificatesSchema.pre("save", function (next) {
   let dateSlug = this.date?.toString().replace(/T.*/, "");
-  console.log(dateSlug);
 
   let languageLearntSlug = this.languageLearnt?.replace(/[ ,&]/g, "-");
   this.slug =

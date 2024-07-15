@@ -6,18 +6,9 @@ import CodEditor from "./CodEditor";
 import ChakraProv from "./ChakraProvider";
 import Image from "next/image";
 import RatingEditor from "./rating/RatingEditor";
+import { iDocument } from "@/types";
 
-interface iDocument {
-  category: string;
-  dataId: string;
-  description: string;
-  hour: string;
-  id: number;
-  moduleType: string;
-  name: string;
-  performance: string;
-  year: string;
-}
+
 export default function CodeEditorComponent({
   content,
   document,

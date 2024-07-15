@@ -56,39 +56,6 @@ html.dark {
   border-color: var(---border-color);
 }
 
-// html.light,
-// html.dark,
-// html.dark[data-darkreader-scheme="dark"],
-// html.light[data-darkreader-scheme="dark"] {
-//   .navbar-menu {
-//     background-color: rgba(0, 174, 255, 0.822);
-//     color: #fff;
-//   }
-
-//   .logo-company,
-//   .btn-add-experience-button {
-//     background: rgb(128, 128, 128);
-//   }
-
-//   .btn-add-experience-button:hover {
-//     background-color: #000;
-//   }
-// }
-// html.light,
-// html.dark,
-// html.dark[data-darkreader-scheme="dimmed"],
-// html.light[data-darkreader-scheme="dimmed"] {
-//   .navbar-menu {
-//     background-color: rgb(0, 153, 255);
-//     color: #fff;
-//   }
-
-//   .logo-company,
-//   .btn-add-experience-button {
-//     background: rgb(128, 128, 128);
-//   }
-// }
-
 body {
   margin: 0;
   padding: 0;
@@ -108,8 +75,6 @@ main {
     margin-top: auto;
   }
 }
-
-
 
 html.light {
   ::-webkit-scrollbar {

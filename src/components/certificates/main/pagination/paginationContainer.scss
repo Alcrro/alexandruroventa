@@ -1,0 +1,27 @@
+.pagination-container {
+  display: block;
+  margin-top: auto;
+  .pagination {
+    display: block;
+    margin: 20px 0;
+    .ul-pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      li {
+        display: block;
+        background-color: white;
+        border-radius: 8px;
+        a {
+          display: block;
+          padding: 0.25rem 0.5rem;
+          color: black;
+        }
+      }
+      li.active {
+        background: rgb(10, 213, 228);
+        border-radius: 8px;
+      }
+    }
+  }
+}

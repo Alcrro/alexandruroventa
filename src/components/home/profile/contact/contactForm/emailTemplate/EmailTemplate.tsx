@@ -1,8 +1,5 @@
+import { EmailTemplateProps } from "@/types";
 import * as React from "react";
-
-interface EmailTemplateProps {
-  email: string;
-}
 
 export const EmailTemplate = ({ email }: EmailTemplateProps) => (
   <div>
