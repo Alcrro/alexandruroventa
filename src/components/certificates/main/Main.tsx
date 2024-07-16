@@ -17,50 +17,52 @@ export default function Main({ documents }: { documents: iCertificate[] }) {
   let firstPage;
   documents?.flatMap(
     (item: any) =>
-      (totalProducts = item.totalDocuments) & (firstPage = item.page)
+      allDocuments.push(item.doc) &
+      (totalProducts = item.totalDocuments) &
+      (firstPage = item.page)
   );
+
+
 
   return (
     <div className="certificates-inner sm:break-all text-center">
       <div className="certificates">
         <ul className="ul-certificate">
-          {documents
-            ?.flatMap((item: any) => item.doc)
-            .map((certificate: iCertificate, key: any) => (
-              <li key={key}>
-                <div className="image-container">
-                  <Link href={`/certificates/${certificate.slug}`}>
-                    <Image
-                      src={certificate.src}
-                      alt="certificate"
-                      width={1000}
-                      height={1000}
-                    />
-                  </Link>
+          {allDocuments.flat(1).map((certificate: iCertificate, key: any) => (
+            <li key={key}>
+              <div className="image-container">
+                <Link href={`/certificates/${certificate.slug}`}>
+                  <Image
+                    src={certificate.src}
+                    alt="certificate"
+                    width={1000}
+                    height={1000}
+                  />
+                </Link>
+              </div>
+              <div className="description-container">
+                <div className="organization">
+                  <div>Organization: </div>
+                  <div>{certificate.organization}</div>
                 </div>
-                <div className="description-container">
-                  <div className="organization">
-                    <div>Organization: </div>
-                    <div>{certificate.organization}</div>
-                  </div>
-                  <div className="language-learnt">
-                    <div>Language learnt:</div>
-                    <div>{certificate.languageLearnt}</div>
-                  </div>
-                  <div className="author">
-                    <div>Author:</div>
-                    <div>
-                      {certificate?.author?.map((author, key) => (
-                        <span key={key}>
-                          • {author}
-                          <br />
-                        </span>
-                      ))}
-                    </div>
+                <div className="language-learnt">
+                  <div>Language learnt:</div>
+                  <div>{certificate.languageLearnt}</div>
+                </div>
+                <div className="author">
+                  <div>Author:</div>
+                  <div>
+                    {certificate?.author?.map((author, key) => (
+                      <span key={key}>
+                        • {author}
+                        <br />
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </li>
-            ))}
+              </div>
+            </li>
+          ))}
         </ul>
         <Pagination totalProducts={totalProducts} currentPage={firstPage} />
       </div>
