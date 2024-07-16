@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./search.scss";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -7,10 +7,11 @@ import { useRouter } from "next/navigation";
 export default function Search() {
   const router = useRouter();
   const pathname = usePathname();
-  const sp = new URLSearchParams();
+  const searchRef: any = useRef();
 
   const searchHandler = (value: string) => {
     let newValue = value.replace(/\//g, "-");
+    const sp = new URLSearchParams();
 
     if (newValue.trim() === "") {
       sp.delete("search");
@@ -21,8 +22,14 @@ export default function Search() {
     router.push(`${pathname}?${sp.toString()}`);
   };
 
+  useEffect(() => {
+    router.replace(`${pathname}`, undefined);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const clearSearchHandler = () => {
     router.push(`${pathname}`);
+    searchRef.current.value = "";
   };
 
   return (
@@ -33,6 +40,7 @@ export default function Search() {
             type="search"
             placeholder="Search..."
             onChange={(e) => searchHandler(e.target.value)}
+            ref={searchRef}
           />
         </div>
       </div>
