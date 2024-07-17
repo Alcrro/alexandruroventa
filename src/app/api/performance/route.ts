@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   try {
-    const languagesSkills = await LanguageSkill.find({});
+    const languagesSkills = await LanguageSkill.find();
 
     return NextResponse.json({
       success: true,

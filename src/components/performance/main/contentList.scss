@@ -10,7 +10,7 @@
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
       gap: 0.2rem;
       text-align: center;
-      li {
+      a {
         font-weight: 600;
         font-size: 18px;
         padding: 0.5rem 10px;
@@ -18,7 +18,7 @@
         margin: 0 auto;
       }
 
-      li:first-child {
+      a:first-child {
         max-width: fit-content;
       }
 
@@ -28,7 +28,7 @@
     }
 
     .body-ul {
-      li {
+      a {
         // display: flex;
         display: grid;
         grid-template-columns: 100px repeat(auto-fit, minmax(100px, 1fr));
@@ -64,7 +64,7 @@
       }
 
       @media (max-width: 720px) {
-        li {
+        a {
           display: grid;
           grid-template-columns: 100%;
           width: 100%;

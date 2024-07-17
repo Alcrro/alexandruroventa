@@ -4,7 +4,6 @@ import "./performance.scss";
 import getLanguageSkill from "@/_lib/languageSkill/getLanguageSkill";
 import { iLanguageSkillGet } from "@/types";
 
-
 export default async function Performance() {
   const performance: iLanguageSkillGet = await getLanguageSkill();
 

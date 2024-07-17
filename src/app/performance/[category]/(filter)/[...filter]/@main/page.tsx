@@ -9,7 +9,7 @@ export default async function page({ params }: { params: any }) {
 
   return (
     <div>
-      <Main documents={content.languageSkillContent} />
+      <Main documents={content.languageSkillContent} params={params}/>
     </div>
   );
 }

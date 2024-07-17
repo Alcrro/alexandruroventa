@@ -55,6 +55,7 @@ export interface iPerformanceDocument {
   contentDescription: string;
   codVersion: string;
   dateVersion: Date;
+  slug: string;
 }
 
 export interface IHeader {

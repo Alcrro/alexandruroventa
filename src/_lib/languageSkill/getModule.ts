@@ -1,7 +1,7 @@
 export default async function getModule(param: any, slug?: any) {
   try {
     const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/performance/${param.category}/${slug}`,
+      `${process.env.NEXTAUTH_URL}/api/performance/category/${param.category}/${slug}`,
       {
         cache: "no-cache",
       }
