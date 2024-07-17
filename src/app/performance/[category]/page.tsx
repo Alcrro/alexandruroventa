@@ -9,7 +9,7 @@ export default async function page({ params }: { params: { category: any } }) {
   return (
     <>
       <Navbar params={params} />
-      <Main documents={categoryType.languageSkillContent} />
+      <Main documents={categoryType.languageSkillContent} params={params}/>
     </>
   );
 }

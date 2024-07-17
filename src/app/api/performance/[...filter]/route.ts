@@ -6,19 +6,13 @@ import { NextRequest, NextResponse } from "next/server";
 
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
-  const filter = algorithmParamsAPI(params.filter);
-
-
   try {
+    let obj: any = {};
+    obj[params.filter[0]] = params.filter[1];
+
     const languageSkillContent = await LanguageSKillContent.aggregate([
       {
-        $match: {
-          category: filter?.obj.category,
-          languageType:
-            filter?.obj.languageType === undefined
-              ? null
-              : "",
-        },
+        $match: obj,
       },
 
       {
@@ -43,14 +37,11 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
           codVersion_details: {
             $arrayElemAt: ["$codVersion_details", 0],
           },
-        },
-      },
-      {
-        $addFields: {
           codVersion: "$codVersion_details.versionCode",
           dateVersion: "$codVersion_details.date",
         },
       },
+
       {
         $project: {
           languageType: 1,
@@ -58,11 +49,21 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
           contentDescription: 1,
           codVersion: 1,
           dateVersion: 1,
+          slug: 1,
         },
       },
+      {
+        $limit:
+          params.filter.indexOf("limit") === -1
+            ? 20
+            : Number(
+                params.filter[params.filter.indexOf("limit") + 1]
+                  .match(/\d+/g)
+                  .toString()
+              ),
+      },
     ]);
-
-  
+    console.log(languageSkillContent);
 
     return NextResponse.json({
       success: true,

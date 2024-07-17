@@ -9,8 +9,9 @@ export default async function Header({ params }: { params: any }) {
   );
 
   const dataResponse = await header.json();
+  console.log(dataResponse);
 
-  const data: IHeader = dataResponse.languageSkillContent[0];
+  const data: IHeader = dataResponse?.languageSkillContent[0];
 
   return (
     <div className="content-header-container">
