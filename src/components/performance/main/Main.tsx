@@ -2,6 +2,7 @@ import React from "react";
 import "./contentList.scss";
 import { iPerformanceDocument } from "@/types";
 import Link from "next/link";
+import Pagination from "@/components/pagination/Pagination";
 
 export default function Main({
   documents,
@@ -10,12 +11,11 @@ export default function Main({
   documents: iPerformanceDocument[];
   params: any;
 }) {
-  console.log(params);
-
   return (
     <div className="main-content-container">
       <div className="main-content-inner">
         <ul className="header-ul">
+          <li>NrCrt</li>
           <li>Type</li>
           <li>Title</li>
           <li>Description</li>
@@ -23,19 +23,32 @@ export default function Main({
           <li>date</li>
         </ul>
         <ul className="body-ul">
-          {documents?.map((item: iPerformanceDocument, rowIndex: number) => (
-            <li key={rowIndex} className="flex">
-              <Link href={`/performance/${params.category}/${item.slug}`}>
-                <div>{item.languageType}</div>
-                <div>{item.contentTitle}</div>
-                <div>{item.contentDescription}</div>
-                <div> {item.codVersion}</div>
+          {documents
+            .map((item:any) => item.data)
+            .flat(1)
+            .map((item: iPerformanceDocument, rowIndex: number) => (
+              <li key={rowIndex} className="flex">
+                <Link href={`/performance/${params.category}/${item.slug}`}>
+                  <div>#{rowIndex + 1}</div>
+                  <div>{item.languageType}</div>
+                  <div>{item.contentTitle}</div>
+                  <div>{item.contentDescription}</div>
+                  <div> {item.codeversions_details.codVersion}</div>
 
-                <div>{new Date(item?.dateVersion)?.toLocaleDateString()}</div>
-              </Link>
-            </li>
-          ))}
+                  <div>
+                    {new Date(
+                      item?.codeversions_details.dateVersion
+                    )?.toLocaleDateString()}
+                  </div>
+                </Link>
+              </li>
+            ))}
         </ul>
+        <Pagination
+          totalProducts={documents[0]?.totalDocuments}
+          currentPage={documents[0]?.page}
+          documentsPerPage={documents[0]?.documentsPerPage}
+        />
       </div>
     </div>
   );

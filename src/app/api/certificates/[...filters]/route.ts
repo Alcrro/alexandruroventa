@@ -18,7 +18,7 @@ export async function GET(
     let orderedBy = params.filters[0]?.split(",");
     let objN: any = {};
     objN[orderedBy[0]] = params.filters[1] === "asc" ? 1 : -1;
-    
+
     const certificates = await Certificates.aggregate([
       {
         $match: searchParam
@@ -49,6 +49,7 @@ export async function GET(
           _id: 0,
           doc: "$data",
           totalDocuments: { $first: "$dataInfo.count" },
+          documentsPerPage: `${limit}`,
           page: `${page}`,
         },
       },

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import "./certificate.scss";
 import { iCertificate } from "@/types";
-import Pagination from "./pagination/Pagination";
+import Pagination from "../../pagination/Pagination";
 
 interface IDoc {
   doc: iCertificate[];
@@ -14,15 +14,15 @@ interface IDoc {
 export default function Main({ documents }: { documents: iCertificate[] }) {
   let allDocuments: any = [];
   let totalProducts;
+  let documentsPerPage;
   let firstPage;
   documents?.flatMap(
     (item: any) =>
       allDocuments.push(item.doc) &
       (totalProducts = item.totalDocuments) &
-      (firstPage = item.page)
+      (firstPage = item.page) &
+      (documentsPerPage = item.documentsPerPage)
   );
-
-
 
   return (
     <div className="certificates-inner sm:break-all text-center">
@@ -64,7 +64,11 @@ export default function Main({ documents }: { documents: iCertificate[] }) {
             </li>
           ))}
         </ul>
-        <Pagination totalProducts={totalProducts} currentPage={firstPage} />
+        <Pagination
+          totalProducts={totalProducts}
+          currentPage={firstPage}
+          documentsPerPage={documentsPerPage}
+        />
       </div>
     </div>
   );

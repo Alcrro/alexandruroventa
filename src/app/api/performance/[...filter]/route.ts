@@ -1,4 +1,3 @@
-import algorithmParamsAPI from "@/_lib/languageSkill/algorithmParamsAPI";
 import { connectDB } from "@/config/mongoDB";
 import CodeVersion from "@/models/languageSkill/LanguageSkillCodeVersion";
 import LanguageSKillContent from "@/models/languageSkill/LanguageSkillContent";
@@ -9,6 +8,33 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
   try {
     let obj: any = {};
     obj[params.filter[0]] = params.filter[1];
+    const { searchParams } = new URL(req.url);
+    const pageNumber = searchParams.get("page");
+
+    let page: number = Number(pageNumber) || 1;
+
+    let docPerPage = 20;
+    let skip = docPerPage * (page - 1);
+    let filter: any = {};
+    let limit =
+      params.filter.indexOf("limit") === -1
+        ? 20
+        : Number(
+            params.filter[params.filter.indexOf("limit") + 1]
+              .match(/\d+/g)
+              .toString()
+          );
+
+    let findIndex: number = params.filter.findIndex(
+      (findIndex: any) => findIndex === "languageType"
+    );
+
+    filter[params.filter[findIndex]] = params.filter[findIndex + 1];
+
+    let totalDocumentsCollection =
+      await LanguageSKillContent.collection.countDocuments();
+
+    console.log(totalDocumentsCollection);
 
     const languageSkillContent = await LanguageSKillContent.aggregate([
       {
@@ -16,54 +42,57 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
       },
 
       {
-        $lookup:
-          /**
-           * from: The target collection.
-           * localField: The local join field.
-           * foreignField: The target join field.
-           * as: The name for the results.
-           * pipeline: Optional pipeline to run on the foreign collection.
-           * let: Optional variables to use in the pipeline field stages.
-           */
-          {
-            from: "codeversions",
-            localField: "versionCode_id",
-            foreignField: "_id",
-            as: "codVersion_details",
-          },
+        $match: params.filter[findIndex] === undefined ? {} : filter,
+      },
+      {
+        $facet: {
+          data: [
+            { $skip: skip }, // Example to skip the first 10 results for pagination
+            { $limit: limit }, // Example to limit the results to 5 per page
+            {
+              $lookup: {
+                from: "codeversions", // The collection to join
+                localField: "versionCode_id", // Field from the orders collection
+                foreignField: "_id", // Field from the customers collection
+                as: "codeversions_details", // Output array field
+              },
+            },
+            {
+              $unwind: {
+                path: "$codeversions_details", // Unwind the resulting array from lookup
+                preserveNullAndEmptyArrays: true, // Optional: include orders without a matching customer
+              },
+            },
+            {
+              $project: {
+                _id: "$_id",
+                category: 1,
+                contentTitle: 1,
+                languageType: 1,
+                contentDescription: 1,
+                codVersion: 1,
+                slug: 1,
+                codeversions_details: {
+                  codVersion: "$codeversions_details.versionCode",
+                  dateVersion: "$codeversions_details.date",
+                },
+              },
+            },
+          ],
+          totalDocuments: [{ $count: "count" }],
+        },
       },
       {
         $addFields: {
-          codVersion_details: {
-            $arrayElemAt: ["$codVersion_details", 0],
-          },
-          codVersion: "$codVersion_details.versionCode",
-          dateVersion: "$codVersion_details.date",
+          totalDocuments: {
+            $arrayElemAt: ["$totalDocuments.count", 0],
+          }, // Extract count from array
+          page: `${page}`,
+          documentsPerPage:`${limit}`
         },
-      },
-
-      {
-        $project: {
-          languageType: 1,
-          contentTitle: 1,
-          contentDescription: 1,
-          codVersion: 1,
-          dateVersion: 1,
-          slug: 1,
-        },
-      },
-      {
-        $limit:
-          params.filter.indexOf("limit") === -1
-            ? 20
-            : Number(
-                params.filter[params.filter.indexOf("limit") + 1]
-                  .match(/\d+/g)
-                  .toString()
-              ),
       },
     ]);
-    console.log(languageSkillContent);
+
 
     return NextResponse.json({
       success: true,

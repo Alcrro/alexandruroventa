@@ -4,12 +4,14 @@ import "./paginationContainer.scss";
 export default function Pagination({
   totalProducts,
   currentPage,
+  documentsPerPage
 }: {
   totalProducts: any;
   currentPage: any;
+  documentsPerPage:any
 }) {
   let totProducts: number = Number(totalProducts);
-  let pages = Math.ceil(totProducts / 12);
+  let pages = Math.ceil(totProducts / documentsPerPage);
 
 
   let numberPages = [];
