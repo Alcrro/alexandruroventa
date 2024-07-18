@@ -24,7 +24,7 @@ export default function Main({
         </ul>
         <ul className="body-ul">
           {documents
-            .map((item:any) => item.data)
+            .map((item: any) => item.data)
             .flat(1)
             .map((item: iPerformanceDocument, rowIndex: number) => (
               <li key={rowIndex} className="flex">
@@ -33,7 +33,7 @@ export default function Main({
                   <div>{item.languageType}</div>
                   <div>{item.contentTitle}</div>
                   <div>{item.contentDescription}</div>
-                  <div> {item.codeversions_details.codVersion}</div>
+                  <div>{item.codeversions_details.codVersion}</div>
 
                   <div>
                     {new Date(

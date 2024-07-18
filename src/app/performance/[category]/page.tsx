@@ -12,7 +12,7 @@ export default async function page({
   searchParams: any;
 }) {
   const categoryType = await getModule(params, "", searchParams);
-  console.log(categoryType);
+
   return (
     <>
       <Navbar params={params} />
