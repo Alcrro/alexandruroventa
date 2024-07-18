@@ -53,9 +53,14 @@ export interface iPerformanceDocument {
   languageType: string;
   contentTitle: string;
   contentDescription: string;
-  codVersion: string;
-  dateVersion: Date;
   slug: string;
+  codeversions_details: {
+    codVersion: string;
+    dateVersion: Date;
+  };
+  totalDocuments: string;
+  page: string;
+  documentsPerPage: string;
 }
 
 export interface IHeader {
