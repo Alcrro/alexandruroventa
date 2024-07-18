@@ -11,8 +11,6 @@ export default async function page({
 }) {
   const main = await getCertificates(params, searchParams);
 
-  // console.log(main.certificates.map((item:any) => item.doc));
-
   return (
     <>
       <Main documents={main.certificates} />

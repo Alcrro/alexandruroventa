@@ -9,8 +9,9 @@
   @media (max-width: 499px) {
     display: grid;
     grid-template-columns: 100%;
-
     justify-content: center;
+    // margin: 0 auto;
+    margin-bottom: 2rem;
   }
 
   ul.isNotActive {

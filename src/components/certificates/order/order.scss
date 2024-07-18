@@ -1,19 +1,26 @@
 .orderBy-container {
   display: block;
-  // @media (max-width: 520px) {
-  //   display: block;
-  //   width: 100%;
-  // }
+
+  @media (max-width: 349px) {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
   .orderBy {
     display: block;
     width: 180px;
     max-width: 100%;
     color: #000;
+    margin: 0 auto;
 
-    // @media (max-width: 520px) {
-    //   display: block;
-    //   width: 100%;
-    // }
+    @media (max-width: 340px) {
+      width: 100%;
+      max-width: 100%;
+    }
+    @media (max-width: 499px) {
+      width: 340px;
+      max-width: 100%;
+    }
 
     .currentValue.isNotActive ~ .ul-order {
       display: none;

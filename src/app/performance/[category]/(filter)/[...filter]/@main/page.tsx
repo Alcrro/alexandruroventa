@@ -12,7 +12,6 @@ export default async function page({
 }) {
   const filter = algorithmTest(params.filter);
   const content = await getModule(params, filter?.str, searchParams);
-  console.log(content);
 
   return (
     <div>

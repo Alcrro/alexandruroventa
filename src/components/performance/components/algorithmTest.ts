@@ -1,6 +1,6 @@
 export default function algorithmTest(array: string[]) {
   const newArray = array;
-  console.log(array);
+
   let indexOfDuplicates = [];
 
   if (newArray.length < 1) {

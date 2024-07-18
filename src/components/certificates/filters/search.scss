@@ -2,13 +2,22 @@
   display: flex;
   gap: 10px;
   align-items: center;
+  width: 100%;
 
+  @media (max-width: 499px) {
+    flex-direction: column;
+  }
   .search {
     display: block;
+    width: 100%;
+
+    @media (max-width: 499px) {
+      text-align: center;
+    }
 
     @media (max-width: 520px) {
       display: block;
-      width: 100%;
+      // width: 100%;
     }
 
     .label-group input {
@@ -16,6 +25,15 @@
       border-radius: 10px;
       background-color: white;
       color: var(---text-div-color);
+      text-align: center;
+
+      @media (max-width: 499px) {
+        width: 340px;
+        margin: 0 auto;
+      }
+      @media (max-width: 349px) {
+        width: 100%;
+      }
     }
 
     .label-group:focus {

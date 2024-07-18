@@ -34,8 +34,6 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
     let totalDocumentsCollection =
       await LanguageSKillContent.collection.countDocuments();
 
-    console.log(totalDocumentsCollection);
-
     const languageSkillContent = await LanguageSKillContent.aggregate([
       {
         $match: obj,
@@ -88,11 +86,10 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
             $arrayElemAt: ["$totalDocuments.count", 0],
           }, // Extract count from array
           page: `${page}`,
-          documentsPerPage:`${limit}`
+          documentsPerPage: `${limit}`,
         },
       },
     ]);
-
 
     return NextResponse.json({
       success: true,
