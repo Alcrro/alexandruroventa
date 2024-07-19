@@ -4,6 +4,13 @@ import NoRecords from "@/components/performance/components/NoRecords";
 import Main from "@/components/performance/main/Main";
 import React from "react";
 
+interface IContentLanguage {
+  data: [];
+  totalDocuments: number;
+  page: string;
+  documentsPerPage: string;
+}
+
 export default async function page({
   params,
   searchParams,
@@ -12,13 +19,12 @@ export default async function page({
   searchParams: any;
 }) {
   const categoryType = await getModule(params, "", searchParams);
-  let contentLength = categoryType?.languageSkillContent
-    ?.map((item: any) => item.data)
-    .flat(1).length;
+
+  const [data] = categoryType?.languageSkillContent;
 
   return (
     <>
-      {contentLength !== 0 ? (
+      {data?.data?.length !== 0 ? (
         <>
           <Navbar params={params} />
           <Main documents={categoryType.languageSkillContent} params={params} />

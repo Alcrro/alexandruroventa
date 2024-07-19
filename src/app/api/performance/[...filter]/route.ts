@@ -3,33 +3,9 @@ import CodeVersion from "@/models/languageSkill/LanguageSkillCodeVersion";
 import LanguageSKillContent from "@/models/languageSkill/LanguageSkillContent";
 import { NextRequest, NextResponse } from "next/server";
 
-const algorithmAggregateMatch = async (filterParam: string[]) => {
-  let filter: any = {};
-  if (filterParam.includes("asc") && filterParam.includes("desc")) {
-    return;
-  } else {
-    let findIndex: number = filterParam.findIndex(
-      (findIndex: any) => findIndex === "asc" || findIndex === "desc"
-    );
-
-    // console.log(findIndex);
-
-    if (findIndex >= 0) {
-      filter[filterParam[findIndex - 1]] =
-        filterParam[findIndex] === "asc" ? 1 : -1;
-    } else {
-      filter = {};
-    }
-  }
-
-  return filter;
-};
-
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   try {
-    let filterMatch = await algorithmAggregateMatch(params?.filter);
-
     let obj: any = {};
     obj[params.filter[0]] = params.filter[1];
     const { searchParams } = new URL(req.url);
@@ -53,13 +29,16 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
       (findIndex: any) => findIndex === "languageType"
     );
 
-    filter[params.filter[findIndex]] = params.filter[findIndex + 1];
-    // console.log(params);
-    // console.log(filterMatch);
-    // console.log(Object.keys(filterMatch).length === 0);
+    let filterMatch = params.filter.findIndex(
+      (findIndex: any) => findIndex === "asc" || findIndex === "desc"
+    );
 
-    let totalDocumentsCollection =
-      await LanguageSKillContent.collection.countDocuments();
+    let sort: any = {};
+
+    sort[params.filter[filterMatch - 1]] =
+      params.filter[filterMatch] === "asc" ? 1 : -1;
+
+    filter[params.filter[findIndex]] = params.filter[findIndex + 1];
 
     const languageSkillContent = await LanguageSKillContent.aggregate([
       {
@@ -71,9 +50,9 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
       },
       {
         $sort:
-          Object.keys(filterMatch).length === 0
+          Object.keys(sort)[0] === "undefined"
             ? { uniqueNumberByCategory: 1 }
-            : filterMatch,
+            : sort,
       },
       {
         $facet: {
@@ -122,7 +101,6 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
           }, // Extract count from array
           page: `${page}`,
           documentsPerPage: `${limit}`,
-          nrCrt: { $add: ["$nrCrt", 1] },
         },
       },
     ]);
