@@ -20,6 +20,7 @@ export default function NoRecords() {
     return () => {
       clearInterval(interval);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [count]);
 
   return (
