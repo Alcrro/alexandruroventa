@@ -54,6 +54,7 @@ export interface iPerformanceDocument {
   contentTitle: string;
   contentDescription: string;
   slug: string;
+  uniqueNumberByCategory: number;
   codeversions_details: {
     codVersion: string;
     dateVersion: Date;

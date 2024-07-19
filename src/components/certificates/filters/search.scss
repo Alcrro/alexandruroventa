@@ -9,15 +9,10 @@
   }
   .search {
     display: block;
-    width: 100%;
 
     @media (max-width: 499px) {
       text-align: center;
-    }
-
-    @media (max-width: 520px) {
-      display: block;
-      // width: 100%;
+      width: 100%;
     }
 
     .label-group input {

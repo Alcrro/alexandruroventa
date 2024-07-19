@@ -11,6 +11,11 @@
   top: 100%;
   left: 0px;
   text-align: center;
+  
+  @media (max-width: 350px) {
+    width: 100%;
+    min-width: 100%;
+  }
 
   ul {
     border: 1px solid;
@@ -21,6 +26,11 @@
     width: 182px;
     padding: 4px 8px;
     background: var(---background-color);
+
+    @media (max-width: 350px) {
+      width: 100%;
+      min-width: 100%;
+    }
     li {
       display: block;
 

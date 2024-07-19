@@ -1,3 +1,4 @@
+import { getRandomUppercaseString } from "@/_lib/languageSkill/slugModuleAlgorith";
 import mongoose from "mongoose";
 
 const LanguageSkillContentSchema = new mongoose.Schema({
@@ -8,6 +9,13 @@ const LanguageSkillContentSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide the type of this category"],
     enum: ["course", "project"],
+  },
+  uniqueNumberByCategory: {
+    type: Number,
+  },
+  unique_id: {
+    type: String,
+    unique: true,
   },
   contentTitle: {
     type: String,
@@ -37,7 +45,10 @@ const LanguageSkillContentSchema = new mongoose.Schema({
 LanguageSkillContentSchema.pre("save", function (next) {
   let slug = this.contentTitle + "-" + this.contentDescription;
 
-  this.slug = slug.split(" ").join("-").toLocaleLowerCase();
+  this.unique_id = getRandomUppercaseString(7);
+  this.slug =
+    slug.split(" ").join("-").toLocaleLowerCase() + "-" + this.unique_id;
+
   next();
 });
 

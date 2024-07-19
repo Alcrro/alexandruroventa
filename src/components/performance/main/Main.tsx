@@ -3,6 +3,8 @@ import "./contentList.scss";
 import { iPerformanceDocument } from "@/types";
 import Link from "next/link";
 import Pagination from "@/components/pagination/Pagination";
+import TableHeader from "./tableHeader/TableHeader";
+import { headerArray } from "@/_lib/languageSkill/headerArray";
 
 export default function Main({
   documents,
@@ -15,12 +17,9 @@ export default function Main({
     <div className="main-content-container">
       <div className="main-content-inner">
         <ul className="header-ul">
-          <li>NrCrt</li>
-          <li>Type</li>
-          <li>Title</li>
-          <li>Description</li>
-          <li>version</li>
-          <li>date</li>
+          {headerArray.map((headers, key) => (
+            <TableHeader headers={headers} params={params} key={key} />
+          ))}
         </ul>
         <ul className="body-ul">
           {documents
@@ -29,7 +28,13 @@ export default function Main({
             .map((item: iPerformanceDocument, rowIndex: number) => (
               <li key={rowIndex} className="flex">
                 <Link href={`/performance/${params.category}/${item.slug}`}>
-                  <div>#{rowIndex + 1}</div>
+                  <div className="category">
+                    <div id="" className="order">
+                      <span className="asc"></span>
+                      <span className="desc"></span>
+                    </div>
+                    <div>{item.uniqueNumberByCategory}</div>
+                  </div>
                   <div>{item.languageType}</div>
                   <div>{item.contentTitle}</div>
                   <div>{item.contentDescription}</div>

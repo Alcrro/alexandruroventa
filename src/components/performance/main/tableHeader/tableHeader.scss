@@ -1,0 +1,38 @@
+.header-ul {
+  li {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    justify-content: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      justify-content: center;
+    }
+  }
+  span {
+    font-size: 10px;
+    font-weight: 400;
+  }
+  span.asc:after {
+    content: "\f128";
+    font-family: "Bootstrap-icons";
+  }
+  span.desc:after {
+    content: "\f148";
+    font-family: "Bootstrap-icons";
+  }
+
+  span.asc.active:after {
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+  }
+  span.desc.active:after {
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+  }
+}
