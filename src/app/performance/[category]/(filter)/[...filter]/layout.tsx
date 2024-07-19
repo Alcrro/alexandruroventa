@@ -1,5 +1,5 @@
 import React from "react";
-
+import "@/components/performance/main/contentList.scss"
 export default function layout({
   filter,
   main,

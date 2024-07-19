@@ -26,18 +26,20 @@
 
     .header-ul {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      grid-template-columns: 100px repeat(auto-fit, minmax(100px, 1fr));
       gap: 0.2rem;
       text-align: center;
-      a {
+      padding: 0.5rem 10px;
+
+      li {
         font-weight: 600;
         font-size: 18px;
-        padding: 0.5rem 10px;
+        // padding: 0.5rem 10px;
         width: 100%;
         margin: 0 auto;
       }
 
-      a:first-child {
+      li:first-child {
         max-width: fit-content;
       }
 
@@ -90,14 +92,17 @@
       }
 
       @media (max-width: 720px) {
-        div {
+        .order {
           display: flex;
           justify-content: space-between;
         }
-        div:first-child:before {
+        .order:before {
+          font-weight: 700;
+        }
+        .order:first-child:before {
           content: "nrCrt:";
         }
-        div:nth-child(2):before {
+        .order:nth-child(2):before {
           content: "Language Type:";
         }
         div:nth-child(3):before {

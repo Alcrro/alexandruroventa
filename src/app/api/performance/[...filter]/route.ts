@@ -3,9 +3,33 @@ import CodeVersion from "@/models/languageSkill/LanguageSkillCodeVersion";
 import LanguageSKillContent from "@/models/languageSkill/LanguageSkillContent";
 import { NextRequest, NextResponse } from "next/server";
 
+const algorithmAggregateMatch = async (filterParam: string[]) => {
+  let filter: any = {};
+  if (filterParam.includes("asc") && filterParam.includes("desc")) {
+    return;
+  } else {
+    let findIndex: number = filterParam.findIndex(
+      (findIndex: any) => findIndex === "asc" || findIndex === "desc"
+    );
+
+    // console.log(findIndex);
+
+    if (findIndex >= 0) {
+      filter[filterParam[findIndex - 1]] =
+        filterParam[findIndex] === "asc" ? 1 : -1;
+    } else {
+      filter = {};
+    }
+  }
+
+  return filter;
+};
+
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   try {
+    let filterMatch = await algorithmAggregateMatch(params?.filter);
+
     let obj: any = {};
     obj[params.filter[0]] = params.filter[1];
     const { searchParams } = new URL(req.url);
@@ -30,6 +54,9 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
     );
 
     filter[params.filter[findIndex]] = params.filter[findIndex + 1];
+    // console.log(params);
+    // console.log(filterMatch);
+    // console.log(Object.keys(filterMatch).length === 0);
 
     let totalDocumentsCollection =
       await LanguageSKillContent.collection.countDocuments();
@@ -43,10 +70,17 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
         $match: params.filter[findIndex] === undefined ? {} : filter,
       },
       {
+        $sort:
+          Object.keys(filterMatch).length === 0
+            ? { uniqueNumberByCategory: 1 }
+            : filterMatch,
+      },
+      {
         $facet: {
           data: [
             { $skip: skip }, // Example to skip the first 10 results for pagination
             { $limit: limit }, // Example to limit the results to 5 per page
+
             {
               $lookup: {
                 from: "codeversions", // The collection to join
@@ -68,6 +102,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
                 contentTitle: 1,
                 languageType: 1,
                 contentDescription: 1,
+                uniqueNumberByCategory: 1,
                 codVersion: 1,
                 slug: 1,
                 codeversions_details: {
@@ -87,9 +122,12 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
           }, // Extract count from array
           page: `${page}`,
           documentsPerPage: `${limit}`,
+          nrCrt: { $add: ["$nrCrt", 1] },
         },
       },
     ]);
+
+    // console.log(languageSkillContent.map((item) => item.data));
 
     return NextResponse.json({
       success: true,
@@ -103,13 +141,14 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: { slug: string } }
+  { params }: { params: { filter: string } }
 ) {
   try {
     const reqBody = await req.json();
+
     const {
       contentDescription,
-      category,
+
       languageType,
       contentTitle,
       code,
@@ -121,12 +160,17 @@ export async function POST(
       versionCode,
     });
 
-    const languageVersionCodeSaved = await languageVersionCode.save();
+    let findLength = await LanguageSKillContent.find({
+      category: params.filter[0],
+    }).countDocuments();
+
+    await languageVersionCode.save();
 
     const newLanguageSkillContent = new LanguageSKillContent({
       contentDescription,
-      category,
+      category: params.filter[0],
       contentTitle,
+      uniqueNumberByCategory: findLength + 1,
       languageType,
       versionCode_id: languageVersionCode._id,
     });
@@ -136,7 +180,6 @@ export async function POST(
       success: true,
       message: "Language skill created successfully",
       languageSkillContentSaved,
-      languageVersionCodeSaved,
     });
   } catch (error: any) {
     console.log(error);

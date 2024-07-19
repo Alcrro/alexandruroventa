@@ -14,8 +14,8 @@ export default async function page({
   const content = await getModule(params, filter?.str, searchParams);
 
   return (
-    <div>
+    <>
       <Main documents={content.languageSkillContent} params={params} />
-    </div>
+    </>
   );
 }
