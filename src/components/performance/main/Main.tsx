@@ -5,6 +5,8 @@ import Link from "next/link";
 import Pagination from "@/components/pagination/Pagination";
 import TableHeader from "./tableHeader/TableHeader";
 import { headerArray } from "@/_lib/languageSkill/headerArray";
+import OrderBy from "./orderBy/OrderBy";
+import dynamic from "next/dynamic";
 
 export default function Main({
   documents,
@@ -27,24 +29,11 @@ export default function Main({
             .flat(1)
             .map((item: iPerformanceDocument, rowIndex: number) => (
               <li key={rowIndex} className="flex">
-                <Link href={`/performance/${params.category}/${item.slug}`}>
-                  <div className="category">
-                    <div id="" className="order">
-                      <span className="asc"></span>
-                      <span className="desc"></span>
-                    </div>
-                    <div>{item.uniqueNumberByCategory}</div>
-                  </div>
-                  <div>{item.languageType}</div>
-                  <div>{item.contentTitle}</div>
-                  <div>{item.contentDescription}</div>
-                  <div>{item.codeversions_details.codVersion}</div>
-
-                  <div>
-                    {new Date(
-                      item?.codeversions_details.dateVersion
-                    )?.toLocaleDateString()}
-                  </div>
+                <Link
+                  href={`/performance/${params.category}/${item.slug}`}
+                  className="a-body-content"
+                >
+                  <OrderBy item={item} params={params} />
                 </Link>
               </li>
             ))}

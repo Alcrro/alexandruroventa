@@ -52,7 +52,7 @@
       display: block;
       height: 100%;
       min-height: 100%;
-      a {
+      .a-body-content {
         // display: flex;
         display: grid;
         grid-template-columns: 100px repeat(auto-fit, minmax(100px, 1fr));
@@ -70,15 +70,17 @@
           gap: 10px;
         }
 
-        div:first-child,
-        div:last-child {
-          max-width: fit-content;
-          margin: 0 auto;
-
-          @media (max-width: 720px) {
-            max-width: unset;
-            margin: unset;
+        @media (min-width: 720px) {
+          div:first-child,
+          div:last-child {
+            max-width: fit-content;
+            margin: 0 auto;
           }
+        }
+
+        @media (max-width: 720px) {
+          max-width: unset;
+          margin: unset;
         }
 
         .content-body-header {
@@ -92,30 +94,34 @@
       }
 
       @media (max-width: 720px) {
+        .category {
+          display: flex;
+          justify-content: space-between;
+        }
         .order {
           display: flex;
           justify-content: space-between;
         }
-        .order:before {
+        .header-name:before {
           font-weight: 700;
         }
-        .order:first-child:before {
-          content: "nrCrt:";
+        .crt .header-name:before {
+          content: "nrCrt";
         }
-        .order:nth-child(2):before {
-          content: "Language Type:";
+        .language-learnt .header-name:before {
+          content: "Language Type";
         }
-        div:nth-child(3):before {
-          content: "Title:";
+        .contentTitle .header-name:before {
+          content: "Title";
         }
-        div:nth-child(4):before {
-          content: "Description:";
+        .contentDescription .header-name:before {
+          content: "Description";
         }
-        div:nth-child(5):before {
-          content: "Version Code:";
+        .codVersion .header-name:before {
+          content: "Version Code";
         }
-        div:nth-child(6):before {
-          content: "Created at:";
+        .dateVersion .header-name:before {
+          content: "Created at";
         }
       }
 
@@ -128,7 +134,7 @@
       }
 
       @media (max-width: 720px) {
-        a {
+        .a-body-content {
           display: grid;
           grid-template-columns: 100%;
           width: 100%;
