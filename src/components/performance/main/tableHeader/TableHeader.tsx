@@ -45,7 +45,7 @@ export default function TableHeader({
           <span
             className={`asc${
               params?.filter === undefined
-                ? null
+                ? ""
                 : headers.orderName ===
                     params?.filter[
                       params?.filter?.indexOf(headers.orderName)
