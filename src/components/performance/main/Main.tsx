@@ -7,6 +7,7 @@ import TableHeader from "./tableHeader/TableHeader";
 import { headerArray } from "@/_lib/languageSkill/headerArray";
 import OrderBy from "./orderBy/OrderBy";
 import dynamic from "next/dynamic";
+import LinkTableContent from "./LinkTableContent";
 
 export default function Main({
   documents,
@@ -28,13 +29,10 @@ export default function Main({
             .map((item: any) => item.data)
             .flat(1)
             .map((item: iPerformanceDocument, rowIndex: number) => (
-              <li key={rowIndex} className="flex">
-                <Link
-                  href={`/performance/${params.category}/${item.slug}`}
-                  className="a-body-content"
-                >
+              <li key={rowIndex}>
+                <LinkTableContent item={item}>
                   <OrderBy item={item} params={params} />
-                </Link>
+                </LinkTableContent>
               </li>
             ))}
         </ul>

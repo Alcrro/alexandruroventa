@@ -49,8 +49,11 @@
     }
 
     .body-ul {
-      display: block;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       height: 100%;
+
       min-height: 100%;
       .a-body-content {
         // display: flex;
@@ -66,6 +69,7 @@
         border-radius: 12px;
         word-break: break-all;
 
+        margin-bottom: unset;
         @media (max-width: 450px) {
           gap: 10px;
         }
@@ -138,6 +142,7 @@
           display: grid;
           grid-template-columns: 100%;
           width: 100%;
+          margin-bottom: unset;
         }
         .content-group {
           display: grid;

@@ -16,6 +16,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
     let docPerPage = 20;
     let skip = docPerPage * (page - 1);
     let filter: any = {};
+    let filterLanguageLearnt: any = {};
     let limit =
       params.filter.indexOf("limit") === -1
         ? 20
@@ -26,7 +27,9 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
           );
 
     let findIndex: number = params.filter.findIndex(
-      (findIndex: any) => findIndex === "languageType"
+      (findIndex: any) =>
+        findIndex === "languageType" &&
+        (findIndex !== "asc" || findIndex + 1 !== "desc")
     );
 
     let filterMatch = params.filter.findIndex(
@@ -38,15 +41,21 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
     sort[params.filter[filterMatch - 1]] =
       params.filter[filterMatch] === "asc" ? 1 : -1;
 
-    filter[params.filter[findIndex]] = params.filter[findIndex + 1];
+    filter[params.filter[filterMatch]] = params.filter[filterMatch + 1];
+
+    filterLanguageLearnt[params.filter[findIndex]] =
+      params.filter[findIndex + 1];
 
     const languageSkillContent = await LanguageSKillContent.aggregate([
       {
+        //filter by category
         $match: obj,
       },
 
       {
-        $match: params.filter[findIndex] === undefined ? {} : filter,
+        // filter by type of language
+        $match:
+          params.filter[findIndex] === undefined ? {} : filterLanguageLearnt,
       },
       {
         $sort:
@@ -104,8 +113,6 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
         },
       },
     ]);
-
-    // console.log(languageSkillContent.map((item) => item.data));
 
     return NextResponse.json({
       success: true,
