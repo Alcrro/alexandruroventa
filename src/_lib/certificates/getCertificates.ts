@@ -19,7 +19,7 @@ export default async function getCertificates(params: any, searchParams: any) {
       `${process.env.NEXTAUTH_URL}/api/certificates/${string}?${search}`,
       {
         method: "GET",
-        cache: "no-cache",
+        next: { revalidate: 86400 },
       }
     );
 

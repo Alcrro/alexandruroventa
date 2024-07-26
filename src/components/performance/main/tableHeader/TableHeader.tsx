@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./tableHeader.scss";
 import Link from "next/link";
+import LinkHeader from "./LinkHeader";
 
 interface headers {
   id: number;
@@ -29,17 +30,7 @@ export default function TableHeader({
           : ""
       }`}
     >
-      <Link
-        href={`/performance/${params.category}/${
-          params?.filter === undefined
-            ? headers.orderBy.asc
-            : headers.orderName ===
-                params?.filter[params?.filter?.indexOf(headers.orderName)] &&
-              params?.filter.includes("asc")
-            ? headers.orderBy.desc
-            : headers.orderBy.asc
-        }`}
-      >
+      <LinkHeader headers={headers} params={params}>
         <div>{headers.name}</div>
         <div className="sort">
           <span
@@ -67,7 +58,7 @@ export default function TableHeader({
             }`}
           ></span>
         </div>
-      </Link>
+      </LinkHeader>
     </li>
   );
 }

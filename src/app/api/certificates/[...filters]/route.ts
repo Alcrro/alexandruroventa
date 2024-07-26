@@ -23,8 +23,13 @@ export async function GET(
       {
         $match: searchParam
           ? {
-              // Search within the entire document
-              $text: { $search: searchParam },
+              $or: [
+                { organization: { $regex: searchParam, $options: "i" } }, // Match text1
+                {
+                  languageLearnt: { $regex: searchParam, $options: "i" },
+                }, // Match text2
+                { author: { $regex: searchParam, $options: "i" } }, // Match text3
+              ],
             }
           : {}, // Match all documents if searchValue is null
       },
