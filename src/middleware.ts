@@ -4,6 +4,7 @@ import type { NextRequest } from "next/server";
 const allowedOrigins = ["https://alexandru-roventa.ro"];
 
 const corsOptions = {
+  "Cache-Control": "s-maxage=86700",
   "X-Content-Type-Options": "nosniff",
   "X-Frame-Options": "SAMEORIGIN",
   "X-XSS-Protection": "1; mode=block",

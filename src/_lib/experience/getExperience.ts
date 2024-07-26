@@ -6,8 +6,7 @@ export default async function getExperience() {
         "Content-Type": "application/json",
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
-      cache: "no-cache",
-      // next: { revalidate: 3600 },
+      next: { revalidate: 86400 },
     });
 
     return response.json();
