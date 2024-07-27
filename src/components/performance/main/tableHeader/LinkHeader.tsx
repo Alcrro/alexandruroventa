@@ -12,11 +12,10 @@ export default function LinkHeader({
   params: any;
 }) {
   const pathname = transformLink(headers, params);
-  // console.log(pathname);
 
   return (
     <Link
-      href={`${pathname}/order/${
+      href={`/performance/${params.category}/${
         params?.filter === undefined
           ? headers.orderBy.asc
           : headers.orderName ===

@@ -1,12 +1,18 @@
 import React from "react";
+import "./alreadyFiltered.scss";
+export default function AlreadyFiltered({
+  params,
+}: {
+  params: { filter: string[] };
+}) {
+  let filtered: any = [];
 
-export default function AlreadyFiltered({ params }: { params: any }) {
   return (
     <>
       {params.filter === undefined ? null : (
-        <div className="flex">
-          <span>Already Filtered by:</span>
-          <div>{params.filter[0]}</div>
+        <div className="already-filtered-container">
+          <div className="title-already-filtered-container">Filtered by:</div>
+          <div className="flex"></div>
         </div>
       )}
     </>
