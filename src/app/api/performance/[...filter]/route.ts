@@ -1,3 +1,6 @@
+import { filterCategory, filterLanguageType } from "@/_lib/performance/filter";
+import { pagination } from "@/_lib/performance/pagination";
+import { sortPerformance } from "@/_lib/performance/sortPerformance";
 import { connectDB } from "@/config/mongoDB";
 import CodeVersion from "@/models/languageSkill/LanguageSkillCodeVersion";
 import LanguageSKillContent from "@/models/languageSkill/LanguageSkillContent";
@@ -6,56 +9,30 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 export async function GET(req: NextRequest, { params }: { params: any }) {
   try {
-    let obj: any = {};
-    obj[params.filter[0]] = params.filter[1];
-    const { searchParams } = new URL(req.url);
-    const pageNumber = searchParams.get("page");
+    let filtCategory = filterCategory(params);
+    let { filterLanguageLearnt } = filterLanguageType(params);
+    let { sort } = sortPerformance(params);
+    let { skip, limit, page } = pagination(req, params);
 
-    let page: number = Number(pageNumber) || 1;
-
-    let docPerPage = 20;
-    let skip = docPerPage * (page - 1);
     let filter: any = {};
-    let filterLanguageLearnt: any = {};
-    let limit =
-      params.filter.indexOf("limit") === -1
-        ? 20
-        : Number(
-            params.filter[params.filter.indexOf("limit") + 1]
-              .match(/\d+/g)
-              .toString()
-          );
 
-    let findIndex: number = params.filter.findIndex(
-      (findIndex: any) =>
-        findIndex === "languageType" &&
-        (findIndex !== "asc" || findIndex + 1 !== "desc")
-    );
+    console.log(filterLanguageLearnt);
 
-    let filterMatch = params.filter.findIndex(
+    let findIndexOrder = params.filter.findIndex(
       (findIndex: any) => findIndex === "asc" || findIndex === "desc"
     );
 
-    let sort: any = {};
-
-    sort[params.filter[filterMatch - 1]] =
-      params.filter[filterMatch] === "asc" ? 1 : -1;
-
-    filter[params.filter[filterMatch]] = params.filter[filterMatch + 1];
-
-    filterLanguageLearnt[params.filter[findIndex]] =
-      params.filter[findIndex + 1];
+    filter[params.filter[findIndexOrder]] = params.filter[findIndexOrder + 1];
 
     const languageSkillContent = await LanguageSKillContent.aggregate([
       {
         //filter by category
-        $match: obj,
+        $match: filtCategory,
       },
 
       {
         // filter by type of language
-        $match:
-          params.filter[findIndex] === undefined ? {} : filterLanguageLearnt,
+        $match: filterLanguageLearnt,
       },
       {
         $sort:

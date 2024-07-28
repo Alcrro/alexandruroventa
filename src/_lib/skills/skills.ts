@@ -71,4 +71,8 @@ export const skills = [
     id: 16,
     skillName: "Framer Motion",
   },
+  {
+    id: 17,
+    skillName: "Docker",
+  },
 ];
