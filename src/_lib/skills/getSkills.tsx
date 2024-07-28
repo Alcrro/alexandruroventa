@@ -8,11 +8,3 @@ export default async function getSkillsList() {
     console.log(error);
   }
 }
-// export default async function getStaticProps() {
-//   try {
-//     const response = await fetch(`${process.env.NEXTAUTH_URL}/api/skills`);
-//     return response.json();
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }

@@ -12,6 +12,10 @@
     max-width: 100%;
     color: #000;
     margin: 0 auto;
+    
+    &:hover {
+      cursor: pointer;
+    }
 
     @media (max-width: 340px) {
       width: 100%;

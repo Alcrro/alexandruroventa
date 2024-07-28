@@ -15,7 +15,7 @@ export default function LinkHeader({
 
   return (
     <Link
-      href={`/performance/${params.category}/${
+      href={`/performance/${params.category}/order/${
         params?.filter === undefined
           ? headers.orderBy.asc
           : headers.orderName ===
