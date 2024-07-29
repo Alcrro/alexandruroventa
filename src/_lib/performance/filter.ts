@@ -12,15 +12,11 @@ export function filterLanguageType(params: { filter: string[] }) {
     (findIndex: any) => findIndex === "languageType"
   );
 
-  console.log(findIndexMatcher);
-
   params.filter[findIndexMatcher] !== undefined &&
   !params.filter.includes("order")
     ? (filterLanguageLearnt[params.filter[findIndexMatcher]] =
         params.filter[findIndexMatcher + 1])
     : {};
-
-  console.log(filterLanguageLearnt);
 
   return { filterLanguageLearnt };
 }

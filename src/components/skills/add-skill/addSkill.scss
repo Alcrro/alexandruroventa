@@ -1,0 +1,43 @@
+.add-skill-content {
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+
+  .add-skill {
+    display: block;
+    text-align: center;
+    .label-group {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      input {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+        padding: 0.25rem;
+        border-radius: 8px;
+        text-align: center;
+        background-color: white;
+        color: #000;
+      }
+    }
+    .add-skill-button {
+      display: block;
+
+      padding: 0.25rem;
+
+      button {
+        display: block;
+        text-align: center;
+        background-color: white;
+        color: #000;
+        padding: 0.5rem;
+        border-radius: 8px;
+        width: 80px;
+        max-width: 80px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
