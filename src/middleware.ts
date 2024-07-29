@@ -16,6 +16,11 @@ const corsOptions = {
 
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest, res: NextResponse) {
+  const requestHeaders = new Headers(request.headers);
+
+  // const { ip, nextUrl } = request;
+  const ip = request.ip || "";
+  requestHeaders.set("x-forwarded-for", ip);
   // Check the origin from the request
   const origin = request.headers.get("origin") ?? "";
   const isAllowedOrigin = allowedOrigins.includes(origin);

@@ -16,8 +16,6 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
 
     let filter: any = {};
 
-    console.log(filterLanguageLearnt);
-
     let findIndexOrder = params.filter.findIndex(
       (findIndex: any) => findIndex === "asc" || findIndex === "desc"
     );
