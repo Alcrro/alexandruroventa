@@ -1,28 +1,20 @@
-"use client";
-import addExperienceAction from "@/components/actions/addExperienceAction";
-import { useRouter } from "next/navigation";
-import React from "react";
-import toast from "react-hot-toast";
-import AddSkillAction from "./AddSkillAction";
+import React, { FormEvent } from "react";
+import { addSkill } from "@/_lib/skills/getSkills";
+import { redirect } from "next/navigation";
 
 export default function SkillForm() {
-  const router = useRouter();
-  async function setData(setData: FormData) {
-    const skillName = setData.get("skillName");
-    console.log(skillName);
+  const setData = async (formData: FormData) => {
+    "use server";
+    const skillNameData: string = formData.get("skillName") as string;
+    console.log(skillNameData);
 
-    try {
-      const response = await AddSkillAction(setData);
-      if (response.error) {
-        toast.error(response.error);
-      } else {
-        toast.success(response.message);
-        router.push("/skills");
-      }
-    } catch (error: any) {
-      console.log(error);
-    }
-  }
+    const data = await addSkill(skillNameData);
+
+    console.log(data.success === true);
+
+    redirect("/skills");
+  };
+
   return (
     <form action={setData}>
       <div className="label-group">

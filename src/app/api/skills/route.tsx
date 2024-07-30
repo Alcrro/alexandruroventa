@@ -1,15 +1,18 @@
 import { connectDB } from "@/config/mongoDB";
 import Skill from "@/models/skills/Skills";
-import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 connectDB();
 
 export async function GET(req: NextRequest) {
   try {
-    const { ip, nextUrl } = req;
-    nextUrl.searchParams.set("x-forwarded-for", ip!);
+    const pipeline: any = {
+      $sort: {
+        skillName: 1,
+      },
+    };
 
-    const skills = await Skill.find({});
+    const skills = await Skill.aggregate([pipeline]);
+
     return NextResponse.json(
       {
         success: true,
@@ -31,13 +34,13 @@ export async function POST(req: NextRequest) {
 
     const { skillName } = reqBody;
 
-    const headersList = headers();
-    const ip = headersList.get("x-forwarded-for");
-    console.log(ip);
-
     const newSkill = new Skill({
       skillName,
     });
+
+    if(newSkill.skillName !== ""){
+      
+    }
 
     const skillSaved = await newSkill.save();
 

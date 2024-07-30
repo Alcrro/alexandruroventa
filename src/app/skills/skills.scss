@@ -1,6 +1,22 @@
 .skills-container {
   display: block;
 
+  .skill-counter {
+    display: block;
+    max-width: 55rem;
+    margin: 0 auto;
+    text-align: end;
+    padding: 12px;
+    margin-bottom: 10px;
+
+    span {
+      display: inline;
+      padding: 12px;
+      border: 1px solid;
+      border-radius: 12px;
+    }
+  }
+
   .skills-inner {
     display: flex;
     position: relative;

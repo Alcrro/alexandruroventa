@@ -27,9 +27,6 @@ const addExperienceAction = async (formData: FormData) => {
       }
     );
 
-    if (response.status === 200) {
-    }
-
     const data = await response.json();
     return data;
   } catch (error) {
