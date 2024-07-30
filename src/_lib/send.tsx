@@ -9,8 +9,8 @@ export default async function sendEmail(data: {}) {
     });
 
     if (response.status === 200) {
-      return response.json();
     }
+    return response.json();
   } catch (error) {
     console.log(error);
   }

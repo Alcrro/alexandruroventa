@@ -34,9 +34,11 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
       },
       {
         $sort:
-          Object.keys(sort)[0] === "undefined"
-            ? { uniqueNumberByCategory: 1 }
-            : sort,
+          Object.keys(sort)[0] !== "undefined" ||
+          Object.keys(sort)[0] !== "version" ||
+          Object.keys(sort)[0] !== "date"
+            ? sort
+            : { uniqueNumberByCategory: 1 },
       },
       {
         $facet: {
@@ -74,6 +76,7 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
                 },
               },
             },
+            { $sort: sort },
           ],
           totalDocuments: [{ $count: "count" }],
         },
