@@ -25,7 +25,6 @@ export function sortPerformance(params: { filter: string[] }) {
       params.filter[findIndex] === "asc" ? 1 : -1;
   }
 
-
   return {
     sort,
   };
