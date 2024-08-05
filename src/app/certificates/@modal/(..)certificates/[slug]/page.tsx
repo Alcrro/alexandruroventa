@@ -1,29 +1,28 @@
 import { getCertificateBySlug } from "@/_lib/certificates/getCertificate";
+import Modal from "@/components/certificates/modal/Modal";
 import Image from "next/image";
 import React from "react";
 
-export default async function page({ params }: { params: { slug: string } }) {
-  console.log(params.slug);
+// export const dynamic = "force-dynamic";
 
-  // console.log(params.slug);
+export default async function page({ params }: { params: { slug: string } }) {
   const certificate = await getCertificateBySlug(params.slug);
+
   let slug = certificate.certificates
     .map((item: any) => item.doc)
     .flat(1)
     .map((item: any) => item.src)
     .join("");
 
-  console.log(slug);
   return (
-    <div className="">
+    <Modal className="certificates-modal">
       <Image
         src={slug}
         alt="certificate"
         width={1200}
         height={1000}
         className="mx-auto rounded-md"
-        priority
       />
-    </div>
+    </Modal>
   );
 }

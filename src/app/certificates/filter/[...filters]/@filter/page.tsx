@@ -1,4 +1,5 @@
-import getCertificates from "@/_lib/certificates/getCertificates";
+
+import { getCertificates } from "@/_lib/certificates/getCertificates";
 import Search from "@/components/certificates/filters/Search";
 import Order from "@/components/certificates/order/Order";
 import React from "react";

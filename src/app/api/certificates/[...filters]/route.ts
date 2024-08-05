@@ -2,14 +2,22 @@ import { connectDB } from "@/config/mongoDB";
 import Certificates from "@/models/certificates/Certificates";
 import { NextRequest, NextResponse } from "next/server";
 connectDB();
+
+interface iSlug {
+  slug: string;
+}
+
 export async function GET(
   req: NextRequest,
   { params, searchParams }: { params: any; searchParams: string }
 ) {
   try {
+    console.log(params);
     const { searchParams } = new URL(req.url);
     const searchParam = searchParams.get("search");
     const pageNumber = searchParams.get("page");
+
+    let slugObj: any = {};
     let page: number = Number(pageNumber) || 1;
     let docPerPage = 12;
     let skip = docPerPage * (page - 1);
@@ -19,20 +27,29 @@ export async function GET(
     let objN: any = {};
     objN[orderedBy[0]] = params.filters[1] === "asc" ? 1 : -1;
 
+    const findIndex = params.filters.findIndex(
+      (findIndex: string) => findIndex === "slug"
+    );
+
+    slugObj[params.filters[findIndex]] = params.filters[findIndex + 1];
+    console.log(slugObj);
+
     const certificates = await Certificates.aggregate([
-      {
-        $match: searchParam
-          ? {
-              $or: [
-                { organization: { $regex: searchParam, $options: "i" } }, // Match text1
-                {
-                  languageLearnt: { $regex: searchParam, $options: "i" },
-                }, // Match text2
-                { author: { $regex: searchParam, $options: "i" } }, // Match text3
-              ],
-            }
-          : {}, // Match all documents if searchValue is null
-      },
+      findIndex >= 0
+        ? { $match: slugObj }
+        : {
+            $match: searchParam
+              ? {
+                  $or: [
+                    { organization: { $regex: searchParam, $options: "i" } }, // Match text1
+                    {
+                      languageLearnt: { $regex: searchParam, $options: "i" },
+                    }, // Match text2
+                    { author: { $regex: searchParam, $options: "i" } }, // Match text3
+                  ],
+                }
+              : {}, // Match all documents if searchValue is null
+          },
       {
         $facet: {
           data: [
@@ -59,6 +76,8 @@ export async function GET(
         },
       },
     ]);
+
+    console.log(certificates);
 
     return NextResponse.json({
       success: true,
