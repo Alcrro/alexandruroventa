@@ -1,4 +1,4 @@
-export default async function getCertificates(params: any, searchParams: any) {
+export const getCertificates = async (params: any, searchParams: any) => {
   let search = "";
 
   if (searchParams !== undefined) {
@@ -27,4 +27,4 @@ export default async function getCertificates(params: any, searchParams: any) {
   } catch (error) {
     console.log(error);
   }
-}
+};

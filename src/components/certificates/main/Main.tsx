@@ -5,12 +5,6 @@ import "./certificate.scss";
 import { iCertificate } from "@/types";
 import Pagination from "../../pagination/Pagination";
 
-interface IDoc {
-  doc: iCertificate[];
-  totalDocuments: [];
-  page: 1;
-}
-
 export default function Main({ documents }: { documents: iCertificate[] }) {
   let allDocuments: any = [];
   let totalProducts;
@@ -33,7 +27,7 @@ export default function Main({ documents }: { documents: iCertificate[] }) {
               <div className="image-container">
                 <Link href={`/certificates/${certificate.slug}`}>
                   <Image
-                    src={certificate.src}
+                    src={`${certificate.src}`}
                     alt="certificate"
                     width={1000}
                     height={1000}

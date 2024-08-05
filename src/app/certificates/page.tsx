@@ -1,8 +1,8 @@
-import getCertificates from "@/_lib/certificates/getCertificates";
 import Main from "@/components/certificates/main/Main";
 import Order from "@/components/certificates/order/Order";
 import "./certificates.scss";
 import Search from "@/components/certificates/filters/Search";
+import { getCertificates } from "@/_lib/certificates/getCertificates";
 
 export default async function page({
   params,

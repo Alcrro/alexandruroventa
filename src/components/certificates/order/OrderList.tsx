@@ -15,7 +15,7 @@ export default function OrderList({ orders }: { orders: any }) {
 
   const orderHandler = () => {
     if (ascActive && ordName === orders.name) {
-      route.push(`/certificates/${ordName}/desc`);
+      route.push(`/certificates/filter/${ordName}/desc`);
     }
   };
 
@@ -26,7 +26,7 @@ export default function OrderList({ orders }: { orders: any }) {
       }`}
       onClick={() => orderHandler()}
     >
-      <Link href={`/certificates/${orders.ascending.link}`}>
+      <Link href={`/certificates/filter/${orders.ascending.link}`}>
         <span
           className={`ordered-name ${
             (ascActive || descActive) && ordName === orders.name ? "active" : ""

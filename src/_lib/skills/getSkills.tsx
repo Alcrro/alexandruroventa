@@ -11,8 +11,6 @@ async function getSkillsList() {
 }
 
 async function addSkill(data: string) {
-  console.log(data);
-
   try {
     const response = await fetch(`${process.env.NEXTAUTH_URL}/api/skills`, {
       // next: { revalidate: 86400 },

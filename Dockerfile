@@ -1,4 +1,4 @@
-FROM node:20-alpine as builder
+FROM node:22-alpine as builder
 
 WORKDIR /nextjsdocker 
 
@@ -18,6 +18,7 @@ COPY --from=builder /nextjsdocker/package*.json ./
 COPY --from=builder /nextjsdocker/.next ./.next
 COPY --from=builder /nextjsdocker/public ./public
 COPY --from=builder /nextjsdocker/node_modules ./node_modules
+COPY --from=builder /nextjsdocker/next.config.mjs ./
 ENV NODE_ENV=production
 EXPOSE 3000
 CMD ["npm","run", "start"]
