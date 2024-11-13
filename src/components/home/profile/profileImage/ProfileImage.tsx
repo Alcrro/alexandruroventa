@@ -8,7 +8,7 @@ export default function ProfileImage() {
     <div className="profile-container">
       <div className="profile-image-container">
         <Image
-          src={"https://alexandru-roventa.s3.eu-central-1.amazonaws.com/eu.png"}
+          src={"https://alexandru-roventa.s3.eu-central-1.amazonaws.com/alexandru-roventa-image.png"}
           alt="my-image"
           width={500}
           height={500}
