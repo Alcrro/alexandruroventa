@@ -38,9 +38,10 @@ export default function FooterComponent() {
         </div>
       </div>
       <div className="row text-center py-3">
-        <div className="footer-copy">Copyright © 2003-2024 alcrro.ro</div>
+        <div className="footer-copy">Copyright © 20023-2024 alcrro.ro</div>
       </div>
     </div>
   </div>
   )
 }
+
