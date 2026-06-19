@@ -1,9 +1,8 @@
 export const dynamic = "force-dynamic";
-import ContactForm from "../../../components/home/profile/contact/contactForm/ContactForm";
-import ContactModal from "../../../components/home/profile/contact/contactModal/ContactModal";
-import React from "react";
+import ContactForm from "@/features/contact/ContactForm";
+import ContactModal from "@/features/contact/ContactModal";
 
-export default function page() {
+export default function ContactMePage() {
   return (
     <ContactModal>
       <ContactForm />

@@ -1,15 +1,15 @@
-export const getCertificateBySlug = async (slug: string) => {
+import { iCertificate } from "@/types";
+
+export async function getCertificateBySlug(slug: string): Promise<iCertificate | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/certificates/slug/${slug}`,
-      {
-        method: "GET",
-        next: { revalidate: 86400 },
-      }
+      `${process.env.NEXTAUTH_URL}/api/certificates/${slug}`,
+      { cache: "no-cache" }
     );
-
-    return response.json();
+    const data = await response.json();
+    return data.certificate ?? null;
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return null;
   }
-};
+}

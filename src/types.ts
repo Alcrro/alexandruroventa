@@ -73,15 +73,14 @@ export interface IHeader {
 }
 
 export interface IProjectsSchema {
+  _id: string;
   title: string;
+  slug?: string;
   link: string;
   thumbnailPhoto: string;
-  languagesUsed: [];
+  languagesUsed: string[];
   gitRepository: string;
   hosted: string;
   moreDescription: string;
 }
 
-export interface EmailTemplateProps {
-  email: string;
-}

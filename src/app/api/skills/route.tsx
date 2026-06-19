@@ -1,60 +1,29 @@
 import { connectDB } from "@/config/mongoDB";
 import Skill from "@/models/skills/Skills";
 import { NextRequest, NextResponse } from "next/server";
+
 connectDB();
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const pipeline: any = {
-      $sort: {
-        skillName: 1,
-      },
-    };
-
-    const skills = await Skill.aggregate([pipeline]);
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Load skills successfully",
-        skills,
-      },
-      { status: 200 }
-    );
+    const skills = await Skill.find().sort({ category: 1, skillName: 1 }).lean();
+    return NextResponse.json({ success: true, skills }, { status: 200 });
   } catch (error) {
-    console.log(error);
-
-    return NextResponse.json({ error: error }, { status: 400 });
+    return NextResponse.json({ error }, { status: 400 });
   }
 }
 
 export async function POST(req: NextRequest) {
   try {
-    const reqBody = await req.json();
+    const { skillName, category, level, icon } = await req.json();
 
-    const { skillName } = reqBody;
-
-    const newSkill = new Skill({
-      skillName,
-    });
-
-    if(newSkill.skillName !== ""){
-      
+    if (!skillName || !category || !level) {
+      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    const skillSaved = await newSkill.save();
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: "successfully added",
-        skillSaved,
-      },
-      { status: 201 }
-    );
+    const newSkill = await new Skill({ skillName, category, level, icon: icon ?? "" }).save();
+    return NextResponse.json({ success: true, skill: newSkill }, { status: 201 });
   } catch (error) {
-    console.log(error);
-
-    return NextResponse.json({ error: error }, { status: 400 });
+    return NextResponse.json({ error }, { status: 400 });
   }
 }

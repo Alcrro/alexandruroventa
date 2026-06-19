@@ -1,31 +1,13 @@
-export const dynamic = "force-dynamic";
-import React from "react";
-import "./skills.scss";
-import { Metadata } from "next/types";
-import SkillsList from "@/components/skills/SkillsList";
+import type { Metadata } from "next";
+import SkillsPage from "@/features/skills/SkillsPage";
 
-import AddButtons from "@/components/buttons/AddButtons";
-import { getSkillsList } from "@/_lib/skills/getSkills";
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Alexandru Roventa - My skills",
-  description: "Home",
+  title: "Alexandru Roventa — Skills",
+  description: "Technical skills — Frontend, Backend, Database, DevOps and Tools.",
 };
 
-export default async function page() {
-  const skillList = await getSkillsList();
-
-  return (
-    <div className="skills-container">
-      <div className="skill-add-container mb-4">
-        <AddButtons description="add-skill" />
-      </div>
-      <div className="skill-counter">
-        <span>Counter: {skillList.skills.length}</span>
-      </div>
-      <div className="skills-inner">
-        <SkillsList skills={skillList.skills} />
-      </div>
-    </div>
-  );
+export default function SkillsRoute() {
+  return <SkillsPage />;
 }

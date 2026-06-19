@@ -1,30 +1,24 @@
-export const getCertificates = async (params: any, searchParams: any) => {
-  let search = "";
+import { iCertificate } from "@/types";
 
-  if (searchParams !== undefined) {
-    for (let [p, val] of Object.entries(searchParams)) {
-      search += `${p}=${val}`;
-    }
-  }
-
-  let string = "";
-
-  params.filters === undefined
-    ? (string = "undefined")
-    : params?.filters?.map((item: any) => (string += `${item}/`));
-
-  // const filter = params.filters.split(",");
+export async function getCertificates(params?: {
+  org?: string;
+  lang?: string;
+  order?: "asc" | "desc";
+}): Promise<iCertificate[]> {
   try {
-    const response = await fetch(
-      `${process.env.NEXTAUTH_URL}/api/certificates/${string}?${search}`,
-      {
-        method: "GET",
-        next: { revalidate: 86400 },
-      }
-    );
+    const query = new URLSearchParams();
+    if (params?.org) query.set("org", params.org);
+    if (params?.lang) query.set("lang", params.lang);
+    if (params?.order) query.set("order", params.order);
 
-    return response.json();
+    const response = await fetch(
+      `${process.env.NEXTAUTH_URL}/api/certificates?${query.toString()}`,
+      { cache: "no-cache" }
+    );
+    const data = await response.json();
+    return data.certificates ?? [];
   } catch (error) {
-    console.log(error);
+    console.error(error);
+    return [];
   }
-};
+}

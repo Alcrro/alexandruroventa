@@ -1,55 +1,28 @@
 import { connectDB } from "@/config/mongoDB";
 import Projects from "@/models/projects/Projects";
 import { NextRequest, NextResponse } from "next/server";
+
 connectDB();
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
-    const projects = await Projects.find();
-
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Projects loaded successfully",
-        projects,
-      },
-      { status: 200 }
-    );
-  } catch (error: any) {
-    return NextResponse.json({ error: error }, { status: 400 });
+    const projects = await Projects.find().lean();
+    return NextResponse.json({ success: true, projects }, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 400 });
   }
 }
+
 export async function POST(req: NextRequest) {
   try {
-    const reqBody = await req.json();
+    const body = await req.json();
+    const { title, link, thumbnailPhoto, languagesUsed, gitRepository, hosted, moreDescription } = body;
 
-    const {
-      title,
-      link,
-      thumbnailPhoto,
-      languagesUsed,
-      gitRepository,
-      hosted,
-      moreDescription,
-    } = reqBody;
+    const project = await new Projects({
+      title, link, thumbnailPhoto, languagesUsed, gitRepository, hosted, moreDescription,
+    }).save();
 
-    const project = new Projects({
-      title,
-      link,
-      thumbnailPhoto,
-      languagesUsed,
-      gitRepository,
-      hosted,
-      moreDescription,
-    });
-
-    const projectSaved = await project.save();
-
-    return NextResponse.json({
-      success: true,
-      message: "Projects saved successfully",
-      projectSaved,
-    });
+    return NextResponse.json({ success: true, project }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 400 });
   }

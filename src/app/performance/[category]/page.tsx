@@ -1,37 +1,34 @@
-import getModule from "@/_lib/languageSkill/getModule";
-import Navbar from "@/components/performance/components/Navbar";
-import NoRecords from "@/components/performance/components/NoRecords";
-import Main from "@/components/performance/main/Main";
-import React from "react";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import PerformanceList from "@/features/performance/PerformanceList";
 
-interface IContentLanguage {
-  data: [];
-  totalDocuments: number;
-  page: string;
-  documentsPerPage: string;
+export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { category: string };
+}): Promise<Metadata> {
+  return { title: `${params.category} — Knowledge Tracker · Alexandru Roventa` };
 }
 
-export default async function page({
-  params,
-  searchParams,
-}: {
-  params: { category: any };
-  searchParams: any;
-}) {
-  const categoryType = await getModule(params, "", searchParams);
-
-  const [data] = categoryType?.languageSkillContent;
-
-  return (
-    <>
-      {data?.data?.length !== 0 ? (
-        <>
-          <Navbar params={params} />
-          <Main documents={categoryType.languageSkillContent} params={params} />
-        </>
-      ) : (
-        <NoRecords />
-      )}
-    </>
+async function getEntries(category: string) {
+  const res = await fetch(
+    `${process.env.NEXTAUTH_URL}/api/performance/${encodeURIComponent(category)}`,
+    { cache: "no-cache" }
   );
+  if (!res.ok) return null;
+  const json = await res.json();
+  return json.entries ?? null;
+}
+
+export default async function CategoryPage({
+  params,
+}: {
+  params: { category: string };
+}) {
+  const entries = await getEntries(params.category);
+  if (!entries) notFound();
+
+  return <PerformanceList entries={entries} category={params.category} />;
 }

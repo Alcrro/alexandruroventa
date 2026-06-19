@@ -1,25 +1,13 @@
-import Main from "@/components/certificates/main/Main";
-import Order from "@/components/certificates/order/Order";
-import "./certificates.scss";
-import Search from "@/components/certificates/filters/Search";
-import { getCertificates } from "@/_lib/certificates/getCertificates";
+import type { Metadata } from "next";
+import CertificatesPage from "@/features/certificates/CertificatesPage";
 
-export default async function page({
-  params,
-  searchParams,
-}: {
-  params: any;
-  searchParams?: string;
-}) {
-  const main = await getCertificates(params, searchParams);
+export const dynamic = "force-dynamic";
 
-  return (
-    <div className="certificates-container relative">
-      <div className="filters-container">
-        <Search />
-        <Order />
-      </div>
-      <Main documents={main.certificates} />
-    </div>
-  );
+export const metadata: Metadata = {
+  title: "Alexandru Roventa — Certificates",
+  description: "Professional certificates in web development, React, TypeScript and more.",
+};
+
+export default function CertificatesRoute() {
+  return <CertificatesPage />;
 }

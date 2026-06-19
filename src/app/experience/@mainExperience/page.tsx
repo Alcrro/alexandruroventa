@@ -1,12 +1,5 @@
-import getExperience from "@/_lib/experience/getExperience";
-import Experience from "@/components/experience/Experience";
-import React from "react";
+import ExperienceTimeline from "@/features/experience/ExperienceTimeline";
 
-export default async function page() {
-  const experiences = await getExperience();
-  return (
-    <>
-      <Experience experiences={experiences.experiences} />
-    </>
-  );
+export default async function MainExperiencePage() {
+  return <ExperienceTimeline />;
 }

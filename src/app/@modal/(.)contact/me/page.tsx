@@ -1,8 +1,8 @@
-import ContactForm from "../../../../components/home/profile/contact/contactForm/ContactForm";
-import ContactModal from "../../../../components/home/profile/contact/contactModal/ContactModal";
-import React from "react";
 export const dynamic = "force-dynamic";
-export default function page() {
+import ContactForm from "@/features/contact/ContactForm";
+import ContactModal from "@/features/contact/ContactModal";
+
+export default function ContactMeModal() {
   return (
     <ContactModal>
       <ContactForm />

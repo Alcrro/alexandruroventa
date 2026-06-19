@@ -1,7 +1,12 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:testing-library/react"],
-
+  "extends": ["next/core-web-vitals"],
   "rules": {
     "react/no-unescaped-entities": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": ["**/*.test.ts", "**/*.test.tsx", "**/*.spec.ts", "**/*.spec.tsx"],
+      "extends": ["plugin:testing-library/react"]
+    }
+  ]
 }

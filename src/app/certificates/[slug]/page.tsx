@@ -1,27 +1,30 @@
-import { getCertificateBySlug } from "@/_lib/certificates/getCertificate";
 import Image from "next/image";
-import React from "react";
+import { notFound } from "next/navigation";
+import { getCertificateBySlug } from "@/_lib/certificates/getCertificate";
+import type { Metadata } from "next";
 
-export default async function page({ params }: { params: { slug: string } }) {
-  console.log(params.slug);
+export const dynamic = "force-dynamic";
 
-  // console.log(params.slug);
-  const certificate = await getCertificateBySlug(params.slug);
-  let slug = certificate.certificates
-    .map((item: any) => item.doc)
-    .flat(1)
-    .map((item: any) => item.src)
-    .join("");
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const cert = await getCertificateBySlug(params.slug);
+  if (!cert) return { title: "Certificate — Alexandru Roventa" };
+  return {
+    title: `${cert.languageLearnt} — ${cert.organization} · Alexandru Roventa`,
+  };
+}
 
-  console.log(slug);
+export default async function CertificatePage({ params }: { params: { slug: string } }) {
+  const cert = await getCertificateBySlug(params.slug);
+  if (!cert) notFound();
+
   return (
-    <div className="">
+    <div style={{ maxWidth: "56rem", margin: "0 auto", padding: "3rem 1rem" }}>
       <Image
-        src={slug}
-        alt="certificate"
+        src={cert.src}
+        alt={`${cert.organization} — ${cert.languageLearnt}`}
         width={1200}
-        height={1000}
-        className="mx-auto rounded-md"
+        height={900}
+        style={{ width: "100%", height: "auto", borderRadius: "12px" }}
         priority
       />
     </div>

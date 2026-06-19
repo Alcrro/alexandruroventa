@@ -1,21 +1,19 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import Navbar from "../components/navbar/Navbar";
+import Navbar from "../features/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
-import NavbarFilterProvider from "@/context/navbarFilterContext/NavbarFilterContext";
-import Footer from "@/components/footer/Footer";
+import Footer from "@/features/footer/Footer";
 import { Toaster } from "react-hot-toast";
 import { ExperienceContextProvider } from "@/context/experienceContext/ExperienceContext";
 import "./layout.scss"
 
 
-const roboto = Roboto({
-  weight: ["400", "700"],
-  style: ["normal", "italic"],
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -39,19 +37,16 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/eu.png" sizes="any" />
       </head>
-      <body className={roboto.className}>
+      <body className={`${inter.variable} font-sans`}>
         <DarkThemeProvider>
           <main>
             <Navbar />
-            <NavbarFilterProvider>
-              <ExperienceContextProvider>
-                <div className="main root">
-                  {children}
-                  {modal}
-                </div>
-              </ExperienceContextProvider>
-            </NavbarFilterProvider>
-
+            <ExperienceContextProvider>
+              <div className="main root">
+                {children}
+                {modal}
+              </div>
+            </ExperienceContextProvider>
             <Footer />
           </main>
         </DarkThemeProvider>
