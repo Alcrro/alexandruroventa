@@ -1,18 +1,10 @@
-import Image from "next/image";
 import Link from "next/link";
-import { IProjectsSchema } from "@/types";
+import { IGithubProject } from "@/types";
 import TechBadge from "./TechBadge";
+import ProjectImage from "./ProjectImage";
 import "./projects.scss";
 
-function ensureHttps(url: string): string {
-  if (!url) return "";
-  return url.startsWith("http") ? url : `https://${url}`;
-}
-
-export default function ProjectDetail({ project }: { project: IProjectsSchema }) {
-  const liveUrl = ensureHttps(project.link);
-  const gitUrl = ensureHttps(project.gitRepository);
-
+export default function ProjectDetail({ project }: { project: IGithubProject }) {
   return (
     <article className="project-detail">
       <div className="project-detail-back">
@@ -24,8 +16,9 @@ export default function ProjectDetail({ project }: { project: IProjectsSchema })
       <h1 className="project-detail-title">{project.title}</h1>
 
       <div className="project-detail-thumb">
-        <Image
-          src={`/projects/${project.thumbnailPhoto}`}
+        <ProjectImage
+          screenshotUrl={project.screenshotUrl}
+          ogImageUrl={project.ogImageUrl}
           alt={project.title}
           width={1200}
           height={675}
@@ -34,8 +27,8 @@ export default function ProjectDetail({ project }: { project: IProjectsSchema })
         />
       </div>
 
-      {project.moreDescription && (
-        <p className="project-detail-description">{project.moreDescription}</p>
+      {project.description && (
+        <p className="project-detail-description">{project.description}</p>
       )}
 
       <div className="project-detail-tech">
@@ -44,21 +37,46 @@ export default function ProjectDetail({ project }: { project: IProjectsSchema })
         ))}
       </div>
 
-      {project.hosted && (
-        <p className="project-detail-hosted">
-          <i className="bi bi-cloud" /> Hosted on <strong>{project.hosted}</strong>
-        </p>
-      )}
-
       <div className="project-detail-actions">
-        {project.gitRepository && (
-          <Link href={gitUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary">
+        {project.backendRepository ? (
+          <>
+            <Link
+              href={project.gitRepository}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              <i className="bi bi-github" /> Frontend
+            </Link>
+            <Link
+              href={project.backendRepository}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-secondary"
+            >
+              <i className="bi bi-github" /> Backend
+            </Link>
+          </>
+        ) : (
+          <Link
+            href={project.gitRepository}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+          >
             <i className="bi bi-github" /> GitHub
           </Link>
         )}
-        <Link href={liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary">
-          <i className="bi bi-box-arrow-up-right" /> Live site
-        </Link>
+        {project.link && (
+          <Link
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary"
+          >
+            <i className="bi bi-box-arrow-up-right" /> Live site
+          </Link>
+        )}
       </div>
     </article>
   );

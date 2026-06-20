@@ -84,3 +84,17 @@ export interface IProjectsSchema {
   moreDescription: string;
 }
 
+export interface IGithubProject {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  link: string;
+  gitRepository: string;
+  backendRepository?: string;  // prezent când repo-ul are pereche -api/-backend/-server
+  languagesUsed: string[];     // limbaje frontend + backend combinate
+  screenshotUrl: string;
+  ogImageUrl: string;
+  updatedAt: string;
+}
+

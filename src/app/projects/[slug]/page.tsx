@@ -1,21 +1,37 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import getProject from "@/_lib/projects/getProject";
+import {
+  getGithubProject,
+  getGithubProjects,
+} from "@/_lib/github/getGithubProjects";
 import ProjectDetail from "@/features/projects/ProjectDetail";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600;
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const data = await getProject(params.slug);
-  if (!data?.project) return { title: "Project — Alexandru Roventa" };
+export async function generateStaticParams() {
+  const projects = await getGithubProjects();
+  return projects.map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const project = await getGithubProject(params.slug);
+  if (!project) return { title: "Project — Alexandru Roventa" };
   return {
-    title: `${data.project.title} — Alexandru Roventa`,
-    description: data.project.moreDescription || `Project: ${data.project.title}`,
+    title: `${project.title} — Alexandru Roventa`,
+    description: project.description || `Project: ${project.title}`,
   };
 }
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const data = await getProject(params.slug);
-  if (!data?.project) notFound();
-  return <ProjectDetail project={data.project} />;
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const project = await getGithubProject(params.slug);
+  if (!project) notFound();
+  return <ProjectDetail project={project} />;
 }

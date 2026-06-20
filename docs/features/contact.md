@@ -1,0 +1,69 @@
+# Contact
+
+## PRD
+
+Formular de contact accesibil din orice pagină, care trimite email direct via Resend.
+
+- Câmpuri: email + mesaj (textarea)
+- Feedback vizual clar după trimitere: toast succes sau eroare
+- Loading state pe butonul submit în timpul trimiterii
+- Protecție anti-spam: rate limiting + honeypot
+- Accesibil ca modal pe desktop via intercept route `/contact/me`
+- Validare input: format email, lungime minimă mesaj
+
+---
+
+## Tech Spec
+
+### Fișiere
+
+```
+src/features/contact/
+├── ContactForm.tsx             # Formular principal — "use client"
+├── ButtonForm.tsx              # Buton submit cu loading state
+├── EmailTemplate.tsx           # Template HTML email (Resend)
+└── contact.scss
+
+src/app/contact/
+├── page.tsx                    # Pagina /contact
+└── me/page.tsx                 # Target pentru intercept route
+
+src/app/@modal/(.)contact/me/page.tsx   # Modal intercept
+src/app/default.tsx                     # Fallback slot @modal
+
+src/app/api/send/route.ts       # POST /api/send → Resend
+src/_lib/send.tsx               # Server Action apelat din ContactForm
+```
+
+### Cum funcționează
+
+1. `ContactForm` (Client Component) gestionează state: email, mesaj, loading, eroare
+2. Submit → Server Action `sendEmail()` → POST `/api/send` → Resend API
+3. Response: toast succes (`react-hot-toast`) sau toast eroare cu mesajul primit
+4. Pe `/contact/me` → intercept route → modal pe desktop; acces direct → pagina full
+
+### Anti-spam
+
+```typescript
+// rate limiting: 1 email per IP per 10 minute
+// honeypot: câmp hidden "website" — dacă e completat, request ignorat silențios
+```
+
+### Variabile de mediu
+
+```
+RESEND_API_KEY              # API key Resend
+CONTACT_EMAIL               # email destinatar (nu hardcodat în componentă)
+```
+
+---
+
+## TODO
+
+- [ ] Toast feedback după trimitere: succes / eroare (`react-hot-toast`)
+- [ ] Loading state pe butonul submit (`isLoading` state, buton disabled în timpul trimiterii)
+- [ ] Rate limiting pe `/api/send` (1 email per IP per 10 minute)
+- [ ] Honeypot field anti-spam (câmp hidden ignorat la spam bots)
+- [ ] Email destinatar din env var (`process.env.CONTACT_EMAIL`), nu hardcodat
+- [ ] Validare robustă: lungime minimă textarea (min 10 caractere), sanitizare input
+- [ ] Fix: `isActive` state setat din formData dar niciodată folosit — șterge sau folosește

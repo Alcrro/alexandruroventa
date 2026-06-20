@@ -23,9 +23,21 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
-       {
+      {
         protocol: "https",
         hostname: "ti-user-certificates.s3.amazonaws.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "opengraph.githubassets.com",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
         port: "",
         pathname: "/**",
       },

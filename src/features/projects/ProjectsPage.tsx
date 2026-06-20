@@ -1,10 +1,9 @@
-import getProjects from "@/_lib/projects/getProjects";
+import { getGithubProjects } from "@/_lib/github/getGithubProjects";
 import ProjectsGrid from "./ProjectsGrid";
 import "./projects.scss";
 
 export default async function ProjectsPage() {
-  const data = await getProjects();
-  const projects = data?.projects ?? [];
+  const projects = await getGithubProjects();
 
   return (
     <section className="projects-section">
