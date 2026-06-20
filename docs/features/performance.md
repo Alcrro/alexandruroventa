@@ -90,11 +90,10 @@ Server Component citește `searchParams` → construiește query MongoDB → ret
 
 ## TODO
 
-- [ ] Filtrare cu query params (înlocuiește URL segments `[...filter]` + parsare manuală fragilă)
-- [ ] Înlocuiește Chakra UI cu wrapper simplu pentru Monaco Editor
-- [ ] Autentificare pentru adăugare conținut (înlocuiește lipsa de protecție actuală)
-- [ ] Sistem rating funcțional cu salvare în DB (`RatingEditor`, `RatingModal`)
-- [ ] Rename intern: `languageSkill` → `knowledgeEntry` pentru consistență cu URL-ul `/performance`
-- [ ] Șterge `LanguageContent.ts` (model aparent nefolosit)
-- [ ] UI tabel responsive — mai curat, fără structuri nested complexe
-- [ ] Cleanup: elimină `algorithmParamsAPI.ts`, `slugAlgorithm.ts` (înlocuite de query params)
+- [x] Filtrare cu query params — `?type=course&sort=desc&page=2`, filtrele se păstrează în URL
+- [x] Înlocuiește Chakra UI cu wrapper simplu pentru Monaco Editor (`MonacoEditor.tsx` fără Chakra)
+- [x] Sistem rating funcțional cu salvare în DB — `POST /api/performance/[category]/[slug]/rate`, câmpuri `ratingSum`/`ratingCount` în model, UI wire-up complet
+- [x] Rename intern: `languageSkill` → `knowledgeEntry` — modele în `models/knowledgeEntry/`, lib în `_lib/knowledgeEntry/`, tip `iKnowledgeCategoryGet`
+- [x] Șterge `LanguageContent.ts` (model nefolosit — șters)
+- [x] UI tabel responsive — media query la 600px, coloane Description și Version ascunse pe mobil
+- [x] Cleanup: `algorithmParamsAPI.ts`, `slugAlgorithm.ts`, `RatingExplanation.tsx` șterse

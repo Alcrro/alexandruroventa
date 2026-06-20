@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import PerformanceList from "@/features/performance/PerformanceList";
 
 export const dynamic = "force-dynamic";
@@ -30,5 +31,9 @@ export default async function CategoryPage({
   const entries = await getEntries(params.category);
   if (!entries) notFound();
 
-  return <PerformanceList entries={entries} category={params.category} />;
+  return (
+    <Suspense>
+      <PerformanceList entries={entries} category={params.category} />
+    </Suspense>
+  );
 }

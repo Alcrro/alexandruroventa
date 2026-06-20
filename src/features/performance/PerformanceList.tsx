@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import "./performance.scss";
@@ -35,9 +36,29 @@ export default function PerformanceList({
   entries: Entry[];
   category: string;
 }) {
-  const [typeFilter, setTypeFilter] = useState<"all" | "course" | "project">("all");
-  const [sortAsc, setSortAsc] = useState(true);
-  const [page, setPage] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const typeFilter = (searchParams.get("type") ?? "all") as "all" | "course" | "project";
+  const sortAsc = searchParams.get("sort") !== "desc";
+  const page = Math.max(1, Number(searchParams.get("page") ?? "1"));
+
+  function setParams(updates: Record<string, string | null>) {
+    const params = new URLSearchParams(searchParams.toString());
+    for (const [key, value] of Object.entries(updates)) {
+      if (value === null) {
+        params.delete(key);
+      } else {
+        params.set(key, value);
+      }
+    }
+    if (params.get("type") === "all") params.delete("type");
+    if (params.get("sort") === "asc") params.delete("sort");
+    if (params.get("page") === "1") params.delete("page");
+    const query = params.toString();
+    router.push(`${pathname}${query ? `?${query}` : ""}`, { scroll: false });
+  }
 
   const filtered = useMemo(() => {
     let list = typeFilter === "all" ? entries : entries.filter((e) => e.languageType === typeFilter);
@@ -55,11 +76,6 @@ export default function PerformanceList({
 
   const filterKey = `${typeFilter}-${sortAsc}`;
 
-  function handleFilter(next: "all" | "course" | "project") {
-    setTypeFilter(next);
-    setPage(1);
-  }
-
   return (
     <section className="perf-list-section">
       <div className="perf-list-header">
@@ -70,7 +86,7 @@ export default function PerformanceList({
               <button
                 key={t}
                 className={`perf-pill${typeFilter === t ? " active" : ""}`}
-                onClick={() => handleFilter(t)}
+                onClick={() => setParams({ type: t === "all" ? null : t, page: null })}
               >
                 {t === "all" ? "All" : t.charAt(0).toUpperCase() + t.slice(1)}
               </button>
@@ -78,7 +94,7 @@ export default function PerformanceList({
           </div>
           <button
             className="perf-sort-btn"
-            onClick={() => { setSortAsc((p) => !p); setPage(1); }}
+            onClick={() => setParams({ sort: sortAsc ? "desc" : null, page: null })}
           >
             <i className={`bi bi-sort-${sortAsc ? "up" : "down"}`} />
             {sortAsc ? "Oldest first" : "Newest first"}
@@ -133,7 +149,7 @@ export default function PerformanceList({
             <div className="perf-pagination">
               <button
                 className="perf-page-btn"
-                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                onClick={() => setParams({ page: String(Math.max(1, safePage - 1)) })}
                 disabled={safePage === 1}
               >
                 <i className="bi bi-chevron-left" />
@@ -142,14 +158,14 @@ export default function PerformanceList({
                 <button
                   key={p}
                   className={`perf-page-btn${safePage === p ? " active" : ""}`}
-                  onClick={() => setPage(p)}
+                  onClick={() => setParams({ page: String(p) })}
                 >
                   {p}
                 </button>
               ))}
               <button
                 className="perf-page-btn"
-                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                onClick={() => setParams({ page: String(Math.min(totalPages, safePage + 1)) })}
                 disabled={safePage === totalPages}
               >
                 <i className="bi bi-chevron-right" />

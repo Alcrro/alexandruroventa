@@ -3,7 +3,7 @@ interface IPerformance {
   link: string;
 }
 
-export interface iLanguageSkillGet {
+export interface iKnowledgeCategoryGet {
   success: boolean;
   message: string;
   languagesSkills: IPerformance[];
