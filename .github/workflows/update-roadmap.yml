@@ -1,0 +1,31 @@
+name: Update Roadmap
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - "docs/features/**"
+
+jobs:
+  update-roadmap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate roadmap.json
+        run: python3 scripts/generate_roadmap.py
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add roadmap.json
+          git diff --cached --quiet && echo "Nicio modificare." || (
+            git commit -m "chore: update roadmap.json [skip ci]"
+            git push
+          )
