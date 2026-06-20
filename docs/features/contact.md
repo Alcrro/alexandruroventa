@@ -60,10 +60,10 @@ CONTACT_EMAIL               # email destinatar (nu hardcodat în componentă)
 
 ## TODO
 
-- [ ] Toast feedback după trimitere: succes / eroare (`react-hot-toast`)
-- [ ] Loading state pe butonul submit (`isLoading` state, buton disabled în timpul trimiterii)
-- [ ] Rate limiting pe `/api/send` (1 email per IP per 10 minute)
-- [ ] Honeypot field anti-spam (câmp hidden ignorat la spam bots)
+- [x] Toast feedback după trimitere: succes / eroare (`react-hot-toast`)
+- [x] Loading state pe butonul submit (`isPending`, buton disabled în timpul trimiterii)
+- [x] Rate limiting pe `/api/send` (1 email per IP per 10 minute)
+- [x] Honeypot field anti-spam (câmp hidden ignorat la spam bots)
 - [ ] Email destinatar din env var (`process.env.CONTACT_EMAIL`), nu hardcodat
-- [ ] Validare robustă: lungime minimă textarea (min 10 caractere), sanitizare input
+- [x] Validare robustă: lungime minimă textarea (min 10 caractere), sanitizare input
 - [ ] Fix: `isActive` state setat din formData dar niciodată folosit — șterge sau folosește

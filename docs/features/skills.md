@@ -84,10 +84,10 @@ src/models/skills/Skills.ts
 
 ## TODO
 
-- [ ] Extinde schema MongoDB: adaugă `category`, `level`, `icon`
-- [ ] Update API route: GET + POST acceptă câmpurile noi
+- [x] Extinde schema MongoDB: adaugă `category`, `level`, `icon`
+- [x] Update API route: GET + POST acceptă câmpurile noi
 - [ ] Pagina admin `add-skill`: select pentru `category` și `level`
-- [ ] Componente noi: `SkillsPage`, `SkillCategory`, `SkillCard`
-- [ ] Badge nivel competență cu 3 variante vizuale (gri / albastru / verde)
-- [ ] Animații staggered cu `whileInView` per categorie
-- [ ] Șterge `SkillsList.tsx` (înlocuit) și `activator/route.tsx` (nefolosit)
+- [x] Componente noi: `SkillsPage`, `SkillCategory`, `SkillCard`
+- [x] Badge nivel competență cu 3 variante vizuale (gri / albastru / verde)
+- [x] Animații staggered cu `whileInView` per categorie
+- [x] Șterge `SkillsList.tsx` (înlocuit) și `activator/route.tsx` (nefolosit)
