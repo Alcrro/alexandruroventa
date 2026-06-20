@@ -1,19 +1,26 @@
 "use client";
-import React, { SetStateAction, useState } from "react";
 import "./rating.scss";
+
 export default function RatingModal({
-  modalHandler,
+  rating,
+  count,
+  onOpen,
 }: {
-  modalHandler: React.Dispatch<SetStateAction<boolean>>;
+  rating: number;
+  count: number;
+  onOpen: () => void;
 }) {
+  const pct = rating > 0 ? `${Math.round((rating / 5) * 100)}%` : "0%";
+
   return (
     <div className="rating-inner">
-      <div className="stars" onClick={() => modalHandler(true)}>
+      <div className="stars" onClick={onOpen} title="Click to rate">
         <div className="star-inner">
-          <div className={`star`} style={{ width: "33%" }}></div>
+          <div className="star" style={{ width: pct }} />
         </div>
       </div>
-      <span>2.83</span>
+      <span>{rating > 0 ? rating.toFixed(2) : "—"}</span>
+      {count > 0 && <span className="rating-count">({count})</span>}
     </div>
   );
 }

@@ -3,6 +3,10 @@ import dynamic from "next/dynamic";
 import "./performance.scss";
 
 const MonacoEditor = dynamic(() => import("./MonacoEditor"), { ssr: false });
+const RatingEditor = dynamic(
+  () => import("@/components/codEditor/rating/RatingEditor"),
+  { ssr: false }
+);
 
 interface EntryData {
   category: string;
@@ -10,6 +14,9 @@ interface EntryData {
   contentDescription: string;
   languageType: "course" | "project";
   uniqueNumberByCategory: number;
+  slug: string;
+  ratingAverage?: number;
+  ratingCount?: number;
 }
 
 interface CodeVersionData {
@@ -55,11 +62,17 @@ export default function PerformanceEntry({
               {codeVersion.versionCode}{date ? ` · ${date}` : ""}
             </span>
           )}
+          <RatingEditor
+            category={entry.category}
+            slug={entry.slug}
+            initialRating={entry.ratingAverage ?? 0}
+            initialCount={entry.ratingCount ?? 0}
+          />
         </div>
       </div>
 
       {codeVersion?.code ? (
-        <MonacoEditor code={codeVersion.code} />
+        <MonacoEditor code={codeVersion.code} category={entry.category} />
       ) : (
         <p className="perf-empty">No code attached to this entry.</p>
       )}

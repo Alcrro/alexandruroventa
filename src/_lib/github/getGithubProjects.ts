@@ -17,7 +17,9 @@ async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadma
   try {
     const res = await fetch(
       `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}/roadmap.json`,
-      { next: { revalidate: 300 } }
+      process.env.NODE_ENV === "development"
+        ? { cache: "no-store" }
+        : { next: { revalidate: 300 } }
     );
     if (!res.ok) return undefined;
     const data = await res.json();

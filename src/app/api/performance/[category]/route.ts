@@ -1,34 +1,16 @@
 import { connectDB } from "@/config/mongoDB";
-import LanguageSKillContent from "@/models/languageSkill/LanguageSkillContent";
+import KnowledgeEntry from "@/models/knowledgeEntry/KnowledgeEntry";
 import { NextRequest, NextResponse } from "next/server";
 
 connectDB();
 
 export async function GET(
-  req: NextRequest,
+  _req: NextRequest,
   { params }: { params: { category: string } }
 ) {
   try {
-    const { searchParams } = new URL(req.url);
-    const type = searchParams.get("type");
-    const sort = searchParams.get("sort") ?? "asc";
-    const sortBy = searchParams.get("sortBy") ?? "uniqueNumberByCategory";
-
-    const match: Record<string, unknown> = { category: params.category };
-    if (type && type !== "all") match.languageType = type;
-
-    const sortOrder = sort === "desc" ? -1 : 1;
-    const sortStage: Record<string, 1 | -1> = {};
-    if (sortBy === "contentTitle") {
-      sortStage.contentTitle = sortOrder;
-    } else if (sortBy === "date") {
-      sortStage["codeversions_details.dateVersion"] = sortOrder;
-    } else {
-      sortStage.uniqueNumberByCategory = sortOrder;
-    }
-
-    const entries = await LanguageSKillContent.aggregate([
-      { $match: match },
+    const entries = await KnowledgeEntry.aggregate([
+      { $match: { category: params.category } },
       {
         $lookup: {
           from: "codeversions",
@@ -58,7 +40,7 @@ export async function GET(
           },
         },
       },
-      { $sort: sortStage },
+      { $sort: { uniqueNumberByCategory: 1 } },
     ]);
 
     return NextResponse.json({ success: true, entries });

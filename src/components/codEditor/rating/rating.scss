@@ -26,6 +26,15 @@
     // z-index: 1;
     overflow: hidden;
   }
+  .stars {
+    cursor: pointer;
+  }
+
+  .rating-count {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
   .star-inner::before {
     position: relative;
     content: "\F586\F586\F586\F586\F586";
