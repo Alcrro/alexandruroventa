@@ -13,10 +13,10 @@ const headers: HeadersInit = {
   }),
 };
 
-async function getRepoRoadmap(repoName: string): Promise<IRoadmapFeature[] | undefined> {
+async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadmapFeature[] | undefined> {
   try {
     const res = await fetch(
-      `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/main/roadmap.json`,
+      `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}/roadmap.json`,
       { next: { revalidate: 300 } }
     );
     if (!res.ok) return undefined;
@@ -56,8 +56,9 @@ function mapRepo(
   mainLangs: string[],
   backendRepo: any | null,
   backendLangs: string[],
-  roadmap?: IRoadmapFeature[]
+  roadmap?: IRoadmapFeature[],
 ): IGithubProject {
+  const branch: string = repo.default_branch ?? "main";
   const topics = repo.topics as string[];
   const nonPortfolioTopics = topics.filter(
     (t) => t !== PORTFOLIO_TOPIC && t !== WIP_TOPIC
@@ -83,7 +84,7 @@ function mapRepo(
     gitRepository: repo.html_url,
     ...(backendRepo && { backendRepository: backendRepo.html_url }),
     languagesUsed: combinedLangs,
-    screenshotUrl: `https://raw.githubusercontent.com/${GITHUB_USER}/${repo.name}/main/preview.png`,
+    screenshotUrl: `https://raw.githubusercontent.com/${GITHUB_USER}/${repo.name}/${branch}/preview.png`,
     ogImageUrl: `https://opengraph.githubassets.com/1/${GITHUB_USER}/${repo.name}`,
     status: getRepoStatus(topics),
     updatedAt: repo.updated_at,
@@ -136,7 +137,7 @@ export async function getGithubProjects(): Promise<IGithubProject[]> {
       const [mainLangs, backendLangs, roadmap] = await Promise.all([
         getRepoLanguages(repo.name),
         backendRepo ? getRepoLanguages(backendRepo.name) : Promise.resolve([]),
-        getRepoRoadmap(repo.name),
+        getRepoRoadmap(repo.name, repo.default_branch ?? "main"),
       ]);
       return mapRepo(repo, mainLangs, backendRepo, backendLangs, roadmap);
     })
@@ -166,14 +167,13 @@ export async function getGithubProject(
   );
   const backendRepo = backendCandidates.find(Boolean) ?? null;
 
-  const [repoRes, mainLangs, backendLangs, roadmap] = await Promise.all([
+  const [repoRes, mainLangs, backendLangs] = await Promise.all([
     fetch(`https://api.github.com/repos/${GITHUB_USER}/${slug}`, {
       headers,
       next: { revalidate: 300 },
     }),
     getRepoLanguages(slug),
     backendRepo ? getRepoLanguages(backendRepo.name) : Promise.resolve([]),
-    getRepoRoadmap(slug),
   ]);
 
   if (!repoRes.ok) return null;
@@ -183,6 +183,8 @@ export async function getGithubProject(
     !repo.topics?.includes(WIP_TOPIC)
   )
     return null;
+
+  const roadmap = await getRepoRoadmap(slug, repo.default_branch ?? "main");
 
   return mapRepo(repo, mainLangs, backendRepo, backendLangs, roadmap);
 }
