@@ -243,4 +243,4 @@ GITHUB_TOKEN    # opțional — rate limit 60 → 5000 req/oră (recomandat în 
 - [ ] Adaugă `preview.png` în rădăcina repo-urilor pentru screenshot custom
 - [ ] Adaugă `roadmap.json` în repo-urile care au features de afișat
 - [ ] Adaugă `GITHUB_TOKEN` în env vars Amplify (recomandat pentru producție)
-- [ ] Șterge `src/app/api/projects/` și `src/models/projects/` (înlocuite, neutilizate)
+- [x] Șterge `src/app/api/projects/`, `src/models/projects/`, `src/_lib/projects/` (înlocuite, neutilizate)
