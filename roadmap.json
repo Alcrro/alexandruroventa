@@ -1,7 +1,7 @@
 [
   {
     "name": "About",
-    "status": "todo"
+    "status": "not-started"
   },
   {
     "name": "Certificates",
@@ -21,11 +21,11 @@
   },
   {
     "name": "Performance",
-    "status": "todo"
+    "status": "not-started"
   },
   {
     "name": "Projects",
-    "status": "todo"
+    "status": "not-started"
   },
   {
     "name": "Skills",
