@@ -43,7 +43,7 @@ for md_file in sorted(docs_dir.glob("*.md")):
         if total == 0 or pending_count == 0:
             status = "done"
         elif done_count == 0:
-            status = "todo"
+            status = "not-started"
         else:
             status = "in-progress"
 
