@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { IProjectsSchema } from "@/types";
+import { IGithubProject } from "@/types";
 import ProjectCard from "./ProjectCard";
 
 const container = {
@@ -14,7 +14,7 @@ const card = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
 };
 
-export default function ProjectsGrid({ projects }: { projects: IProjectsSchema[] }) {
+export default function ProjectsGrid({ projects }: { projects: IGithubProject[] }) {
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
 
   const allTechs = Array.from(new Set(projects.flatMap((p) => p.languagesUsed))).sort();
@@ -56,7 +56,7 @@ export default function ProjectsGrid({ projects }: { projects: IProjectsSchema[]
           className="projects-grid"
         >
           {filtered.map((project) => (
-            <motion.div key={project._id} variants={card}>
+            <motion.div key={project.id} variants={card}>
               <ProjectCard project={project} />
             </motion.div>
           ))}
