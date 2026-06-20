@@ -20,6 +20,7 @@ Testele vizează exclusiv `src/components/` (UI generic reutilizabil). Feature-u
 MONGO_URI          # MongoDB connection string
 NEXTAUTH_URL       # URL-ul public al aplicației (ex: https://alexandru-roventa.ro)
 RESEND_API_KEY     # API key Resend pentru email
+CONTACT_EMAIL      # email destinatar pentru formular (fallback: alexandru@alexandru-roventa.ro)
 ```
 
 Fișierul `.env.local` nu există în repo — se generează la build (vezi `amplify.yml`).

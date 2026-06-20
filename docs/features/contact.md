@@ -53,7 +53,7 @@ src/_lib/send.tsx               # Server Action apelat din ContactForm
 
 ```
 RESEND_API_KEY              # API key Resend
-CONTACT_EMAIL               # email destinatar (nu hardcodat în componentă)
+CONTACT_EMAIL               # email destinatar (fallback: alexandru@alexandru-roventa.ro)
 ```
 
 ---
@@ -64,6 +64,6 @@ CONTACT_EMAIL               # email destinatar (nu hardcodat în componentă)
 - [x] Loading state pe butonul submit (`isPending`, buton disabled în timpul trimiterii)
 - [x] Rate limiting pe `/api/send` (1 email per IP per 10 minute)
 - [x] Honeypot field anti-spam (câmp hidden ignorat la spam bots)
-- [ ] Email destinatar din env var (`process.env.CONTACT_EMAIL`), nu hardcodat
+- [x] Email destinatar din env var (`process.env.CONTACT_EMAIL`), nu hardcodat
 - [x] Validare robustă: lungime minimă textarea (min 10 caractere), sanitizare input
-- [ ] Fix: `isActive` state setat din formData dar niciodată folosit — șterge sau folosește
+- [x] Fix: `isActive` state setat din formData dar niciodată folosit — șters
