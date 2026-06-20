@@ -1,0 +1,10 @@
+[
+  { "name": "Home", "status": "done" },
+  { "name": "About", "status": "in-progress" },
+  { "name": "Skills", "status": "in-progress" },
+  { "name": "Projects", "status": "done" },
+  { "name": "Certificates", "status": "in-progress" },
+  { "name": "Experience", "status": "in-progress" },
+  { "name": "Performance", "status": "in-progress" },
+  { "name": "Contact", "status": "in-progress" }
+]

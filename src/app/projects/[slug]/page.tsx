@@ -6,7 +6,7 @@ import {
 } from "@/_lib/github/getGithubProjects";
 import ProjectDetail from "@/features/projects/ProjectDetail";
 
-export const revalidate = 3600;
+export const revalidate = 300;
 
 export async function generateStaticParams() {
   const projects = await getGithubProjects();

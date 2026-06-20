@@ -84,6 +84,13 @@ export interface IProjectsSchema {
   moreDescription: string;
 }
 
+export type RoadmapStatus = "done" | "in-progress" | "not-started";
+
+export interface IRoadmapFeature {
+  name: string;
+  status: RoadmapStatus;
+}
+
 export interface IGithubProject {
   id: number;
   title: string;
@@ -91,10 +98,12 @@ export interface IGithubProject {
   description: string;
   link: string;
   gitRepository: string;
-  backendRepository?: string;  // prezent când repo-ul are pereche -api/-backend/-server
-  languagesUsed: string[];     // limbaje frontend + backend combinate
+  backendRepository?: string;
+  languagesUsed: string[];
   screenshotUrl: string;
   ogImageUrl: string;
+  status: "live" | "wip";
   updatedAt: string;
+  roadmap?: IRoadmapFeature[];
 }
 
