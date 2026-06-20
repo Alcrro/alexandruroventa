@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { IGithubProject, IRoadmapFeature } from "@/types";
 
 const GITHUB_USER = "Alcrro";
@@ -16,6 +18,18 @@ const headers: HeadersInit = {
 };
 
 async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadmapFeature[] | undefined> {
+  // For the portfolio repo itself, read directly from filesystem to bypass GitHub CDN cache
+  if (repoName === "alexandruroventa") {
+    try {
+      const content = fs.readFileSync(path.join(process.cwd(), "roadmap.json"), "utf-8");
+      const data = JSON.parse(content);
+      if (!Array.isArray(data)) return undefined;
+      return data as IRoadmapFeature[];
+    } catch {
+      return undefined;
+    }
+  }
+
   try {
     const res = await fetch(
       `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}/roadmap.json`,
