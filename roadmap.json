@@ -1,10 +1,34 @@
 [
-  { "name": "Home", "status": "done" },
-  { "name": "About", "status": "in-progress" },
-  { "name": "Skills", "status": "in-progress" },
-  { "name": "Projects", "status": "done" },
-  { "name": "Certificates", "status": "in-progress" },
-  { "name": "Experience", "status": "in-progress" },
-  { "name": "Performance", "status": "in-progress" },
-  { "name": "Contact", "status": "in-progress" }
+  {
+    "name": "About",
+    "status": "todo"
+  },
+  {
+    "name": "Certificates",
+    "status": "todo"
+  },
+  {
+    "name": "Contact",
+    "status": "todo"
+  },
+  {
+    "name": "Experience",
+    "status": "todo"
+  },
+  {
+    "name": "Home",
+    "status": "todo"
+  },
+  {
+    "name": "Performance",
+    "status": "todo"
+  },
+  {
+    "name": "Projects",
+    "status": "todo"
+  },
+  {
+    "name": "Skills",
+    "status": "todo"
+  }
 ]
