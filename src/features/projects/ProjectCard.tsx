@@ -4,8 +4,10 @@ import TechBadge from "./TechBadge";
 import ProjectImage from "./ProjectImage";
 
 export default function ProjectCard({ project }: { project: IGithubProject }) {
+  const isWip = project.status === "wip";
+
   return (
-    <div className="project-card">
+    <div className={`project-card${isWip ? " project-card--wip" : ""}`}>
       <Link href={`/projects/${project.slug}`} className="project-thumb">
         <ProjectImage
           screenshotUrl={project.screenshotUrl}
@@ -13,8 +15,11 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
           alt={project.title}
           width={600}
           height={340}
-          className="project-thumb-img"
+          className={`project-thumb-img${isWip ? " project-thumb-img--wip" : ""}`}
         />
+        {isWip && (
+          <span className="project-wip-badge">In Progress</span>
+        )}
       </Link>
 
       <div className="project-card-body">
@@ -22,7 +27,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
           <h2 className="project-card-title">
             <Link href={`/projects/${project.slug}`}>{project.title}</Link>
           </h2>
-          {project.link && (
+          {!isWip && project.link && (
             <Link
               href={project.link}
               target="_blank"
@@ -75,7 +80,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
               <i className="bi bi-github" /> GitHub
             </Link>
           )}
-          {project.link && (
+          {!isWip && project.link && (
             <Link
               href={project.link}
               target="_blank"
