@@ -77,10 +77,10 @@ const itemVariants = {
 
 ## TODO
 
-- [ ] `AboutPage.tsx` și componente secundare în `src/features/about/`
-- [ ] Secțiunea Intro: text scurt 2-3 propoziții
-- [ ] Secțiunea Educație: tabel cu instituții + perioade
-- [ ] Secțiunea Experiență scurtă: ani totali + domenii + CTA link `/experience`
-- [ ] Secțiunea Tehnologii: grid cu stack principal (hardcodat, fără nivele)
-- [ ] Metadata SEO proprie în `src/app/about/page.tsx`
-- [ ] Framer Motion `whileInView` per secțiune + stagger pe grid tehnologii
+- [x] `AboutPage.tsx` și componente secundare în `src/features/about/`
+- [x] Secțiunea Intro: text scurt 2-3 propoziții
+- [x] Secțiunea Educație: tabel cu instituții + perioade
+- [x] Secțiunea Experiență scurtă: ani totali + domenii + CTA link `/experience`
+- [x] Secțiunea Tehnologii: grid cu stack principal (hardcodat, fără nivele)
+- [x] Metadata SEO proprie în `src/app/about/page.tsx`
+- [x] Framer Motion `whileInView` per secțiune + stagger pe grid tehnologii

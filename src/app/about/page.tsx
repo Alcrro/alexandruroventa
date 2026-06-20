@@ -1,13 +1,18 @@
 export const dynamic = "force-dynamic";
 
 import { Metadata } from "next/types";
-import React from "react";
+import AboutPage from "@/features/about/AboutPage";
 
 export const metadata: Metadata = {
-  title: "Alexandru Roventa - About me",
-  description: "Home",
+  title: "About — Alexandru Roventa",
+  description: "Full Stack Developer cu experiență în Next.js, React, MongoDB și TypeScript.",
+  openGraph: {
+    title: "About — Alexandru Roventa",
+    url: "https://alexandru-roventa.ro/about",
+    type: "profile",
+  },
 };
 
 export default function page() {
-  return <div className="about"></div>;
+  return <AboutPage />;
 }
