@@ -333,8 +333,8 @@
   &--not-started {
     color: var(--text-muted);
     .project-roadmap-icon {
-      background: var(--bg-elevated);
-      border: 1.5px solid var(--border);
+      background: transparent;
+      border: 1.5px solid var(--text-muted);
     }
   }
 }
