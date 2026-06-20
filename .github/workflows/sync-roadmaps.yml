@@ -18,7 +18,7 @@ jobs:
           set -e
 
           REPOS=$(gh api "user/repos" --paginate \
-            --jq '.[] | select((.topics // []) | contains(["portfolio"])) | .full_name')
+            --jq '.[] | select((.topics // []) | (contains(["portfolio"]) or contains(["portfolio-wip"]))) | .full_name')
 
           if [ -z "$REPOS" ]; then
             echo "No repos found with topic 'portfolio'."
