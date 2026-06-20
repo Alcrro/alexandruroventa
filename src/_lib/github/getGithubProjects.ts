@@ -5,6 +5,8 @@ const PORTFOLIO_TOPIC = "portfolio";
 const WIP_TOPIC = "portfolio-wip";
 const BACKEND_SUFFIXES = ["-api", "-backend", "-server", "-be"] as const;
 
+const devCache = process.env.NODE_ENV === "development" ? { cache: "no-store" as const } : { next: { revalidate: 300 } };
+
 const headers: HeadersInit = {
   Accept: "application/vnd.github+json",
   "X-GitHub-Api-Version": "2022-11-28",
@@ -17,9 +19,7 @@ async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadma
   try {
     const res = await fetch(
       `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}/roadmap.json`,
-      process.env.NODE_ENV === "development"
-        ? { cache: "no-store" }
-        : { next: { revalidate: 300 } }
+      devCache
     );
     if (!res.ok) return undefined;
     const data = await res.json();
@@ -34,7 +34,7 @@ async function getRepoLanguages(repoName: string): Promise<string[]> {
   try {
     const res = await fetch(
       `https://api.github.com/repos/${GITHUB_USER}/${repoName}/languages`,
-      { headers, next: { revalidate: 300 } }
+      { headers, ...devCache }
     );
     if (!res.ok) return [];
     const langs: Record<string, number> = await res.json();
@@ -120,7 +120,7 @@ function buildProjects(portfolioRepos: any[]) {
 export async function getGithubProjects(): Promise<IGithubProject[]> {
   const res = await fetch(
     `https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&sort=updated`,
-    { headers, next: { revalidate: 300 } }
+    { headers, ...devCache }
   );
   if (!res.ok) return [];
 
@@ -154,7 +154,7 @@ export async function getGithubProject(
       try {
         const res = await fetch(
           `https://api.github.com/repos/${GITHUB_USER}/${slug}${suffix}`,
-          { headers, next: { revalidate: 300 } }
+          { headers, ...devCache }
         );
         if (!res.ok) return null;
         const r = await res.json();
@@ -172,7 +172,7 @@ export async function getGithubProject(
   const [repoRes, mainLangs, backendLangs] = await Promise.all([
     fetch(`https://api.github.com/repos/${GITHUB_USER}/${slug}`, {
       headers,
-      next: { revalidate: 300 },
+      ...devCache,
     }),
     getRepoLanguages(slug),
     backendRepo ? getRepoLanguages(backendRepo.name) : Promise.resolve([]),
