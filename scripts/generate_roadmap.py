@@ -2,33 +2,28 @@
 """
 Generates roadmap.json from docs/features/*.md.
 
+Usage: python3 generate_roadmap.py [repo_path]
+  repo_path — root of the target repo (default: current directory)
+
 Status logic:
   - "done"        — all TODO items checked, or no TODO section
   - "in-progress" — at least one unchecked item
-  - "todo"        — no checked items at all
+  - "not-started" — no checked items
 """
 
 import json
 import re
+import sys
 from pathlib import Path
 
-NAME_MAP = {
-    "home": "Home",
-    "about": "About",
-    "skills": "Skills",
-    "projects": "Projects",
-    "certificates": "Certificates",
-    "experience": "Experience",
-    "performance": "Performance",
-    "contact": "Contact",
-}
-
-docs_dir = Path("docs/features")
+root = Path(sys.argv[1]) if len(sys.argv) > 1 else Path(".")
+docs_dir = root / "docs/features"
 roadmap = []
 
 for md_file in sorted(docs_dir.glob("*.md")):
-    name = NAME_MAP.get(md_file.stem, md_file.stem.capitalize())
     content = md_file.read_text(encoding="utf-8")
+    h1 = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
+    name = h1.group(1).strip() if h1 else md_file.stem.replace("-", " ").replace("_", " ").title()
 
     todo_match = re.search(r"## TODO\s*(.*?)(?=\n## |\Z)", content, re.DOTALL)
 
@@ -49,7 +44,7 @@ for md_file in sorted(docs_dir.glob("*.md")):
 
     roadmap.append({"name": name, "status": status})
 
-output = Path("roadmap.json")
+output = root / "roadmap.json"
 output.write_text(json.dumps(roadmap, indent=2, ensure_ascii=False) + "\n")
 print(f"Roadmap generat: {len(roadmap)} feature-uri")
 for item in roadmap:

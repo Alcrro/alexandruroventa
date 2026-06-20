@@ -1,0 +1,54 @@
+name: Sync Portfolio Roadmaps
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync roadmap.json for all repos with topic "portfolio"
+        env:
+          GH_TOKEN: ${{ secrets.PORTFOLIO_PAT }}
+        run: |
+          set -e
+
+          REPOS=$(gh api "user/repos" --paginate \
+            --jq '.[] | select((.topics // []) | contains(["portfolio"])) | .full_name')
+
+          if [ -z "$REPOS" ]; then
+            echo "No repos found with topic 'portfolio'."
+            exit 0
+          fi
+
+          for REPO in $REPOS; do
+            echo "=== $REPO ==="
+            REPO_NAME=$(echo "$REPO" | cut -d'/' -f2)
+            TARGET="/tmp/${REPO_NAME}"
+
+            git clone --depth=1 \
+              "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git" \
+              "$TARGET"
+
+            if [ ! -d "${TARGET}/docs/features" ]; then
+              echo "Skipping: no docs/features/"
+              rm -rf "$TARGET"
+              continue
+            fi
+
+            python3 scripts/generate_roadmap.py "$TARGET"
+
+            git -C "$TARGET" config user.name "github-actions[bot]"
+            git -C "$TARGET" config user.email "github-actions[bot]@users.noreply.github.com"
+            git -C "$TARGET" add roadmap.json
+            git -C "$TARGET" diff --cached --quiet \
+              && echo "No changes." \
+              || (git -C "$TARGET" commit -m "chore: update roadmap.json [skip ci]" \
+                  && git -C "$TARGET" push)
+
+            rm -rf "$TARGET"
+          done
