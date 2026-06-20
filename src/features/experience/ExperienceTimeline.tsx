@@ -1,5 +1,6 @@
 import getExperience from "@/_lib/experience/getExperience";
 import ExperienceContainer from "./ExperienceContainer";
+import ExperienceHeader from "./ExperienceHeader";
 import "./experience.scss";
 
 export default async function ExperienceTimeline() {
@@ -12,7 +13,7 @@ export default async function ExperienceTimeline() {
 
   return (
     <section className="experience-section">
-      <h1 className="experience-title">Experience</h1>
+      <ExperienceHeader experiences={sorted} />
       <ExperienceContainer items={sorted} />
     </section>
   );

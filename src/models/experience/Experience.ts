@@ -8,6 +8,7 @@ const experienceSchema = new mongoose.Schema<iExperience>({
   endYear: { type: Date },
   isEnded: { type: Boolean },
   className: { type: String },
+  companyLogo: { type: String, default: null },
   titleDescription: { type: String },
   descriptionMore: { type: String },
 });

@@ -10,16 +10,35 @@ export async function GET(req: NextRequest) {
     const org = searchParams.get("org");
     const lang = searchParams.get("lang");
     const order = searchParams.get("order") === "asc" ? 1 : -1;
+    const page = Math.max(1, Number(searchParams.get("page")) || 1);
+    const documentsPerPage = Math.max(1, Number(searchParams.get("documentsPerPage")) || 12);
 
-    const match: any = {};
+    const match: Record<string, unknown> = {};
     if (org) match.organization = { $regex: org, $options: "i" };
     if (lang) match.languageLearnt = { $regex: lang, $options: "i" };
 
-    const certificates = await Certificates.find(match)
-      .sort({ date: order })
-      .lean();
+    const [data, totalDocuments, orgs, langs] = await Promise.all([
+      Certificates.find(match)
+        .sort({ date: order })
+        .skip((page - 1) * documentsPerPage)
+        .limit(documentsPerPage)
+        .lean(),
+      Certificates.countDocuments(match),
+      Certificates.distinct("organization"),
+      Certificates.distinct("languageLearnt"),
+    ]);
 
-    return NextResponse.json({ success: true, certificates }, { status: 200 });
+    return NextResponse.json(
+      {
+        data,
+        totalDocuments,
+        page,
+        documentsPerPage,
+        orgs: (orgs as string[]).filter(Boolean).sort(),
+        langs: (langs as string[]).filter(Boolean).sort(),
+      },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ error }, { status: 400 });
   }

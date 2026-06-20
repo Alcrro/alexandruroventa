@@ -86,7 +86,7 @@ src/models/skills/Skills.ts
 
 - [x] Extinde schema MongoDB: adaugă `category`, `level`, `icon`
 - [x] Update API route: GET + POST acceptă câmpurile noi
-- [ ] Pagina admin `add-skill`: select pentru `category` și `level`
+- [x] Pagina admin `add-skill`: select pentru `category` și `level`
 - [x] Componente noi: `SkillsPage`, `SkillCategory`, `SkillCard`
 - [x] Badge nivel competență cu 3 variante vizuale (gri / albastru / verde)
 - [x] Animații staggered cu `whileInView` per categorie

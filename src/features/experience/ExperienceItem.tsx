@@ -48,7 +48,11 @@ export default function ExperienceItem({
       transition={{ duration: 0.5, delay: index * 0.18, ease: "easeOut" }}
     >
       <div className="exp-dot">
-        <i className={`bi ${icon}`} />
+        {item.companyLogo ? (
+          <img src={item.companyLogo} alt={item.titleDescription} className="exp-logo-img" />
+        ) : (
+          <i className={`bi ${icon}`} />
+        )}
       </div>
 
       <div className="exp-body">

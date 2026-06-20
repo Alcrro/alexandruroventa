@@ -25,6 +25,7 @@ export interface iExperience {
   endYear: Date | null;
   isEnded: boolean;
   className: string;
+  companyLogo?: string;
   titleDescription: string;
   descriptionMore: string;
 }
@@ -36,6 +37,15 @@ export interface iCertificate {
   date: Date;
   src: string;
   slug: string;
+}
+
+export interface CertificatesResponse {
+  data: iCertificate[];
+  totalDocuments: number;
+  page: number;
+  documentsPerPage: number;
+  orgs: string[];
+  langs: string[];
 }
 export interface iDocument {
   category: string;

@@ -113,14 +113,14 @@ export default function Loading() {
 
 ## TODO
 
-- [ ] Filtrare cu query params — înlocuiește client-side `useState` din `CertificatesGrid`
+- [x] Filtrare cu query params — înlocuiește client-side `useState` din `CertificatesGrid`
 - [x] Șterge `layout.tsx` cu slot `@filter` (nu mai e necesar)
 - [x] Înlocuiește API route `[...filters]/` cu endpoint unic `/api/certificates` + query params
-- [ ] `CertificatesFilter.tsx` — Client Component separat cu `useRouter + useSearchParams`
-- [ ] Afișare număr total certificate în header
+- [x] `CertificatesFilter.tsx` — Client Component separat cu `useRouter + useSearchParams`
+- [x] Afișare număr total certificate în header
 - [x] `loading.tsx` cu skeleton cards (animație CSS pulse)
 - [x] `placeholder="blur"` + `blurDataURL` static pe imaginile certificatelor
 - [x] Fix `alt` text: `"${organization} — ${languageLearnt}"` în loc de `"certificate"`
-- [ ] Fix anti-pattern `flatMap` cu `&` bitwise — extracție directă din response structurat
-- [ ] Return type explicit pe `getCertificates.ts` (elimină `any`)
+- [x] Fix anti-pattern `flatMap` cu `&` bitwise — extracție directă din response structurat
+- [x] Return type explicit pe `getCertificates.ts` (elimină `any`)
 - [x] Șterge: `Search.tsx`, componentele `order/` (5 fișiere), `[...filters]/route.ts`

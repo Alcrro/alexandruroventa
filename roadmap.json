@@ -5,7 +5,7 @@
   },
   {
     "name": "Certificates",
-    "status": "in-progress"
+    "status": "done"
   },
   {
     "name": "Contact",
@@ -13,7 +13,7 @@
   },
   {
     "name": "Experience",
-    "status": "in-progress"
+    "status": "done"
   },
   {
     "name": "Home",
@@ -29,6 +29,6 @@
   },
   {
     "name": "Skills",
-    "status": "in-progress"
+    "status": "done"
   }
 ]

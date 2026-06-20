@@ -4,11 +4,21 @@
   padding: 4rem 1rem;
 }
 
+.exp-page-header {
+  margin-bottom: 3rem;
+}
+
 .experience-title {
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
   color: var(--text-primary);
-  margin: 0 0 3rem;
+  margin: 0 0 0.4rem;
+}
+
+.exp-total-years {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+  margin: 0;
 }
 
 /* ─── Timeline ───────────────────────────────────────────────── */
@@ -110,6 +120,165 @@
     }
   }
 }
+
+/* ─── Company logo ───────────────────────────────────────────── */
+
+.exp-logo-img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  border-radius: 2px;
+}
+
+/* ─── Admin panel ────────────────────────────────────────────── */
+
+.exp-admin {
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 4rem 1rem;
+}
+
+.exp-admin-unlock {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.exp-admin-section {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 2rem;
+}
+
+.exp-admin-subtitle {
+  font-size: var(--text-lg);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+  margin: 0 0 1.25rem;
+}
+
+.exp-admin-msg {
+  padding: 0.75rem 1rem;
+  background: var(--bg-elevated);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  margin-bottom: 1.5rem;
+}
+
+.exp-admin-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exp-admin-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.exp-admin-label {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+
+  &--inline {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+  }
+}
+
+.exp-admin-input {
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+}
+
+.exp-admin-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.exp-admin-btn {
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  cursor: pointer;
+  align-self: flex-start;
+  transition: opacity var(--transition-fast);
+
+  &:hover { opacity: 0.85; }
+  &--sm { padding: 0.3rem 0.6rem; font-size: 0.75rem; }
+  &--danger { background: #dc2626; }
+}
+
+.exp-admin-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.exp-admin-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.exp-admin-item-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-elevated);
+  flex-wrap: wrap;
+}
+
+.exp-admin-item-title {
+  flex: 1;
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-primary);
+}
+
+.exp-admin-item-dates {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.exp-admin-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.exp-admin-edit-form {
+  padding: 1rem;
+}
+
+.exp-admin-empty {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+/* ─── Toggle ─────────────────────────────────────────────────── */
 
 .exp-toggle {
   display: inline-flex;

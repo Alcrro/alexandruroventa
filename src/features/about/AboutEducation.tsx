@@ -5,13 +5,13 @@ const education = [
   {
     institution: "Faculty of Automation and Applied Informatics",
     field: "Automation and Applied Informatics",
-    period: "2013 – 2017",
+    period: "2014 – 2018",
     note: "Studied C++ and Oracle; did not graduate",
   },
   {
     institution: "High School of Electrotechnics and Electronics",
     field: "Electronics and Electrotechnics",
-    period: "2009 – 2013",
+    period: "2010 – 2014",
   },
   {
     institution: "Full Stack Web Development Bootcamp",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ExperienceTimeline from "@/features/experience/ExperienceTimeline";
 
 export const dynamic = "force-dynamic";
 
@@ -8,5 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function ExperiencePage() {
-  return null;
+  return <ExperienceTimeline />;
 }

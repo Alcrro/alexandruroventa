@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   description: "Professional certificates in web development, React, TypeScript and more.",
 };
 
-export default function CertificatesRoute() {
-  return <CertificatesPage />;
+interface Props {
+  searchParams: {
+    org?: string;
+    lang?: string;
+    order?: string;
+    page?: string;
+  };
+}
+
+export default function CertificatesRoute({ searchParams }: Props) {
+  return <CertificatesPage searchParams={searchParams} />;
 }

@@ -9,7 +9,7 @@ const addExperienceAction = async (formData: FormData) => {
 
   try {
     const response = await fetch(
-      "http://localhost:3000/api/experience/add-experience",
+      `${process.env.NEXTAUTH_URL}/api/experience/add-experience`,
       {
         method: "POST",
         headers: {

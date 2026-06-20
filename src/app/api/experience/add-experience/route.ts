@@ -5,22 +5,22 @@ import { NextRequest, NextResponse } from "next/server";
 connectDB();
 
 export async function POST(req: NextRequest) {
-  try {
-    const reqBody = await req.json();
+  if (req.headers.get("x-admin-secret") !== process.env.ADMIN_SECRET) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
 
+  try {
     const {
       startYear,
       endYear,
       isEnded,
       className,
+      companyLogo,
       titleDescription,
       descriptionMore,
-    } = reqBody;
+    } = await req.json();
 
-    const incNumber = (await Experience.find()).length;
-    const saveNumber = incNumber;
-
-    saveNumber === incNumber ? incNumber + 2 : incNumber;
+    const idIncNumber = (await Experience.find()).length;
 
     if (startYear === "2000-01-01") {
       return NextResponse.json(
@@ -35,36 +35,25 @@ export async function POST(req: NextRequest) {
       );
     }
     if (!titleDescription) {
-      return NextResponse.json(
-        { error: "you can't assign empty value" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "you can't assign empty value" }, { status: 400 });
     }
     if (!descriptionMore) {
-      return NextResponse.json(
-        { error: "you can't assign empty value" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "you can't assign empty value" }, { status: 400 });
     }
 
-    // const experiences = new Experience({
-    //   startYear,
-    //   idIncNumber: saveNumber,
-    //   endYear,
-    //   isEnded,
-    //   className,
-    //   titleDescription,
-    //   descriptionMore,
-    // });
-    // const experienceSaved = await experiences.save();
-    return NextResponse.json(
-      {
-        success: true,
-        message: "Add the cod from the email!",
-        // experienceSaved,
-      },
-      { status: 200 }
-    );
+    const experience = new Experience({
+      startYear,
+      idIncNumber,
+      endYear,
+      isEnded,
+      className,
+      companyLogo,
+      titleDescription,
+      descriptionMore,
+    });
+    const experienceSaved = await experience.save();
+
+    return NextResponse.json({ success: true, experienceSaved }, { status: 201 });
   } catch (error: any) {
     return NextResponse.json({ error: error.errors }, { status: 500 });
   }
