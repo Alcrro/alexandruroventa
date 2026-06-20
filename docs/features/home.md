@@ -72,11 +72,11 @@ const socialLinks = [
 
 ## TODO
 
-- [ ] Hero: titlu H1 + rol + 2 CTA-uri structurate deasupra fold-ului
-- [ ] Framer Motion stagger pe hero (imagine → titlu → rol → butoane → social)
-- [ ] Framer Motion `whileInView` pe secțiunea About Me
-- [ ] GitHub în social links
-- [ ] Open Graph metadata completă în `src/app/page.tsx` + `og-image.png` în `/public`
-- [ ] Fix LCP: `priority` prop pe `<Image>` profil
-- [ ] `AboutMeContent`: prop `variant` în loc de `usePathname()` intern
-- [ ] Șterge dead code: `ProfileDescription.tsx`, `Spacing.tsx`, `spacing.scss`
+- [x] Hero: titlu H1 + rol + 2 CTA-uri structurate deasupra fold-ului
+- [x] Framer Motion stagger pe hero (imagine → titlu → rol → butoane → social)
+- [x] Framer Motion `whileInView` pe secțiunea About Me
+- [x] GitHub în social links
+- [x] Open Graph metadata completă în `src/app/page.tsx` + `og-image.png` în `/public`
+- [x] Fix LCP: `priority` prop pe `<Image>` profil
+- [x] `AboutMeContent`: prop `variant` în loc de `usePathname()` intern
+- [x] Șterge dead code: `ProfileDescription.tsx`, `Spacing.tsx`, `spacing.scss`

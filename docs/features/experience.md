@@ -75,11 +75,11 @@ const totalYears = new Date().getFullYear() - Math.min(...experiences.map(e => n
 
 ## TODO
 
-- [ ] Design timeline vizual: linie verticală + dot per item
+- [x] Design timeline vizual: linie verticală + dot per item
 - [ ] Logo companie din imagini reale (înlocuiește clase CSS hardcodate în SCSS)
 - [ ] Adaugă câmp `companyLogo: String` (URL) în schema MongoDB
-- [ ] Header cu ani total experiență calculați automat
-- [ ] Animații scroll-triggered pe fiecare item
+- [x] Header cu ani total experiență calculați automat
+- [x] Animații scroll-triggered pe fiecare item
 - [ ] Autentificare reală pentru adăugare experiență (înlocuiește cheia one-time)
 - [ ] Edit / delete experiențe din admin
-- [ ] Simplifică structura de rute (elimină parallel routes `@addExperience/@activate`)
+- [ ] Simplifică structura de rute (elimină parallel routes `@addExperience/@mainExperience`)

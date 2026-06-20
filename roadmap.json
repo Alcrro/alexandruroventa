@@ -5,19 +5,19 @@
   },
   {
     "name": "Certificates",
-    "status": "todo"
+    "status": "in-progress"
   },
   {
     "name": "Contact",
-    "status": "todo"
+    "status": "in-progress"
   },
   {
     "name": "Experience",
-    "status": "todo"
+    "status": "in-progress"
   },
   {
     "name": "Home",
-    "status": "todo"
+    "status": "done"
   },
   {
     "name": "Performance",
@@ -29,6 +29,6 @@
   },
   {
     "name": "Skills",
-    "status": "todo"
+    "status": "in-progress"
   }
 ]
