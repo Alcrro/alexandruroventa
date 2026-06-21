@@ -5,6 +5,7 @@ on:
     branches: [master, main]
     paths:
       - "docs/features/**"
+      - "docs/stack.md"
 
 jobs:
   update-roadmap:
@@ -24,8 +25,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add roadmap.json
+          git add roadmap.json tech.json
           git diff --cached --quiet && echo "Nicio modificare." || (
-            git commit -m "chore: update roadmap.json [skip ci]"
+            git commit -m "chore: update roadmap.json + tech.json [skip ci]"
             git push
           )
