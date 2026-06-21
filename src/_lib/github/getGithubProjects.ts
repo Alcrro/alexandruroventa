@@ -44,6 +44,29 @@ async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadma
   }
 }
 
+async function getRepoTech(repoName: string, branch: string): Promise<string[] | null> {
+  if (repoName === "alexandruroventa") {
+    try {
+      const content = fs.readFileSync(path.join(process.cwd(), "tech.json"), "utf-8");
+      const data = JSON.parse(content);
+      return Array.isArray(data) ? data : null;
+    } catch {
+      return null;
+    }
+  }
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}/tech.json`,
+      devCache
+    );
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data) ? data : null;
+  } catch {
+    return null;
+  }
+}
+
 async function getRepoLanguages(repoName: string): Promise<string[]> {
   try {
     const res = await fetch(
@@ -67,11 +90,31 @@ function getRepoStatus(topics: string[]): "live" | "wip" {
   return "wip";
 }
 
+async function checkUrlLive(url: string): Promise<boolean> {
+  if (!url) return false;
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 5000);
+    const res = await fetch(url, {
+      method: "HEAD",
+      signal: controller.signal,
+      redirect: "follow",
+      ...devCache,
+    });
+    clearTimeout(timer);
+    return res.status < 400;
+  } catch {
+    return false;
+  }
+}
+
 function mapRepo(
   repo: any,
   mainLangs: string[],
   backendRepo: any | null,
   backendLangs: string[],
+  isDeployed: boolean,
+  tech: string[] | null,
   roadmap?: IRoadmapFeature[],
 ): IGithubProject {
   const branch: string = repo.default_branch ?? "main";
@@ -80,12 +123,17 @@ function mapRepo(
     (t) => t !== PORTFOLIO_TOPIC && t !== WIP_TOPIC
   );
 
-  const combinedLangs =
+  const baseLangs =
     mainLangs.length > 0 || backendLangs.length > 0
       ? [...mainLangs, ...backendLangs.filter((l) => !mainLangs.includes(l))]
       : repo.language
-      ? [repo.language, ...nonPortfolioTopics]
-      : nonPortfolioTopics;
+      ? [repo.language]
+      : [];
+
+  const combinedLangs = tech ?? [
+    ...baseLangs,
+    ...nonPortfolioTopics.filter((t) => !baseLangs.includes(t)),
+  ];
 
   const title = (repo.name as string)
     .replace(/-/g, " ")
@@ -103,6 +151,7 @@ function mapRepo(
     screenshotUrl: `https://raw.githubusercontent.com/${GITHUB_USER}/${repo.name}/${branch}/preview.png`,
     ogImageUrl: `https://opengraph.githubassets.com/1/${GITHUB_USER}/${repo.name}`,
     status: getRepoStatus(topics),
+    isDeployed,
     updatedAt: repo.updated_at,
     ...(roadmap && { roadmap }),
   };
@@ -150,12 +199,15 @@ export async function getGithubProjects(): Promise<IGithubProject[]> {
   return Promise.all(
     [...mainRepos, ...unpairedBackends].map(async (repo) => {
       const backendRepo = backendMap.get(repo.name) ?? null;
-      const [mainLangs, backendLangs, roadmap] = await Promise.all([
+      const branch = repo.default_branch ?? "main";
+      const [mainLangs, backendLangs, roadmap, isDeployed, tech] = await Promise.all([
         getRepoLanguages(repo.name),
         backendRepo ? getRepoLanguages(backendRepo.name) : Promise.resolve([]),
-        getRepoRoadmap(repo.name, repo.default_branch ?? "main"),
+        getRepoRoadmap(repo.name, branch),
+        checkUrlLive(repo.homepage ?? ""),
+        getRepoTech(repo.name, branch),
       ]);
-      return mapRepo(repo, mainLangs, backendRepo, backendLangs, roadmap);
+      return mapRepo(repo, mainLangs, backendRepo, backendLangs, isDeployed, tech, roadmap);
     })
   );
 }
@@ -200,7 +252,12 @@ export async function getGithubProject(
   )
     return null;
 
-  const roadmap = await getRepoRoadmap(slug, repo.default_branch ?? "main");
+  const branch = repo.default_branch ?? "main";
+  const [roadmap, isDeployed, tech] = await Promise.all([
+    getRepoRoadmap(slug, branch),
+    checkUrlLive(repo.homepage ?? ""),
+    getRepoTech(slug, branch),
+  ]);
 
-  return mapRepo(repo, mainLangs, backendRepo, backendLangs, roadmap);
+  return mapRepo(repo, mainLangs, backendRepo, backendLangs, isDeployed, tech, roadmap);
 }

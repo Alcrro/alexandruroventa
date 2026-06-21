@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """
-Generates roadmap.json from docs/features/*.md.
+Generates roadmap.json and tech.json from docs/.
 
 Usage: python3 generate_roadmap.py [repo_path]
   repo_path — root of the target repo (default: current directory)
 
-Supports two formats:
+roadmap.json — from docs/features/*.md, supports two formats:
   1. Feature table  — one file with | Feature | Status | Progress | columns
   2. Per-feature    — one .md per feature with ## TODO checkboxes
+
+tech.json — from docs/stack.md, a simple markdown list:
+  - React
+  - Next.js 14
+  - TypeScript
 """
 
 import json
@@ -81,3 +86,15 @@ output.write_text(json.dumps(roadmap, indent=2, ensure_ascii=False) + "\n")
 print(f"Roadmap generat: {len(roadmap)} feature-uri")
 for item in roadmap:
     print(f"  {item['name']}: {item['status']}")
+
+stack_file = root / "docs/stack.md"
+if stack_file.exists():
+    tech = [
+        m.group(1).strip()
+        for line in stack_file.read_text(encoding="utf-8").splitlines()
+        if (m := re.match(r"^[-*]\s+(.+)$", line))
+    ]
+    if tech:
+        tech_output = root / "tech.json"
+        tech_output.write_text(json.dumps(tech, indent=2, ensure_ascii=False) + "\n")
+        print(f"Tech generat: {tech}")

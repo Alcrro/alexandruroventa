@@ -7,6 +7,12 @@ import "./projects.scss";
 export default function ProjectDetail({ project }: { project: IGithubProject }) {
   const isWip = project.status === "wip";
 
+  const done = project.roadmap?.filter((f) => f.status === "done") ?? [];
+  const inProgress = project.roadmap?.filter((f) => f.status === "in-progress") ?? [];
+  const notStarted = project.roadmap?.filter((f) => f.status === "not-started") ?? [];
+  const total = project.roadmap?.length ?? 0;
+  const progress = total > 0 ? Math.round((done.length / total) * 100) : 0;
+
   return (
     <article className="project-detail">
       <div className="project-detail-back">
@@ -42,17 +48,69 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
         ))}
       </div>
 
-      {project.roadmap && project.roadmap.length > 0 && (
+      {total > 0 && (
         <div className="project-roadmap">
-          <h2 className="project-roadmap-title">Features</h2>
-          <ul className="project-roadmap-list">
-            {project.roadmap.map((feature) => (
-              <li key={feature.name} className={`project-roadmap-item project-roadmap-item--${feature.status}`}>
-                <span className="project-roadmap-icon" />
-                {feature.name}
-              </li>
-            ))}
-          </ul>
+          <div className="project-roadmap-header">
+            <h2 className="project-roadmap-title">Features</h2>
+            <div className="project-roadmap-stats">
+              <span className="roadmap-stat roadmap-stat--done">{done.length} shipped</span>
+              {inProgress.length > 0 && (
+                <span className="roadmap-stat roadmap-stat--progress">{inProgress.length} in progress</span>
+              )}
+              {notStarted.length > 0 && (
+                <span className="roadmap-stat roadmap-stat--planned">{notStarted.length} planned</span>
+              )}
+            </div>
+          </div>
+
+          <div className="project-roadmap-bar">
+            <div className="project-roadmap-bar-fill" style={{ width: `${progress}%` }} />
+          </div>
+
+          <div className="project-roadmap-board">
+            {done.length > 0 && (
+              <div className="roadmap-col roadmap-col--done">
+                <h3 className="roadmap-col-title">
+                  <span className="roadmap-col-dot" />
+                  Shipped
+                  <span className="roadmap-col-count">{done.length}</span>
+                </h3>
+                <ul className="roadmap-col-list">
+                  {done.map((f) => (
+                    <li key={f.name} className="roadmap-feature">{f.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {inProgress.length > 0 && (
+              <div className="roadmap-col roadmap-col--progress">
+                <h3 className="roadmap-col-title">
+                  <span className="roadmap-col-dot" />
+                  In Progress
+                  <span className="roadmap-col-count">{inProgress.length}</span>
+                </h3>
+                <ul className="roadmap-col-list">
+                  {inProgress.map((f) => (
+                    <li key={f.name} className="roadmap-feature">{f.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {notStarted.length > 0 && (
+              <div className="roadmap-col roadmap-col--planned">
+                <h3 className="roadmap-col-title">
+                  <span className="roadmap-col-dot" />
+                  Planned
+                  <span className="roadmap-col-count">{notStarted.length}</span>
+                </h3>
+                <ul className="roadmap-col-list">
+                  {notStarted.map((f) => (
+                    <li key={f.name} className="roadmap-feature">{f.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
@@ -86,7 +144,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
             <i className="bi bi-github" /> GitHub
           </Link>
         )}
-        {!isWip && project.link && (
+        {project.isDeployed && project.link && (
           <Link
             href={project.link}
             target="_blank"

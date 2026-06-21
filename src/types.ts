@@ -113,6 +113,7 @@ export interface IGithubProject {
   screenshotUrl: string;
   ogImageUrl: string;
   status: "live" | "wip";
+  isDeployed: boolean;
   updatedAt: string;
   roadmap?: IRoadmapFeature[];
 }

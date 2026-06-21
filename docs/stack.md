@@ -1,0 +1,10 @@
+- Next.js 14
+- React
+- TypeScript
+- Tailwind CSS
+- Sass
+- Framer Motion
+- MongoDB
+- Mongoose
+- Resend
+- next-themes

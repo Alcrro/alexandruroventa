@@ -27,7 +27,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
           <h2 className="project-card-title">
             <Link href={`/projects/${project.slug}`}>{project.title}</Link>
           </h2>
-          {!isWip && project.link && (
+          {project.isDeployed && project.link && (
             <Link
               href={project.link}
               target="_blank"
@@ -80,7 +80,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
               <i className="bi bi-github" /> GitHub
             </Link>
           )}
-          {!isWip && project.link && (
+          {project.isDeployed && project.link && (
             <Link
               href={project.link}
               target="_blank"
