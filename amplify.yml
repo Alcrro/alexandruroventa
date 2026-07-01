@@ -12,6 +12,7 @@ frontend:
         - echo "MONGO_URI=$MONGO_URI" >> .env.local
         - echo "CONTACT_EMAIL=$CONTACT_EMAIL" >> .env.local
         - echo "ADMIN_SECRET=$ADMIN_SECRET" >> .env.local
+        - echo "GITHUB_TOKEN=$GITHUB_TOKEN" >> .env.local
         - npm run build
   artifacts:
     baseDirectory: .next

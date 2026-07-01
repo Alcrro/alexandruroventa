@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import ProjectsPage from "@/features/projects/ProjectsPage";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Alexandru Roventa — Projects",
