@@ -31,6 +31,6 @@
     "src/_lib/performance/systemDesign/getModule.ts",
     "jest.config.js"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "docs"],
   "jsx": "react-jsx"
 }
