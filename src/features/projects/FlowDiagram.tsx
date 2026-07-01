@@ -17,215 +17,242 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import "@xyflow/react/dist/style.css";
 
-// ─── types ────────────────────────────────────────────────────────────────────
+interface Field {
+  name: string;
+  type: string;
+  required?: boolean;
+  isRef?: boolean;
+}
 
 interface NodeData extends Record<string, unknown> {
-  label: string;
-  sub: string;
+  collection: string;
   color: string;
-  badge?: string;
+  fields: Field[];
   detail: string;
 }
 
-type FlowNode = Node<NodeData, "custom">;
+type FlowNode = Node<NodeData, "db">;
 
-// ─── custom node ──────────────────────────────────────────────────────────────
-
-function DiagramNode({ data, selected }: NodeProps<FlowNode>) {
+function DbNode({ data, selected }: NodeProps<FlowNode>) {
+  const fields = data.fields as Field[];
   return (
     <div
       style={{
         background: "var(--bg-surface)",
-        border: `2px solid ${selected ? data.color : data.color + "66"}`,
-        borderRadius: 10,
-        padding: "12px 20px",
-        width: 200,
-        textAlign: "center",
-        cursor: "pointer",
-        boxShadow: selected ? `0 0 20px ${data.color}44` : "0 2px 8px rgba(0,0,0,0.12)",
+        border: `2px solid ${selected ? data.color : data.color + "55"}`,
+        borderRadius: 8,
+        width: 230,
+        overflow: "hidden",
+        boxShadow: selected ? `0 0 20px ${data.color}33` : "0 2px 8px rgba(0,0,0,0.15)",
         transition: "border-color 0.2s, box-shadow 0.2s",
+        cursor: "pointer",
       }}
     >
-      <Handle
-        type="target"
-        position={Position.Top}
-        style={{ background: data.color, border: "none", width: 8, height: 8 }}
-      />
-      {data.badge && (
-        <span
-          style={{
-            display: "inline-block",
-            fontSize: 10,
-            padding: "2px 7px",
-            borderRadius: 4,
-            background: data.color + "22",
-            color: data.color,
-            fontFamily: "monospace",
-            marginBottom: 6,
-          }}
-        >
-          {data.badge as string}
+      <Handle id="t" type="target" position={Position.Top}
+        style={{ background: data.color, border: "none", width: 8, height: 8 }} />
+      <Handle id="l" type="target" position={Position.Left}
+        style={{ background: data.color, border: "none", width: 8, height: 8 }} />
+
+      <div style={{
+        background: data.color + "20",
+        borderBottom: `1px solid ${data.color}33`,
+        padding: "8px 12px",
+      }}>
+        <span style={{ color: data.color, fontFamily: "monospace", fontSize: 12, fontWeight: 700 }}>
+          ▦ {data.collection}
         </span>
-      )}
-      <div
-        style={{
-          color: "var(--text-primary)",
-          fontFamily: "monospace",
-          fontSize: 13,
-          fontWeight: 700,
-        }}
-      >
-        {data.label}
       </div>
-      <div
-        style={{
-          color: data.color,
-          fontFamily: "monospace",
-          fontSize: 11,
-          marginTop: 4,
-          opacity: 0.8,
-        }}
-      >
-        {data.sub}
-      </div>
-      <Handle
-        type="source"
-        position={Position.Bottom}
-        style={{ background: data.color, border: "none", width: 8, height: 8 }}
-      />
+
+      {fields.map((f, i) => (
+        <div key={f.name} style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          padding: "4px 12px",
+          borderBottom: i < fields.length - 1 ? `1px solid ${data.color}12` : "none",
+        }}>
+          <span style={{
+            fontFamily: "monospace",
+            fontSize: 11,
+            color: "var(--text-primary)",
+            fontWeight: f.required ? 600 : 400,
+          }}>
+            {f.name}{f.required ? " *" : ""}
+          </span>
+          <span style={{
+            fontFamily: "monospace",
+            fontSize: 10,
+            color: f.isRef ? data.color : "var(--text-muted)",
+          }}>
+            {f.type}
+          </span>
+        </div>
+      ))}
+
+      <Handle id="b" type="source" position={Position.Bottom}
+        style={{ background: data.color, border: "none", width: 8, height: 8 }} />
+      <Handle id="r" type="source" position={Position.Right}
+        style={{ background: data.color, border: "none", width: 8, height: 8 }} />
     </div>
   );
 }
 
-// ─── static data ─────────────────────────────────────────────────────────────
-
-const GREEN  = "#3fb950";
-const PURPLE = "#bc8cff";
 const ORANGE = "#f0883e";
+const GREEN  = "#3fb950";
 const BLUE   = "#38bdf8";
+const PURPLE = "#bc8cff";
+const CYAN   = "#22d3ee";
+const AMBER  = "#fbbf24";
+
+const edgeDefaults = {
+  type: "smoothstep",
+  labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
+  labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
+  labelBgPadding: [4, 3] as [number, number],
+  labelBgBorderRadius: 3,
+};
 
 const initialNodes: FlowNode[] = [
   {
-    id: "page",
-    type: "custom",
-    position: { x: 250, y: 0 },
+    id: "certificates",
+    type: "db",
+    position: { x: 0, y: 0 },
     data: {
-      label: "ProjectsPage",
-      sub: "server component",
-      color: GREEN,
-      badge: "async",
-      detail:
-        "Server component — runs only on the server. Calls getGithubProjects() at build/revalidate time (revalidate: 300s in prod, no-store in dev). Zero data-fetching JS shipped to the client.",
-    },
-  },
-  {
-    id: "grid",
-    type: "custom",
-    position: { x: 250, y: 150 },
-    data: {
-      label: "ProjectsGrid",
-      sub: "client component",
-      color: PURPLE,
-      badge: '"use client"',
-      detail:
-        "Client component that owns interactivity. Manages activeFilter via useState. Uses AnimatePresence + motion.div variants (stagger 0.08s) for smooth card transitions when filter changes.",
-    },
-  },
-  {
-    id: "filters",
-    type: "custom",
-    position: { x: 20, y: 305 },
-    data: {
-      label: "[filter buttons]",
-      sub: "useState(activeFilter)",
+      collection: "certificates",
       color: ORANGE,
-      detail:
-        'One chip per unique tech derived from all projects. Click toggles activeFilter; "All" resets to null. The filtered list is computed inline with Array.filter() on each render.',
+      fields: [
+        { name: "_id", type: "ObjectId" },
+        { name: "src", type: "String", required: true },
+        { name: "organization", type: "String" },
+        { name: "languageLearnt", type: "String" },
+        { name: "author", type: "Array" },
+        { name: "slug", type: "String (auto)" },
+        { name: "date", type: "Date" },
+      ],
+      detail: "Certificatele obținute. Slug-ul e generat automat pre-save din organization + languageLearnt + date + _id.",
     },
   },
   {
-    id: "cards",
-    type: "custom",
-    position: { x: 460, y: 305 },
+    id: "experience",
+    type: "db",
+    position: { x: 260, y: 0 },
     data: {
-      label: "ProjectCard × N",
-      sub: "Framer Motion stagger",
-      color: BLUE,
-      detail:
-        "Each card is wrapped in a motion.div with staggered entrance (delay 0.08s × index). Shows thumbnail, tech badges (TechBadge), GitHub link, and a Live button when project.isDeployed is true.",
+      collection: "experience",
+      color: GREEN,
+      fields: [
+        { name: "_id", type: "ObjectId" },
+        { name: "idIncNumber", type: "Number" },
+        { name: "startYear", type: "Date" },
+        { name: "currentYear", type: "Date" },
+        { name: "endYear", type: "Date" },
+        { name: "isEnded", type: "Boolean" },
+        { name: "className", type: "String" },
+        { name: "companyLogo", type: "String" },
+        { name: "titleDescription", type: "String" },
+        { name: "descriptionMore", type: "String" },
+      ],
+      detail: "Istoricul profesional. Pre-save hook: dacă isEnded=true → currentYear=now, endYear=null.",
     },
   },
   {
-    id: "detail",
-    type: "custom",
-    position: { x: 460, y: 460 },
+    id: "skill",
+    type: "db",
+    position: { x: 520, y: 0 },
     data: {
-      label: "ProjectDetail",
-      sub: "/projects/[slug]",
+      collection: "Skill",
       color: BLUE,
-      detail:
-        "Full project page rendered server-side via getGithubProject(slug). Shows roadmap board, screenshot, description, tech stack, and GitHub/Live links.",
+      fields: [
+        { name: "_id", type: "ObjectId" },
+        { name: "skillName", type: "String", required: true },
+        { name: "category", type: "enum (5)", required: true },
+        { name: "level", type: "enum (3)", required: true },
+        { name: "icon", type: "String" },
+      ],
+      detail: "Skill-uri tehnice. category ∈ {Frontend, Backend, Database, DevOps, Tools}. level ∈ {beginner, intermediate, advanced}. skillName este unic.",
+    },
+  },
+  {
+    id: "languageSkill",
+    type: "db",
+    position: { x: 0, y: 360 },
+    data: {
+      collection: "languageSkill",
+      color: PURPLE,
+      fields: [
+        { name: "_id", type: "ObjectId" },
+        { name: "skillName", type: "String", required: true },
+        { name: "link", type: "String (auto)" },
+      ],
+      detail: "Categorii de cunoștințe (ex: JavaScript, React). link generat din skillName. Referit logic prin câmpul category din languageSKillContent.",
+    },
+  },
+  {
+    id: "knowledgeEntry",
+    type: "db",
+    position: { x: 260, y: 360 },
+    data: {
+      collection: "languageSKillContent",
+      color: CYAN,
+      fields: [
+        { name: "_id", type: "ObjectId" },
+        { name: "category", type: "→ languageSkill", isRef: true },
+        { name: "languageType", type: "course | project", required: true },
+        { name: "contentTitle", type: "String", required: true },
+        { name: "contentDescription", type: "String", required: true },
+        { name: "unique_id", type: "String (auto)" },
+        { name: "slug", type: "String (auto)" },
+        { name: "versionCode_id", type: "→ CodeVersion", isRef: true },
+        { name: "ratingSum", type: "Number" },
+        { name: "ratingCount", type: "Number" },
+      ],
+      detail: "Conținut de cunoștințe — cursuri sau proiecte. Ref la categoria din languageSkill și la codul asociat din CodeVersion. Rating = ratingSum / ratingCount.",
+    },
+  },
+  {
+    id: "codeVersion",
+    type: "db",
+    position: { x: 520, y: 360 },
+    data: {
+      collection: "CodeVersion",
+      color: AMBER,
+      fields: [
+        { name: "_id", type: "ObjectId" },
+        { name: "code", type: "String" },
+        { name: "versionCode", type: "String" },
+        { name: "date", type: "Date" },
+        { name: "title_id", type: "→ languageSKillContent", isRef: true },
+      ],
+      detail: "Versiuni de cod asociate unui entry din Knowledge Tracker. title_id este back-reference pentru navigare bidirecțională.",
     },
   },
 ];
 
 const initialEdges: Edge[] = [
   {
-    id: "e1",
-    source: "page",
-    target: "grid",
-    label: "projects[]",
+    id: "cat",
+    source: "languageSkill",
+    sourceHandle: "r",
+    target: "knowledgeEntry",
+    targetHandle: "l",
+    label: "category",
     animated: true,
-    type: "smoothstep",
-    style: { stroke: GREEN + "99" },
-    labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
-    labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
-    labelBgPadding: [4, 3],
-    labelBgBorderRadius: 3,
-  },
-  {
-    id: "e2",
-    source: "grid",
-    target: "filters",
-    label: "renders",
-    type: "smoothstep",
     style: { stroke: PURPLE + "99" },
-    labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
-    labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
-    labelBgPadding: [4, 3],
-    labelBgBorderRadius: 3,
+    ...edgeDefaults,
   },
   {
-    id: "e3",
-    source: "grid",
-    target: "cards",
-    label: "renders × N",
+    id: "code",
+    source: "knowledgeEntry",
+    sourceHandle: "r",
+    target: "codeVersion",
+    targetHandle: "l",
+    label: "versionCode_id",
     animated: true,
-    type: "smoothstep",
-    style: { stroke: PURPLE + "99" },
-    labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
-    labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
-    labelBgPadding: [4, 3],
-    labelBgBorderRadius: 3,
-  },
-  {
-    id: "e4",
-    source: "cards",
-    target: "detail",
-    label: "push nav",
-    animated: true,
-    type: "smoothstep",
-    style: { stroke: BLUE + "99", strokeDasharray: "6 3" },
-    labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
-    labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
-    labelBgPadding: [4, 3],
-    labelBgBorderRadius: 3,
+    style: { stroke: CYAN + "99" },
+    ...edgeDefaults,
   },
 ];
 
-// ─── component ────────────────────────────────────────────────────────────────
-
-const nodeTypes = { custom: DiagramNode };
+const nodeTypes = { db: DbNode };
 
 export default function FlowDiagram() {
   const { resolvedTheme } = useTheme();
@@ -235,11 +262,10 @@ export default function FlowDiagram() {
 
   const onNodeClick = useCallback((_: React.MouseEvent, node: Node) => {
     const data = node.data as NodeData;
-    setSelected((prev) => (prev?.label === data.label ? null : data));
+    setSelected((prev) => (prev?.collection === data.collection ? null : data));
   }, []);
 
   const onPaneClick = useCallback(() => setSelected(null), []);
-
   const memoNodeTypes = useMemo(() => nodeTypes, []);
 
   return (
@@ -255,11 +281,11 @@ export default function FlowDiagram() {
           nodeTypes={memoNodeTypes}
           colorMode={resolvedTheme === "light" ? "light" : "dark"}
           fitView
-          fitViewOptions={{ padding: 0.25 }}
+          fitViewOptions={{ padding: 0.15 }}
           nodesDraggable={false}
           nodesConnectable={false}
           elementsSelectable
-          minZoom={0.5}
+          minZoom={0.3}
           maxZoom={1.5}
         >
           <Background gap={20} size={1} />
@@ -270,7 +296,7 @@ export default function FlowDiagram() {
       <AnimatePresence mode="wait">
         {selected && (
           <motion.div
-            key={selected.label}
+            key={selected.collection as string}
             className="flow-detail-card"
             initial={{ opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -278,19 +304,11 @@ export default function FlowDiagram() {
             transition={{ duration: 0.18 }}
           >
             <div className="flow-detail-header">
-              <span className="flow-detail-label" style={{ color: selected.color }}>
-                {selected.label}
+              <span className="flow-detail-label" style={{ color: selected.color as string }}>
+                {selected.collection as string}
               </span>
-              {selected.badge && (
-                <span
-                  className="flow-detail-badge"
-                  style={{ background: selected.color + "22", color: selected.color }}
-                >
-                  {selected.badge as string}
-                </span>
-              )}
             </div>
-            <p className="flow-detail-text">{selected.detail}</p>
+            <p className="flow-detail-text">{selected.detail as string}</p>
           </motion.div>
         )}
       </AnimatePresence>

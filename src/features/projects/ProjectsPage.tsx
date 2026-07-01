@@ -11,7 +11,7 @@ export default async function ProjectsPage() {
       <h1 className="projects-title">Projects</h1>
       <ProjectsGrid projects={projects} />
       <div className="flow-diagram-section">
-        <p className="flow-diagram-heading">Feature architecture</p>
+        <p className="flow-diagram-heading">MongoDB schema</p>
         <FlowDiagram />
       </div>
     </section>
