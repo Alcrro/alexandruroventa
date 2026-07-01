@@ -9,3 +9,4 @@
 - Resend
 - next-themes
 - AWS Amplify
+- AWS Route 53

@@ -9,5 +9,6 @@
   "Mongoose",
   "Resend",
   "next-themes",
-  "AWS Amplify"
+  "AWS Amplify",
+  "AWS Route 53"
 ]
