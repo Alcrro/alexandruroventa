@@ -8,5 +8,6 @@
   "MongoDB",
   "Mongoose",
   "Resend",
-  "next-themes"
+  "next-themes",
+  "AWS Amplify"
 ]

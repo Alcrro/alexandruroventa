@@ -8,3 +8,4 @@
 - Mongoose
 - Resend
 - next-themes
+- AWS Amplify
