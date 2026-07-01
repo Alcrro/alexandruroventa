@@ -1,0 +1,126 @@
+{
+  "nodes": [
+    {
+      "id": "certificates",
+      "collection": "certificates",
+      "color": "#f0883e",
+      "x": 0,
+      "y": 0,
+      "fields": [
+        { "name": "_id", "type": "ObjectId" },
+        { "name": "src", "type": "String", "required": true },
+        { "name": "organization", "type": "String" },
+        { "name": "languageLearnt", "type": "String" },
+        { "name": "author", "type": "Array" },
+        { "name": "slug", "type": "String (auto)" },
+        { "name": "date", "type": "Date" }
+      ],
+      "detail": "Stores obtained certificates. Slug is auto-generated pre-save from organization + languageLearnt + date + _id."
+    },
+    {
+      "id": "experience",
+      "collection": "experience",
+      "color": "#3fb950",
+      "x": 260,
+      "y": 0,
+      "fields": [
+        { "name": "_id", "type": "ObjectId" },
+        { "name": "idIncNumber", "type": "Number" },
+        { "name": "startYear", "type": "Date" },
+        { "name": "currentYear", "type": "Date" },
+        { "name": "endYear", "type": "Date" },
+        { "name": "isEnded", "type": "Boolean" },
+        { "name": "className", "type": "String" },
+        { "name": "companyLogo", "type": "String" },
+        { "name": "titleDescription", "type": "String" },
+        { "name": "descriptionMore", "type": "String" }
+      ],
+      "detail": "Work history. Pre-save hook: if isEnded=true → currentYear=now, endYear=null."
+    },
+    {
+      "id": "skill",
+      "collection": "Skill",
+      "color": "#38bdf8",
+      "x": 520,
+      "y": 0,
+      "fields": [
+        { "name": "_id", "type": "ObjectId" },
+        { "name": "skillName", "type": "String", "required": true },
+        { "name": "category", "type": "enum (5)", "required": true },
+        { "name": "level", "type": "enum (3)", "required": true },
+        { "name": "icon", "type": "String" }
+      ],
+      "detail": "Technical skills. category ∈ {Frontend, Backend, Database, DevOps, Tools}. level ∈ {beginner, intermediate, advanced}. skillName is unique."
+    },
+    {
+      "id": "languageSkill",
+      "collection": "languageSkill",
+      "color": "#bc8cff",
+      "x": 0,
+      "y": 360,
+      "fields": [
+        { "name": "_id", "type": "ObjectId" },
+        { "name": "skillName", "type": "String", "required": true },
+        { "name": "link", "type": "String (auto)" }
+      ],
+      "detail": "Knowledge categories (e.g. JavaScript, React). link is auto-generated from skillName. Referenced logically via the category field in languageSKillContent."
+    },
+    {
+      "id": "knowledgeEntry",
+      "collection": "languageSKillContent",
+      "color": "#22d3ee",
+      "x": 260,
+      "y": 360,
+      "fields": [
+        { "name": "_id", "type": "ObjectId" },
+        { "name": "category", "type": "→ languageSkill", "isRef": true },
+        { "name": "languageType", "type": "course | project", "required": true },
+        { "name": "contentTitle", "type": "String", "required": true },
+        { "name": "contentDescription", "type": "String", "required": true },
+        { "name": "unique_id", "type": "String (auto)" },
+        { "name": "slug", "type": "String (auto)" },
+        { "name": "versionCode_id", "type": "→ CodeVersion", "isRef": true },
+        { "name": "ratingSum", "type": "Number" },
+        { "name": "ratingCount", "type": "Number" }
+      ],
+      "detail": "Knowledge content — courses or projects. References a category in languageSkill and associated code in CodeVersion. Rating = ratingSum / ratingCount."
+    },
+    {
+      "id": "codeVersion",
+      "collection": "CodeVersion",
+      "color": "#fbbf24",
+      "x": 520,
+      "y": 360,
+      "fields": [
+        { "name": "_id", "type": "ObjectId" },
+        { "name": "code", "type": "String" },
+        { "name": "versionCode", "type": "String" },
+        { "name": "date", "type": "Date" },
+        { "name": "title_id", "type": "→ languageSKillContent", "isRef": true }
+      ],
+      "detail": "Code versions linked to a KnowledgeEntry. title_id is a back-reference for bidirectional navigation."
+    }
+  ],
+  "edges": [
+    {
+      "id": "cat",
+      "source": "languageSkill",
+      "sourceHandle": "r",
+      "target": "knowledgeEntry",
+      "targetHandle": "l",
+      "label": "category",
+      "animated": true,
+      "color": "#bc8cff"
+    },
+    {
+      "id": "code",
+      "source": "knowledgeEntry",
+      "sourceHandle": "r",
+      "target": "codeVersion",
+      "targetHandle": "l",
+      "label": "versionCode_id",
+      "animated": true,
+      "color": "#22d3ee"
+    }
+  ]
+}

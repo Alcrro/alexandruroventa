@@ -15,26 +15,20 @@ import {
 } from "@xyflow/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
+import { IProjectSchema, ISchemaField } from "@/types";
 import "@xyflow/react/dist/style.css";
-
-interface Field {
-  name: string;
-  type: string;
-  required?: boolean;
-  isRef?: boolean;
-}
 
 interface NodeData extends Record<string, unknown> {
   collection: string;
   color: string;
-  fields: Field[];
+  fields: ISchemaField[];
   detail: string;
 }
 
 type FlowNode = Node<NodeData, "db">;
 
 function DbNode({ data, selected }: NodeProps<FlowNode>) {
-  const fields = data.fields as Field[];
+  const fields = data.fields as ISchemaField[];
   return (
     <div
       style={{
@@ -97,165 +91,39 @@ function DbNode({ data, selected }: NodeProps<FlowNode>) {
   );
 }
 
-const ORANGE = "#f0883e";
-const GREEN  = "#3fb950";
-const BLUE   = "#38bdf8";
-const PURPLE = "#bc8cff";
-const CYAN   = "#22d3ee";
-const AMBER  = "#fbbf24";
-
-const edgeDefaults = {
-  type: "smoothstep",
-  labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
-  labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
-  labelBgPadding: [4, 3] as [number, number],
-  labelBgBorderRadius: 3,
-};
-
-const initialNodes: FlowNode[] = [
-  {
-    id: "certificates",
-    type: "db",
-    position: { x: 0, y: 0 },
-    data: {
-      collection: "certificates",
-      color: ORANGE,
-      fields: [
-        { name: "_id", type: "ObjectId" },
-        { name: "src", type: "String", required: true },
-        { name: "organization", type: "String" },
-        { name: "languageLearnt", type: "String" },
-        { name: "author", type: "Array" },
-        { name: "slug", type: "String (auto)" },
-        { name: "date", type: "Date" },
-      ],
-      detail: "Certificatele obținute. Slug-ul e generat automat pre-save din organization + languageLearnt + date + _id.",
-    },
-  },
-  {
-    id: "experience",
-    type: "db",
-    position: { x: 260, y: 0 },
-    data: {
-      collection: "experience",
-      color: GREEN,
-      fields: [
-        { name: "_id", type: "ObjectId" },
-        { name: "idIncNumber", type: "Number" },
-        { name: "startYear", type: "Date" },
-        { name: "currentYear", type: "Date" },
-        { name: "endYear", type: "Date" },
-        { name: "isEnded", type: "Boolean" },
-        { name: "className", type: "String" },
-        { name: "companyLogo", type: "String" },
-        { name: "titleDescription", type: "String" },
-        { name: "descriptionMore", type: "String" },
-      ],
-      detail: "Istoricul profesional. Pre-save hook: dacă isEnded=true → currentYear=now, endYear=null.",
-    },
-  },
-  {
-    id: "skill",
-    type: "db",
-    position: { x: 520, y: 0 },
-    data: {
-      collection: "Skill",
-      color: BLUE,
-      fields: [
-        { name: "_id", type: "ObjectId" },
-        { name: "skillName", type: "String", required: true },
-        { name: "category", type: "enum (5)", required: true },
-        { name: "level", type: "enum (3)", required: true },
-        { name: "icon", type: "String" },
-      ],
-      detail: "Skill-uri tehnice. category ∈ {Frontend, Backend, Database, DevOps, Tools}. level ∈ {beginner, intermediate, advanced}. skillName este unic.",
-    },
-  },
-  {
-    id: "languageSkill",
-    type: "db",
-    position: { x: 0, y: 360 },
-    data: {
-      collection: "languageSkill",
-      color: PURPLE,
-      fields: [
-        { name: "_id", type: "ObjectId" },
-        { name: "skillName", type: "String", required: true },
-        { name: "link", type: "String (auto)" },
-      ],
-      detail: "Categorii de cunoștințe (ex: JavaScript, React). link generat din skillName. Referit logic prin câmpul category din languageSKillContent.",
-    },
-  },
-  {
-    id: "knowledgeEntry",
-    type: "db",
-    position: { x: 260, y: 360 },
-    data: {
-      collection: "languageSKillContent",
-      color: CYAN,
-      fields: [
-        { name: "_id", type: "ObjectId" },
-        { name: "category", type: "→ languageSkill", isRef: true },
-        { name: "languageType", type: "course | project", required: true },
-        { name: "contentTitle", type: "String", required: true },
-        { name: "contentDescription", type: "String", required: true },
-        { name: "unique_id", type: "String (auto)" },
-        { name: "slug", type: "String (auto)" },
-        { name: "versionCode_id", type: "→ CodeVersion", isRef: true },
-        { name: "ratingSum", type: "Number" },
-        { name: "ratingCount", type: "Number" },
-      ],
-      detail: "Conținut de cunoștințe — cursuri sau proiecte. Ref la categoria din languageSkill și la codul asociat din CodeVersion. Rating = ratingSum / ratingCount.",
-    },
-  },
-  {
-    id: "codeVersion",
-    type: "db",
-    position: { x: 520, y: 360 },
-    data: {
-      collection: "CodeVersion",
-      color: AMBER,
-      fields: [
-        { name: "_id", type: "ObjectId" },
-        { name: "code", type: "String" },
-        { name: "versionCode", type: "String" },
-        { name: "date", type: "Date" },
-        { name: "title_id", type: "→ languageSKillContent", isRef: true },
-      ],
-      detail: "Versiuni de cod asociate unui entry din Knowledge Tracker. title_id este back-reference pentru navigare bidirecțională.",
-    },
-  },
-];
-
-const initialEdges: Edge[] = [
-  {
-    id: "cat",
-    source: "languageSkill",
-    sourceHandle: "r",
-    target: "knowledgeEntry",
-    targetHandle: "l",
-    label: "category",
-    animated: true,
-    style: { stroke: PURPLE + "99" },
-    ...edgeDefaults,
-  },
-  {
-    id: "code",
-    source: "knowledgeEntry",
-    sourceHandle: "r",
-    target: "codeVersion",
-    targetHandle: "l",
-    label: "versionCode_id",
-    animated: true,
-    style: { stroke: CYAN + "99" },
-    ...edgeDefaults,
-  },
-];
-
 const nodeTypes = { db: DbNode };
 
-export default function FlowDiagram() {
+export default function FlowDiagram({ schema }: { schema: IProjectSchema }) {
   const { resolvedTheme } = useTheme();
+
+  const initialNodes: FlowNode[] = useMemo(() =>
+    schema.nodes.map((n) => ({
+      id: n.id,
+      type: "db" as const,
+      position: { x: n.x, y: n.y },
+      data: { collection: n.collection, color: n.color, fields: n.fields, detail: n.detail },
+    })), [schema]);
+
+  const initialEdges: Edge[] = useMemo(() =>
+    schema.edges.map((e) => ({
+      id: e.id,
+      source: e.source,
+      ...(e.sourceHandle && { sourceHandle: e.sourceHandle }),
+      target: e.target,
+      ...(e.targetHandle && { targetHandle: e.targetHandle }),
+      label: e.label,
+      animated: e.animated,
+      type: "smoothstep",
+      style: {
+        stroke: (e.color ?? "#888") + "99",
+        ...(e.dashed ? { strokeDasharray: "5 3" } : {}),
+      },
+      labelStyle: { fontFamily: "monospace", fontSize: 10, fill: "var(--text-muted)" },
+      labelBgStyle: { fill: "var(--bg-elevated)", fillOpacity: 0.9 },
+      labelBgPadding: [4, 3] as [number, number],
+      labelBgBorderRadius: 3,
+    })), [schema]);
+
   const [nodes, , onNodesChange] = useNodesState<FlowNode>(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
   const [selected, setSelected] = useState<NodeData | null>(null);

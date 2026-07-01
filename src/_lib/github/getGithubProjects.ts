@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { IGithubProject, IRoadmapFeature } from "@/types";
+import { IGithubProject, IProjectSchema, IRoadmapFeature } from "@/types";
 
 const GITHUB_USER = "Alcrro";
 const PORTFOLIO_TOPIC = "portfolio";
@@ -39,6 +39,27 @@ async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadma
     const data = await res.json();
     if (!Array.isArray(data)) return undefined;
     return data as IRoadmapFeature[];
+  } catch {
+    return undefined;
+  }
+}
+
+async function getRepoSchema(repoName: string, branch: string): Promise<IProjectSchema | undefined> {
+  if (repoName === "alexandruroventa") {
+    try {
+      const content = fs.readFileSync(path.join(process.cwd(), "schema.json"), "utf-8");
+      return JSON.parse(content) as IProjectSchema;
+    } catch {
+      return undefined;
+    }
+  }
+  try {
+    const res = await fetch(
+      `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}/schema.json`,
+      devCache
+    );
+    if (!res.ok) return undefined;
+    return await res.json() as IProjectSchema;
   } catch {
     return undefined;
   }
@@ -116,6 +137,7 @@ function mapRepo(
   isDeployed: boolean,
   tech: string[] | null,
   roadmap?: IRoadmapFeature[],
+  schema?: IProjectSchema,
 ): IGithubProject {
   const branch: string = repo.default_branch ?? "main";
   const topics = repo.topics as string[];
@@ -154,6 +176,7 @@ function mapRepo(
     isDeployed,
     updatedAt: repo.updated_at,
     ...(roadmap && { roadmap }),
+    ...(schema && { schema }),
   };
 }
 
@@ -253,11 +276,12 @@ export async function getGithubProject(
     return null;
 
   const branch = repo.default_branch ?? "main";
-  const [roadmap, isDeployed, tech] = await Promise.all([
+  const [roadmap, isDeployed, tech, schema] = await Promise.all([
     getRepoRoadmap(slug, branch),
     checkUrlLive(repo.homepage ?? ""),
     getRepoTech(slug, branch),
+    getRepoSchema(slug, branch),
   ]);
 
-  return mapRepo(repo, mainLangs, backendRepo, backendLangs, isDeployed, tech, roadmap);
+  return mapRepo(repo, mainLangs, backendRepo, backendLangs, isDeployed, tech, roadmap, schema);
 }

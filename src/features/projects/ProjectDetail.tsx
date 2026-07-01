@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IGithubProject } from "@/types";
 import TechBadge from "./TechBadge";
 import ProjectImage from "./ProjectImage";
+import FlowDiagram from "./FlowDiagram";
 import "./projects.scss";
 
 export default function ProjectDetail({ project }: { project: IGithubProject }) {
@@ -111,6 +112,13 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
               </div>
             )}
           </div>
+        </div>
+      )}
+
+      {project.schema && (
+        <div className="flow-diagram-section">
+          <p className="flow-diagram-heading">Database schema</p>
+          <FlowDiagram schema={project.schema} />
         </div>
       )}
 

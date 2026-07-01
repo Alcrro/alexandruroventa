@@ -101,6 +101,40 @@ export interface IRoadmapFeature {
   status: RoadmapStatus;
 }
 
+export interface ISchemaField {
+  name: string;
+  type: string;
+  required?: boolean;
+  isRef?: boolean;
+}
+
+export interface ISchemaNode {
+  id: string;
+  collection: string;
+  color: string;
+  x: number;
+  y: number;
+  fields: ISchemaField[];
+  detail: string;
+}
+
+export interface ISchemaEdge {
+  id: string;
+  source: string;
+  sourceHandle?: string;
+  target: string;
+  targetHandle?: string;
+  label?: string;
+  animated?: boolean;
+  color?: string;
+  dashed?: boolean;
+}
+
+export interface IProjectSchema {
+  nodes: ISchemaNode[];
+  edges: ISchemaEdge[];
+}
+
 export interface IGithubProject {
   id: number;
   title: string;
@@ -116,5 +150,6 @@ export interface IGithubProject {
   isDeployed: boolean;
   updatedAt: string;
   roadmap?: IRoadmapFeature[];
+  schema?: IProjectSchema;
 }
 

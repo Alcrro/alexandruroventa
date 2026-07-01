@@ -1,6 +1,5 @@
 import { getGithubProjects } from "@/_lib/github/getGithubProjects";
 import ProjectsGrid from "./ProjectsGrid";
-import FlowDiagram from "./FlowDiagram";
 import "./projects.scss";
 
 export default async function ProjectsPage() {
@@ -10,10 +9,6 @@ export default async function ProjectsPage() {
     <section className="projects-section">
       <h1 className="projects-title">Projects</h1>
       <ProjectsGrid projects={projects} />
-      <div className="flow-diagram-section">
-        <p className="flow-diagram-heading">MongoDB schema</p>
-        <FlowDiagram />
-      </div>
     </section>
   );
 }
