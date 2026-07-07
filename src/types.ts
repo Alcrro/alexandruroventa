@@ -132,7 +132,7 @@ export interface ISchemaEdge {
 
 export interface IProjectSchema {
   nodes: ISchemaNode[];
-  edges: ISchemaEdge[];
+  edges?: ISchemaEdge[];
 }
 
 export interface IGithubProject {
@@ -146,6 +146,7 @@ export interface IGithubProject {
   languagesUsed: string[];
   screenshotUrl: string;
   ogImageUrl: string;
+  screenshots?: string[];
   status: "live" | "wip";
   isDeployed: boolean;
   updatedAt: string;

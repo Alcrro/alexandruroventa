@@ -2,6 +2,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ["react-icons"],
   env: {
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     RESEND_API_KEY: process.env.RESEND_API_KEY,

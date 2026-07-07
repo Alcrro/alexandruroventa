@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { IGithubProject } from "@/types";
 import TechBadge from "./TechBadge";
-import ProjectImage from "./ProjectImage";
-import FlowDiagram from "./FlowDiagram";
+import ProjectGallery from "./ProjectGallery";
+import SchemaCards from "./SchemaCards";
 import "./projects.scss";
 
 export default function ProjectDetail({ project }: { project: IGithubProject }) {
@@ -27,17 +27,11 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
         {isWip && <span className="project-wip-badge" style={{ position: "static", transform: "none", marginLeft: "1rem", display: "inline-block", verticalAlign: "middle" }}>In Progress</span>}
       </h1>
 
-      <div className="project-detail-thumb">
-        <ProjectImage
-          screenshotUrl={project.screenshotUrl}
-          ogImageUrl={project.ogImageUrl}
-          alt={project.title}
-          width={1200}
-          height={675}
-          className="project-detail-img"
-          priority
-        />
-      </div>
+      <ProjectGallery
+        screenshots={project.screenshots ?? [project.screenshotUrl]}
+        ogImageUrl={project.ogImageUrl}
+        title={project.title}
+      />
 
       {project.description && (
         <p className="project-detail-description">{project.description}</p>
@@ -118,7 +112,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
       {project.schema && (
         <div className="flow-diagram-section">
           <p className="flow-diagram-heading">Database schema</p>
-          <FlowDiagram schema={project.schema} />
+          <SchemaCards schema={project.schema} />
         </div>
       )}
 

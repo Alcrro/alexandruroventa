@@ -22,6 +22,7 @@
       "collection": "experience",
       "color": "#3fb950",
       "x": 260,
+      
       "y": 0,
       "fields": [
         { "name": "_id", "type": "ObjectId" },

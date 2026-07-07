@@ -105,7 +105,7 @@ export default function FlowDiagram({ schema }: { schema: IProjectSchema }) {
     })), [schema]);
 
   const initialEdges: Edge[] = useMemo(() =>
-    schema.edges.map((e) => ({
+    (schema.edges ?? []).map((e) => ({
       id: e.id,
       source: e.source,
       ...(e.sourceHandle && { sourceHandle: e.sourceHandle }),

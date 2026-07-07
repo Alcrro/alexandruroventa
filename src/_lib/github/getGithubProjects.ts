@@ -44,6 +44,29 @@ async function getRepoRoadmap(repoName: string, branch: string): Promise<IRoadma
   }
 }
 
+async function getRepoScreenshots(repoName: string, branch: string): Promise<string[] | undefined> {
+  const base = `https://raw.githubusercontent.com/${GITHUB_USER}/${repoName}/${branch}`;
+  if (repoName === "alexandruroventa") {
+    try {
+      const content = fs.readFileSync(path.join(process.cwd(), "screenshots.json"), "utf-8");
+      const data = JSON.parse(content);
+      if (!Array.isArray(data)) return undefined;
+      return (data as string[]).map((p) => `${base}/${p}`);
+    } catch {
+      return undefined;
+    }
+  }
+  try {
+    const res = await fetch(`${base}/screenshots.json`, devCache);
+    if (!res.ok) return undefined;
+    const data = await res.json();
+    if (!Array.isArray(data)) return undefined;
+    return (data as string[]).map((p) => `${base}/${p}`);
+  } catch {
+    return undefined;
+  }
+}
+
 async function getRepoSchema(repoName: string, branch: string): Promise<IProjectSchema | undefined> {
   if (repoName === "alexandruroventa") {
     try {
@@ -138,6 +161,7 @@ function mapRepo(
   tech: string[] | null,
   roadmap?: IRoadmapFeature[],
   schema?: IProjectSchema,
+  screenshots?: string[],
 ): IGithubProject {
   const branch: string = repo.default_branch ?? "main";
   const topics = repo.topics as string[];
@@ -177,6 +201,7 @@ function mapRepo(
     updatedAt: repo.updated_at,
     ...(roadmap && { roadmap }),
     ...(schema && { schema }),
+    ...(screenshots && screenshots.length > 0 && { screenshots }),
   };
 }
 
@@ -276,12 +301,13 @@ export async function getGithubProject(
     return null;
 
   const branch = repo.default_branch ?? "main";
-  const [roadmap, isDeployed, tech, schema] = await Promise.all([
+  const [roadmap, isDeployed, tech, schema, screenshots] = await Promise.all([
     getRepoRoadmap(slug, branch),
     checkUrlLive(repo.homepage ?? ""),
     getRepoTech(slug, branch),
     getRepoSchema(slug, branch),
+    getRepoScreenshots(slug, branch),
   ]);
 
-  return mapRepo(repo, mainLangs, backendRepo, backendLangs, isDeployed, tech, roadmap, schema);
+  return mapRepo(repo, mainLangs, backendRepo, backendLangs, isDeployed, tech, roadmap, schema, screenshots);
 }
