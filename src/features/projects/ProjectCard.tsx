@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { IGithubProject } from "@/types";
-import TechBadge from "./TechBadge";
+import TechList from "./TechList";
 import ProjectImage from "./ProjectImage";
 
 export default function ProjectCard({ project }: { project: IGithubProject }) {
@@ -44,11 +44,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
           <p className="project-description">{project.description}</p>
         )}
 
-        <div className="project-tech">
-          {project.languagesUsed.map((tech) => (
-            <TechBadge key={tech} tech={tech} />
-          ))}
-        </div>
+        <TechList techs={project.languagesUsed} />
 
         <div className="project-actions">
           {project.backendRepository ? (
