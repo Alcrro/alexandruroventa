@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 
 const education = [
   {
+    institution: "Full Stack Web Development Bootcamp",
+    field: "React · Next.js · Node.js · MongoDB",
+    period: "2022",
+  },
+  {
     institution: "Faculty of Automation and Applied Informatics",
     field: "Automation and Applied Informatics",
     period: "2014 – 2018",
@@ -12,11 +17,6 @@ const education = [
     institution: "High School of Electrotechnics and Electronics",
     field: "Electronics and Electrotechnics",
     period: "2010 – 2014",
-  },
-  {
-    institution: "Full Stack Web Development Bootcamp",
-    field: "React · Next.js · Node.js · MongoDB",
-    period: "2022",
   },
 ];
 
