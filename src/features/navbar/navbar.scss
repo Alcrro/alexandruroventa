@@ -1,6 +1,9 @@
 .navbar-container {
   display: block;
   padding: 1.25rem 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 50;
 }
 
 .navbar-inner {
@@ -9,67 +12,179 @@
 }
 
 .navbar-menu {
-  max-width: fit-content;
-  margin: 0 auto;
-  background-color: var(--accent);
-  color: #fff;
-  border-radius: 30px;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 0;
+
+  // Glassmorphism — funcționează automat pe ambele teme
+  background: rgba(255, 254, 251, 0.82);
+  backdrop-filter: blur(16px) saturate(1.8);
+  -webkit-backdrop-filter: blur(16px) saturate(1.8);
+  border: 1px solid rgba(229, 231, 235, 0.6);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 16px rgba(0, 0, 0, 0.06);
+  border-radius: var(--radius-full);
+  transition:
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+
+  &.scrolled {
+    box-shadow:
+      0 2px 8px rgba(0, 0, 0, 0.08),
+      0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  :root.dark & {
+    background: rgba(22, 27, 34, 0.85);
+    border-color: rgba(51, 65, 85, 0.45);
+    box-shadow:
+      0 1px 3px rgba(0, 0, 0, 0.2),
+      0 4px 16px rgba(0, 0, 0, 0.28);
+
+    &.scrolled {
+      box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.3),
+        0 8px 32px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // ── home link stânga ──────────────────────────────────────
+  .navbar-home {
+    padding: 0.4rem 0.75rem;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+    transition: background 0.18s ease;
+
+    .navbar-text {
+      font-size: var(--text-sm);
+      font-weight: var(--font-semibold);
+      color: var(--text-secondary);
+      text-transform: capitalize;
+      transition: color 0.18s ease;
+    }
+
+    &:hover {
+      background: var(--bg-elevated);
+
+      .navbar-text {
+        color: var(--text-primary);
+      }
+    }
+
+    &.active {
+      background: var(--accent-bg);
+
+      .navbar-text {
+        color: var(--accent);
+      }
+    }
+  }
 
   // ── hamburger: ascuns pe desktop ──────────────────────────
   .hamburger {
     display: none;
   }
 
-  // ── meniu desktop ─────────────────────────────────────────
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 0.5rem 1rem;
-    justify-content: center;
-    align-items: center;
+  // ── stiluri comune pentru ambele liste ────────────────────
+  .nav-desktop,
+  .nav-mobile {
     list-style: none;
     margin: 0;
+    padding: 0.4rem 0.75rem;
+    gap: 2px;
+    align-items: center;
+    justify-content: center;
 
     li {
-      display: block;
-      padding: 0.5rem;
+      border-radius: var(--radius-full);
+      transition: background 0.18s ease;
 
       a {
         display: block;
+        padding: 0.4rem 0.75rem;
+        border-radius: var(--radius-full);
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+        &:hover {
+          transform: translateY(-1px);
+        }
+      }
+
+      &:hover {
+        background: var(--bg-elevated);
       }
 
       &.active {
-        background-color: #fff;
-        color: #000;
-        border-radius: 14px;
+        background: var(--accent-bg);
 
         .navbar-text {
-          color: #000;
+          color: var(--accent);
+          font-weight: var(--font-semibold);
         }
       }
     }
 
     .navbar-text {
       display: block;
+      font-size: var(--text-sm);
       text-transform: capitalize;
-      color: #fff;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      transition: color 0.18s ease;
+    }
+
+    li:hover .navbar-text {
+      color: var(--text-primary);
     }
   }
 
-  // ── theme toggle inline ────────────────────────────────────
+  // ── desktop nav ───────────────────────────────────────────
+  .nav-desktop {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+  }
+
+  // ── mobile nav (framer-motion controlează mount/unmount) ──
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    li {
+      width: 100%;
+      border-radius: var(--radius-md);
+
+      a {
+        border-radius: var(--radius-md);
+        text-align: center;
+      }
+    }
+
+    .navbar-text {
+      font-size: var(--text-base);
+    }
+  }
+
+  // Preventie: mobile nav nu apare niciodată pe desktop
+  @media (min-width: 641px) {
+    .nav-mobile {
+      display: none !important;
+    }
+  }
+
+  // ── theme toggle ──────────────────────────────────────────
   .navbar-theme {
     display: flex;
     align-items: center;
-    padding-right: 0.5rem;
+    padding-right: 0.4rem;
 
     .theme-toggle {
       position: static;
-      background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      background: var(--bg-elevated);
+      color: var(--text-secondary);
       border-radius: 50%;
       width: 32px;
       height: 32px;
@@ -77,30 +192,34 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border: none;
+      border: 1px solid var(--border);
       cursor: pointer;
-      transition: background var(--transition-fast);
+      transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease,
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 
       &:hover {
-        background: rgba(255, 255, 255, 0.3);
+        background: var(--accent-bg);
+        color: var(--accent);
+        border-color: transparent;
+        transform: rotate(22deg) scale(1.08);
         opacity: 1;
       }
 
       i {
-        font-size: 1rem;
+        font-size: 0.9rem;
         display: block;
       }
     }
   }
 
-  // ── mobile (≤ 640px) ──────────────────────────────────────
+  // ── mobile ≤ 640px ────────────────────────────────────────
   @media (max-width: 640px) {
-    max-width: 100%;
-    border-radius: 16px;
+    border-radius: var(--radius-lg);
     padding: 0.5rem 1rem;
-    display: flex;
     flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
     gap: 0.5rem;
 
@@ -113,43 +232,19 @@
       cursor: pointer;
       padding: 6px;
       flex-shrink: 0;
+      margin-left: auto;
 
       .hamburger-line {
         display: block;
         width: 22px;
         height: 2px;
-        background: #fff;
+        background: var(--text-primary);
         border-radius: 2px;
-        transition: transform 0.2s ease, opacity 0.2s ease;
-
-        &:nth-child(1).open {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-        &:nth-child(2).open {
-          opacity: 0;
-        }
-        &:nth-child(3).open {
-          transform: rotate(-45deg) translate(5px, -5px);
-        }
       }
     }
 
-    ul {
+    .nav-desktop {
       display: none;
-      flex-direction: column;
-      width: 100%;
-      padding: 0.5rem 0;
-      gap: 2px;
-
-      &.open {
-        display: flex;
-      }
-
-      li {
-        width: 100%;
-        text-align: center;
-        padding: 0.4rem 0.5rem;
-      }
     }
   }
 }
