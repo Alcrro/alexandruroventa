@@ -1,8 +1,51 @@
 .contact-page {
+  position: relative;
   max-width: 56rem;
   margin: 0 auto;
   padding: 4rem 1rem;
+  overflow: hidden;
 }
+
+/* ─── Background orbs ────────────────────────────────────────── */
+
+.contact-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+  will-change: transform;
+
+  &--1 {
+    width: 380px;
+    height: 380px;
+    background: var(--accent);
+    opacity: 0.09;
+    top: -80px;
+    right: -80px;
+    animation: orb-float 10s ease-in-out infinite alternate;
+  }
+
+  &--2 {
+    width: 280px;
+    height: 280px;
+    background: var(--accent-bg);
+    opacity: 0.2;
+    bottom: 60px;
+    left: -60px;
+    animation: orb-float 13s ease-in-out infinite alternate-reverse;
+  }
+}
+
+@keyframes orb-float {
+  from {
+    transform: translate(0, 0) scale(1);
+  }
+  to {
+    transform: translate(24px, -18px) scale(1.08);
+  }
+}
+
+/* ─── Layout ─────────────────────────────────────────────────── */
 
 .contact-inner {
   display: grid;
@@ -18,11 +61,48 @@
 
 /* ─── Left info ──────────────────────────────────────────────── */
 
+.contact-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  padding: 0.3rem 0.75rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  margin-bottom: 1.25rem;
+}
+
+.availability-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+  animation: pulse-dot 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45);
+  }
+  50% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 5px rgba(34, 197, 94, 0);
+  }
+}
+
 .contact-title {
   font-size: var(--text-3xl);
   font-weight: var(--font-bold);
-  color: var(--text-primary);
   margin: 0 0 0.75rem;
+  background: linear-gradient(135deg, var(--text-primary) 50%, var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .contact-subtitle {
@@ -97,6 +177,22 @@
   }
 }
 
+/* ─── Form card ──────────────────────────────────────────────── */
+
+.contact-form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  will-change: transform;
+  transition: box-shadow var(--transition-base);
+
+  &:hover {
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+}
+
 /* ─── Form ───────────────────────────────────────────────────── */
 
 .contact-form {
@@ -119,14 +215,14 @@
 
 .form-input,
 .form-textarea {
-  background: var(--bg-surface);
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: 0.6rem 0.85rem;
   font-size: var(--text-sm);
   color: var(--text-primary);
   width: 100%;
-  transition: border-color var(--transition-fast);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   font-family: inherit;
 
   &::placeholder {
@@ -136,6 +232,7 @@
   &:focus {
     outline: none;
     border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.13);
   }
 }
 
@@ -151,7 +248,11 @@
   height: 0;
 }
 
+/* ─── Submit ─────────────────────────────────────────────────── */
+
 .contact-submit {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -168,12 +269,35 @@
   transition: opacity var(--transition-fast);
 
   &:hover:not(:disabled) {
-    opacity: 0.85;
+    opacity: 0.9;
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+
+  &:hover:not(:disabled) .submit-shimmer {
+    animation: shimmer 0.65s ease forwards;
+  }
+}
+
+.submit-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.25) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  to {
+    transform: translateX(200%);
   }
 }
 

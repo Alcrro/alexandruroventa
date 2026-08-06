@@ -1,10 +1,7 @@
 import Link from "next/link";
 import "./footer.scss";
 
-const contactEmails = [
-  "business@alexandru-roventa.ro",
-  "alex.roventa94@gmail.com",
-];
+const contactEmails = ["alex.roventa94@gmail.com"];
 
 const projectLinks = [
   { label: "alexandru-roventa.ro", href: "https://alexandru-roventa.ro/" },

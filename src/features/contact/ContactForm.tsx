@@ -1,11 +1,18 @@
 "use client";
 import { useRef, useState, useTransition } from "react";
+import {
+  motion,
+  useMotionValue,
+  useSpring,
+  useTransform,
+  AnimatePresence,
+} from "framer-motion";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import sendEmail from "@/_lib/send";
 import "./contact.scss";
 
-const BUSINESS_EMAIL = "business@alexandru-roventa.ro";
+const BUSINESS_EMAIL = "alex.roventa94@gmail.com";
 
 const socialLinks = [
   {
@@ -20,10 +27,48 @@ const socialLinks = [
   },
 ];
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 22 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
+};
+
 export default function ContactForm() {
-  const ref = useRef<HTMLFormElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [isCopied, setIsCopied] = useState(false);
   const [isPending, startTransition] = useTransition();
+
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [7, -7]), {
+    stiffness: 300,
+    damping: 30,
+  });
+  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-7, 7]), {
+    stiffness: 300,
+    damping: 30,
+  });
+
+  const onMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = cardRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    mouseX.set((e.clientX - rect.left) / rect.width - 0.5);
+    mouseY.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+
+  const onMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   const copyEmail = () => {
     navigator.clipboard.writeText(BUSINESS_EMAIL);
@@ -35,7 +80,6 @@ export default function ContactForm() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
-    // honeypot — bots fill hidden fields
     if (formData.get("website")) return;
 
     const email = formData.get("email") as string;
@@ -53,112 +97,161 @@ export default function ContactForm() {
         toast.error("Failed to send. Please try again.");
       } else {
         toast.success("Message sent successfully!");
-        ref.current?.reset();
+        formRef.current?.reset();
       }
     });
   };
 
   return (
     <div className="contact-page">
-      <div className="contact-inner">
+      <div className="contact-orb contact-orb--1" aria-hidden="true" />
+      <div className="contact-orb contact-orb--2" aria-hidden="true" />
+
+      <motion.div
+        className="contact-inner"
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Left — info */}
         <div className="contact-info">
-          <h1 className="contact-title">Get in touch</h1>
-          <p className="contact-subtitle">
+          <motion.div className="contact-availability" variants={fadeUp}>
+            <span className="availability-dot" />
+            Available for projects
+          </motion.div>
+
+          <motion.h1 className="contact-title" variants={fadeUp}>
+            Get in touch
+          </motion.h1>
+
+          <motion.p className="contact-subtitle" variants={fadeUp}>
             Have a project in mind or just want to say hello? Feel free to
             reach out — I&apos;ll get back to you as soon as possible.
-          </p>
+          </motion.p>
 
-          <div className="contact-email-label">Email</div>
-          <button
-            type="button"
-            className={`contact-email-btn${isCopied ? " is-copied" : ""}`}
-            onClick={copyEmail}
-            aria-label="Copy email address"
-          >
-            <span>{BUSINESS_EMAIL}</span>
-            <i className={`bi ${isCopied ? "bi-check2" : "bi-clipboard"}`} />
-          </button>
+          <motion.div variants={fadeUp}>
+            <div className="contact-email-label">Email</div>
+            <motion.button
+              type="button"
+              className={`contact-email-btn${isCopied ? " is-copied" : ""}`}
+              onClick={copyEmail}
+              aria-label="Copy email address"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.96 }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+            >
+              <span>{BUSINESS_EMAIL}</span>
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.i
+                  key={isCopied ? "check" : "clipboard"}
+                  className={`bi ${isCopied ? "bi-check2" : "bi-clipboard"}`}
+                  initial={{ opacity: 0, scale: 0.4, rotate: -15 }}
+                  animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                  exit={{ opacity: 0, scale: 0.4, rotate: 15 }}
+                  transition={{ duration: 0.18, ease: "easeOut" }}
+                />
+              </AnimatePresence>
+            </motion.button>
+          </motion.div>
 
-          <div className="contact-social">
+          <motion.div className="contact-social" variants={fadeUp}>
             {socialLinks.map((link) => (
-              <Link
+              <motion.div
                 key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={link.label}
-                className="contact-social-link"
+                whileHover={{ y: -4, scale: 1.12 }}
+                whileTap={{ scale: 0.88 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
               >
-                <i className={`bi ${link.icon}`} />
-              </Link>
+                <Link
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={link.label}
+                  className="contact-social-link"
+                >
+                  <i className={`bi ${link.icon}`} />
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
 
-        {/* Right — form */}
-        <form
-          ref={ref}
-          onSubmit={handleSubmit}
-          className="contact-form"
-          noValidate
+        {/* Right — form card with 3D tilt */}
+        <motion.div
+          ref={cardRef}
+          className="contact-form-card"
+          variants={fadeUp}
+          onMouseMove={onMouseMove}
+          onMouseLeave={onMouseLeave}
+          style={{ rotateX, rotateY, transformPerspective: 1200 }}
         >
-          {/* honeypot */}
-          <input
-            type="text"
-            name="website"
-            tabIndex={-1}
-            aria-hidden="true"
-            className="contact-honeypot"
-          />
-
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              Your email
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="you@example.com"
-              required
-              className="form-input"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="message" className="form-label">
-              Message
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Tell me about your project..."
-              required
-              rows={7}
-              className="form-textarea"
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={isPending}
-            className="contact-submit"
+          <form
+            ref={formRef}
+            onSubmit={handleSubmit}
+            className="contact-form"
+            noValidate
           >
-            {isPending ? (
-              <>
-                <i className="bi bi-arrow-repeat contact-spinner" />
-                Sending…
-              </>
-            ) : (
-              <>
-                <i className="bi bi-send" />
-                Send message
-              </>
-            )}
-          </button>
-        </form>
-      </div>
+            {/* honeypot */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              aria-hidden="true"
+              className="contact-honeypot"
+            />
+
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Your email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+                required
+                className="form-input"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="message" className="form-label">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                placeholder="Tell me about your project..."
+                required
+                rows={7}
+                className="form-textarea"
+              />
+            </div>
+
+            <motion.button
+              type="submit"
+              disabled={isPending}
+              className="contact-submit"
+              whileHover={!isPending ? { scale: 1.03 } : {}}
+              whileTap={!isPending ? { scale: 0.97 } : {}}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
+              {isPending ? (
+                <>
+                  <i className="bi bi-arrow-repeat contact-spinner" />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  <i className="bi bi-send" />
+                  Send message
+                  <span className="submit-shimmer" aria-hidden="true" />
+                </>
+              )}
+            </motion.button>
+          </form>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
