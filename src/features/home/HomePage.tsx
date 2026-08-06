@@ -1,11 +1,13 @@
 import HeroSection from "./HeroSection";
-import AboutSection from "./AboutSection";
+import FeaturedProjects from "./FeaturedProjects";
+import TechStack from "./TechStack";
 
 export default function HomePage() {
   return (
     <div className="home-page">
       <HeroSection />
-      <AboutSection />
+      <FeaturedProjects />
+      <TechStack />
     </div>
   );
 }

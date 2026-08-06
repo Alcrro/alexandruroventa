@@ -76,12 +76,6 @@ export default function HeroSection() {
 							Contact me
 						</Link>
 						<Link
-							href="/projects"
-							className="btn-secondary"
-						>
-							See projects
-						</Link>
-						<Link
 							href="https://alexandru-roventa.s3.eu-central-1.amazonaws.com/CV-Alexandru-Roventa-web-developer.pdf"
 							target="_blank"
 							rel="noopener noreferrer"
