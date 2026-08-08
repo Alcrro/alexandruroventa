@@ -1,14 +1,245 @@
+/* ─── Projects Hero ──────────────────────────────────────────── */
+
+.ph {
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.5rem 1.5rem 5rem;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, var(--bg));
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+.ph-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ph-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+
+  &--1 {
+    width: 520px;
+    height: 520px;
+    top: -140px;
+    left: -120px;
+    background: radial-gradient(circle, rgba(2, 132, 199, 0.45) 0%, transparent 70%);
+  }
+
+  &--2 {
+    width: 440px;
+    height: 440px;
+    top: 0;
+    right: -100px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+  }
+
+  &--3 {
+    width: 380px;
+    height: 380px;
+    bottom: -60px;
+    left: 35%;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.35) 0%, transparent 70%);
+  }
+}
+
+.ph-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+  background-size: 30px 30px;
+  opacity: 0.6;
+  mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 20%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 65% 65% at 50% 50%, black 20%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ph-inner {
+  position: relative;
+  z-index: 3;
+  max-width: 680px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
+  will-change: transform;
+}
+
+.ph-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  padding: 0.3rem 0.9rem;
+  border-radius: var(--radius-full);
+}
+
+.ph-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  animation: ph-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ph-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.65); }
+}
+
+.ph-title {
+  font-size: clamp(2.6rem, 7vw, 4.75rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.ph-title-accent {
+  background: linear-gradient(130deg, var(--accent) 0%, #8b5cf6 60%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ph-subtitle {
+  font-size: var(--text-lg);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin: 0;
+  max-width: 460px;
+}
+
+.ph-stats {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.ph-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.ph-stat-value {
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.ph-stat-label {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: var(--font-medium);
+}
+
+.ph-stat-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+  flex-shrink: 0;
+}
+
+.ph-cta {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.ph-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--accent);
+  color: var(--accent-text);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.85;
+    transform: translateY(-2px);
+  }
+}
+
+.ph-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.5rem;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  border: 1px solid var(--border);
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
+
+  &:hover {
+    background: var(--border);
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 640px) {
+  .ph {
+    min-height: 380px;
+    padding: 4rem 1rem 3.5rem;
+  }
+
+  .ph-stats {
+    gap: 1.25rem;
+  }
+
+  .ph-orb--1 { width: 300px; height: 300px; }
+  .ph-orb--2 { width: 260px; height: 260px; }
+  .ph-orb--3 { width: 220px; height: 220px; }
+}
+
+/* ─────────────────────────────────────────────────────────────── */
+
 .projects-section {
   max-width: 56rem;
   margin: 0 auto;
-  padding: 4rem 1rem;
-}
-
-.projects-title {
-  font-size: var(--text-3xl);
-  font-weight: var(--font-bold);
-  color: var(--text-primary);
-  margin: 0 0 2rem;
+  padding: 2rem 1rem 4rem;
 }
 
 /* ─── Tech Filter ────────────────────────────────────────────── */
