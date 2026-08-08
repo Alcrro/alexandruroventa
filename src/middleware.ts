@@ -10,7 +10,7 @@ const corsOptions = {
   "X-XSS-Protection": "1; mode=block",
   "Referrer-Policy": "same-origin",
   "Content-Security-Policy":
-    "default-src * data: blob: 'unsafe-inline' 'unsafe-eval';frame-ancestors 'self';block-all-mixed-content;upgrade-insecure-requests ",
+    "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; block-all-mixed-content; upgrade-insecure-requests",
   "Strict-Transport-Security": "max-age=31536000",
 };
 
