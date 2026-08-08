@@ -27,6 +27,25 @@ const socialLinks = [
   },
 ];
 
+const faqs = [
+  {
+    q: "How quickly do you respond?",
+    a: "Within 24 hours on business days. Urgent? Mention it in your message.",
+  },
+  {
+    q: "What kind of projects do you take on?",
+    a: "Web apps, SaaS platforms, dashboards and APIs — primarily React, Next.js and Node.js.",
+  },
+  {
+    q: "Are you open to freelance?",
+    a: "Yes, currently open to new projects — short contracts and long-term engagements.",
+  },
+  {
+    q: "What timezone are you in?",
+    a: "EET (UTC+2), Romania. Good overlap with Western Europe and US East Coast mornings.",
+  },
+];
+
 const container = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
@@ -104,8 +123,59 @@ export default function ContactForm() {
 
   return (
     <div className="contact-page">
-      <div className="contact-orb contact-orb--1" aria-hidden="true" />
-      <div className="contact-orb contact-orb--2" aria-hidden="true" />
+      {/* Hero */}
+      <div className="contact-hero">
+        <div className="contact-hero-bg" aria-hidden>
+          <div className="contact-hero-orb contact-hero-orb--1" />
+          <div className="contact-hero-orb contact-hero-orb--2" />
+          <div className="contact-hero-orb contact-hero-orb--3" />
+        </div>
+        <div className="contact-hero-grid" aria-hidden />
+        <motion.div
+          className="contact-hero-content"
+          animate={{ rotateX: [2, -1.5, 2], rotateY: [-2.5, 2.5, -2.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ transformPerspective: 900 }}
+        >
+          <motion.span
+            className="contact-hero-eyebrow"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            <span className="contact-hero-eyebrow-dot" />
+            Available for projects
+          </motion.span>
+
+          <h1 className="contact-hero-title">
+            {(["Let’s", "work", "together"] as const).map((word, i) => (
+              <motion.span
+                key={word}
+                className={`contact-hero-word${i === 2 ? " contact-hero-accent" : ""}`}
+                initial={{ opacity: 0, y: 32, filter: "blur(8px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{
+                  duration: 0.55,
+                  delay: 0.15 + i * 0.11,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.p
+            className="contact-hero-sub"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.52, ease: [0.25, 0.46, 0.45, 0.94] }}
+          >
+            Have a project in mind or just want to say hello? Drop me a line —
+            I respond within 24h.
+          </motion.p>
+        </motion.div>
+      </div>
 
       <motion.div
         className="contact-inner"
@@ -252,6 +322,38 @@ export default function ContactForm() {
           </form>
         </motion.div>
       </motion.div>
+
+      {/* FAQ */}
+      <div className="contact-faq">
+        <motion.h2
+          className="contact-faq-heading"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+        >
+          Common questions
+        </motion.h2>
+        <div className="contact-faq-grid">
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={faq.q}
+              className="contact-faq-item"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.45,
+                delay: i * 0.08,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+            >
+              <h3>{faq.q}</h3>
+              <p>{faq.a}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
