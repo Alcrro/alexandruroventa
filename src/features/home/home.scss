@@ -383,7 +383,6 @@
   position: relative;
   padding: 5rem 0 7rem;
   border-top: 1px solid var(--border);
-  overflow: hidden;
 }
 
 .faq-orb {
@@ -392,6 +391,10 @@
   filter: blur(90px);
   pointer-events: none;
   z-index: 0;
+
+  :root:not(.dark) & {
+    opacity: 0.45;
+  }
 }
 
 .faq-orb--1 {
@@ -526,16 +529,48 @@
 }
 
 .faq-item {
-  border-bottom: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  position: relative;
   transition: background var(--transition-base);
 
-  &:first-child {
-    border-top: 1px solid var(--border);
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0.5rem;
+    right: 0.5rem;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border) 25%,
+      var(--border) 75%,
+      transparent
+    );
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+
+  &:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0.5rem;
+    right: 0.5rem;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border) 25%,
+      var(--border) 75%,
+      transparent
+    );
   }
 
   &.is-open {
-    background: color-mix(in srgb, var(--accent) 4%, transparent);
+    border-radius: var(--radius-md);
+    background: color-mix(in srgb, var(--accent) 5%, transparent);
   }
 }
 
@@ -550,6 +585,7 @@
   cursor: pointer;
   text-align: left;
   font-family: inherit;
+  color: var(--text-primary);
   transition: color var(--transition-fast);
 
   &:hover .faq-q-text {
@@ -590,8 +626,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--text-muted);
-  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
   transition: color var(--transition-fast);
 
   .is-open & {
