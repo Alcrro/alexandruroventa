@@ -22,7 +22,7 @@ function formatDuration(item: iExperience): string {
   if (years > 0) parts.push(`${years} ${years === 1 ? "year" : "years"}`);
   if (months > 0) parts.push(`${months} ${months === 1 ? "month" : "months"}`);
 
-  return parts.length ? `(${parts.join(", ")})` : "";
+  return parts.length ? `${parts.join(", ")}` : "";
 }
 
 export default function ExperienceItem({
@@ -36,16 +36,20 @@ export default function ExperienceItem({
   const icon = iconMap[item.className] ?? "bi-building";
   const startYear = new Date(item.startYear).getFullYear();
   const endLabel =
-    item.currentYear !== null ? "present" : new Date(item.endYear!).getFullYear().toString();
+    item.currentYear !== null ? "Present" : new Date(item.endYear!).getFullYear().toString();
   const duration = formatDuration(item);
+
+  const chips = item.descriptionMore
+    ? item.descriptionMore.split("\n").map((l) => l.trim()).filter(Boolean)
+    : [];
 
   return (
     <motion.div
       className="exp-item"
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: index * 0.18, ease: "easeOut" }}
+      transition={{ duration: 0.5, delay: index * 0.12, ease: "easeOut" }}
     >
       <div className="exp-dot">
         {item.companyLogo ? (
@@ -55,50 +59,59 @@ export default function ExperienceItem({
         )}
       </div>
 
-      <div className="exp-body">
-        <div className="exp-header">
-          <h2 className="exp-title">{item.titleDescription}</h2>
+      <motion.div
+        className="exp-card"
+        whileHover={{ y: -3, rotateX: 1 }}
+        style={{ transformStyle: "preserve-3d", perspective: 800 }}
+        transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      >
+        <div className="exp-card-top">
+          <div className="exp-card-left">
+            <h2 className="exp-title">{item.titleDescription}</h2>
+            {duration && <span className="exp-duration-badge">{duration}</span>}
+          </div>
           <span className="exp-years">
-            {startYear} – {endLabel}
-            {duration && <span className="exp-duration">{duration}</span>}
+            {startYear} — {endLabel}
           </span>
         </div>
 
         <AnimatePresence initial={false}>
-          {expanded && (
+          {expanded && chips.length > 0 && (
             <motion.div
-              className="exp-description"
+              className="exp-chips-wrap"
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.32, ease: "easeInOut" }}
             >
-              <ul>
-                {item.descriptionMore
-                  .split("\n")
-                  .filter((l) => l.trim())
-                  .map((line, i) => (
-                    <li key={i}>{line.trim()}</li>
-                  ))}
-              </ul>
+              <div className="exp-chips">
+                {chips.map((chip, i) => (
+                  <motion.span
+                    key={i}
+                    className="exp-chip"
+                    initial={{ opacity: 0, scale: 0.88 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: i * 0.04, duration: 0.22 }}
+                  >
+                    {chip}
+                  </motion.span>
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
 
-        {item.descriptionMore && (
+        {chips.length > 0 && (
           <button
-            className="exp-toggle"
+            className={`exp-toggle${expanded ? " exp-toggle--open" : ""}`}
             onClick={() => setExpanded((v) => !v)}
             aria-expanded={expanded}
           >
-            {expanded ? (
-              <>Less <i className="bi bi-chevron-up" /></>
-            ) : (
-              <>More <i className="bi bi-chevron-down" /></>
-            )}
+            <span>{expanded ? "Collapse" : "Show details"}</span>
+            <i className={`bi bi-chevron-${expanded ? "up" : "down"}`} />
           </button>
         )}
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

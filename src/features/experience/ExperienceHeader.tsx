@@ -6,8 +6,8 @@ export default function ExperienceHeader({ experiences }: { experiences: iExperi
 
   return (
     <div className="exp-page-header">
-      <h1 className="experience-title">Experience</h1>
-      <p className="exp-total-years">{totalYears}+ years of professional experience</p>
+      <h1 className="experience-title">My Journey</h1>
+      <p className="exp-total-years">{totalYears}+ years of continuous learning</p>
     </div>
   );
 }
