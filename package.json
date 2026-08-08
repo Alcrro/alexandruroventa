@@ -16,6 +16,8 @@
     "@emotion/styled": "^11.11.5",
     "@fullhuman/postcss-purgecss": "^6.0.0",
     "@monaco-editor/react": "^4.6.0",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.2",
     "@xyflow/react": "^12.11.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
