@@ -5,10 +5,10 @@ const knowledgeCategorySchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a skill"],
     unique: true,
+    maxlength: 100,
+    trim: true,
   },
-  link: {
-    type: String,
-  },
+  link: { type: String, maxlength: 200 },
 });
 
 knowledgeCategorySchema.pre("save", function (next) {

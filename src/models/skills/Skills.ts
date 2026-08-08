@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const SkillSchema = new mongoose.Schema({
-  skillName: { type: String, required: true, unique: true },
+  skillName: { type: String, required: true, unique: true, maxlength: 100, trim: true },
   category: {
     type: String,
     required: true,
@@ -14,7 +14,7 @@ const SkillSchema = new mongoose.Schema({
     enum: ["beginner", "intermediate", "advanced"],
     default: "intermediate",
   },
-  icon: { type: String, default: "" },
+  icon: { type: String, default: "", maxlength: 200 },
 });
 
 const Skill = mongoose.models.Skill || mongoose.model("Skill", SkillSchema);

@@ -7,10 +7,10 @@ const experienceSchema = new mongoose.Schema<iExperience>({
   currentYear: { type: Date, default: null },
   endYear: { type: Date },
   isEnded: { type: Boolean },
-  className: { type: String },
-  companyLogo: { type: String, default: null },
-  titleDescription: { type: String },
-  descriptionMore: { type: String },
+  className: { type: String, maxlength: 100 },
+  companyLogo: { type: String, default: null, maxlength: 500 },
+  titleDescription: { type: String, maxlength: 300 },
+  descriptionMore: { type: String, maxlength: 5000 },
 });
 
 experienceSchema.pre("save", function (next) {
