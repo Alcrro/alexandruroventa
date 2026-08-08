@@ -1,10 +1,18 @@
 import { connectDB } from "@/config/mongoDB";
 import Certificates from "@/models/certificates/Certificates";
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit, requireAdminSecret } from "@/lib/rateLimit";
+
+function escapeRegex(s: string): string {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 connectDB();
 
 export async function GET(req: NextRequest) {
+  const rl = await checkRateLimit(req, "general");
+  if (!rl.allowed) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
   try {
     const { searchParams } = new URL(req.url);
     const org = searchParams.get("org");
@@ -14,8 +22,8 @@ export async function GET(req: NextRequest) {
     const documentsPerPage = Math.max(1, Number(searchParams.get("documentsPerPage")) || 12);
 
     const match: Record<string, unknown> = {};
-    if (org) match.organization = { $regex: org, $options: "i" };
-    if (lang) match.languageLearnt = { $regex: lang, $options: "i" };
+    if (org) match.organization = { $regex: escapeRegex(org), $options: "i" };
+    if (lang) match.languageLearnt = { $regex: escapeRegex(lang), $options: "i" };
 
     const [data, totalDocuments, orgs, langs] = await Promise.all([
       Certificates.find(match)
@@ -45,6 +53,9 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!requireAdminSecret(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
     const { organization, languageLearnt, src, author, date } = await req.json();
     const certificate = await new Certificates({ organization, languageLearnt, src, author, date }).save();

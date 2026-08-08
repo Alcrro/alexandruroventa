@@ -1,10 +1,14 @@
 import { connectDB } from "@/config/mongoDB";
 import KnowledgeCategory from "@/models/knowledgeEntry/KnowledgeCategory";
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit, requireAdminSecret } from "@/lib/rateLimit";
 
 connectDB();
 
-export async function GET(_req: NextRequest) {
+export async function GET(req: NextRequest) {
+  const rl = await checkRateLimit(req, "general");
+  if (!rl.allowed) return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+
   try {
     const languagesSkills = await KnowledgeCategory.find();
     return NextResponse.json({ success: true, message: "Language skill loaded successfully", languagesSkills });
@@ -14,6 +18,9 @@ export async function GET(_req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
+  if (!requireAdminSecret(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   try {
     const { skillName } = await req.json();
 
