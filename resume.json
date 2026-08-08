@@ -1,0 +1,174 @@
+{
+  "basics": {
+    "name": "Alexandru Roventa",
+    "label": "Full-Stack Developer · SaaS Products · AI Integration",
+    "label_corporate": "Full-Stack Developer · SaaS Products · AI Integration",
+    "email": "alex.roventa94@gmail.com",
+    "phone": "+40 746 629 827",
+    "url": "https://alcrro.ro",
+    "summary": "Full-stack developer building and shipping SaaS products end-to-end, independently. Currently running two active products: LearnNoir, an EdTech platform with AI-generated lesson content for schools, and ApexFitness, a gym management SaaS. Open to freelance or remote full-stack roles.",
+    "summary_ro": "Full-stack developer care construiește și lansează produse SaaS end-to-end, independent. În prezent rulez două produse active: LearnNoir, platformă EdTech cu generare conținut AI pentru școli, și ApexFitness, SaaS de gestiune săli de fitness. Caut colaborări freelance sau remote full-stack.",
+    "summary_corporate": "Independent full-stack developer who builds, ships and maintains SaaS products end-to-end without a team. Currently running two active products: LearnNoir, an EdTech platform with AI content generation and school accounts, and ApexFitness, a gym management SaaS with payments and member check-in. Open to freelance or remote product development roles.",
+    "summary_corporate_ro": "Full-stack developer independent care construiește, lansează și întrețíne produse SaaS end-to-end, fără echipă. În prezent rulez două produse active: LearnNoir, platformă EdTech cu generare conținut AI și conturi pentru școli, și ApexFitness, SaaS de gestiune săli de fitness cu plăți și check-in membri. Caut colaborări freelance sau remote în dezvoltare de produs.",
+    "location": {
+      "city": "Satu Mare",
+      "countryCode": "RO"
+    },
+    "profiles": [
+      {
+        "network": "GitHub",
+        "username": "Alcrro",
+        "url": "https://github.com/Alcrro"
+      },
+      {
+        "network": "LinkedIn",
+        "username": "alexandru-roventa",
+        "url": "https://www.linkedin.com/in/alexandru-roventa/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "name": "Omnia Plast",
+      "position": "Production Planner",
+      "startDate": "2022-05-01",
+      "endDate": "2023-06-30",
+      "location": "Satu Mare, Romania",
+      "highlights": [
+        "Worked with ERP systems: PSS (Production Scheduling System) and MRP (Material Requirements Planning)"
+      ]
+    },
+    {
+      "name": "Omnia Plast",
+      "position": "Data Entry / IT Support",
+      "startDate": "2019-03-17",
+      "endDate": "2022-05-01",
+      "location": "Satu Mare, Romania",
+      "highlights": [
+        "Data entry and internal projects in an ERP system",
+        "Internal IT troubleshooting (hardware/software, printers, network equipment)"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "LearnNoir",
+      "url": "https://learn-noir-test.vercel.app",
+      "repo": "https://github.com/Alcrro/learnNoir-test",
+      "startDate": "2026-03-01",
+      "problem": "Most EdTech platforms deliver static content — walls of text or generic exercises. LearnNoir generates structured, interactive lessons via AI, with Cambridge-style lesson design, visual concept maps, and animated visualizations.",
+      "problem_ro": "Majoritarea platformelor EdTech livrează conținut static — text sau exerciții generice. LearnNoir generează lecții structurate și interactive prin AI, cu design de tip Cambridge, hărți de concepte și vizualizări animate.",
+      "description": "Platformă EdTech. Clean Architecture, Express 5 + TypeScript, React 19, Supabase, Redis, Stripe. Pipeline AI propriu pentru generare conținut lecții (raw → blocks). Vizualizări interactive cu GSAP, React Flow, Mafs. Conturi organizaționale pentru școli.",
+      "description_en": "EdTech platform. Clean Architecture, Express 5 + TypeScript, React 19, Supabase, Redis, Stripe. Custom AI pipeline for lesson content generation (raw → structured blocks). Interactive visualizations with GSAP, React Flow, Mafs. Organizational accounts for schools.",
+      "impact": "Active EdTech SaaS built and maintained independently. Custom AI pipeline generates structured lesson content (OpenAI). Multi-tenant architecture with organizational accounts for schools. Stripe billing integrated.",
+      "impact_ro": "SaaS EdTech activ, construit și întreținut independent. Pipeline AI propriu generează conținut structurat de lecții (OpenAI). Arhitectură multi-tenant cu conturi organizaționale pentru școli. Billing Stripe integrat.",
+      "keywords": ["TypeScript", "Express", "React", "Supabase", "Redis", "Stripe", "AI Pipeline"],
+      "type": "application"
+    },
+    {
+      "name": "web-services-platform",
+      "url": "https://alcrro.ro",
+      "repo": "https://github.com/Alcrro/web-services-platform",
+      "startDate": "2025-12-01",
+      "problem": "Web service providers and agencies lack a centralized tool to manage clients, projects, and documentation — and to leverage AI in their daily workflow.",
+      "problem_ro": "Furnizorii de servicii web și agențiile nu au un instrument centralizat pentru clienți, proiecte și documentație — și pentru a integra AI în fluxul zilnic de lucru.",
+      "description": "Dashboard Next.js pentru gestiunea serviciilor web. Integrare Anthropic Claude, Prisma + PostgreSQL, Supabase, TipTap editor, TanStack Query/Table, ECharts, Zustand. Autentificare și integrare GitHub prin Octokit.",
+      "description_en": "Next.js dashboard for web services management. Anthropic Claude integration, Prisma + PostgreSQL, Supabase, TipTap rich text editor, TanStack Query/Table, ECharts, Zustand. Authentication and GitHub integration via Octokit.",
+      "impact": "Next.js dashboard with Anthropic Claude AI integration, delivered end-to-end independently — from architecture to deployment.",
+      "impact_ro": "Dashboard Next.js cu integrare Anthropic Claude, livrat end-to-end independent — de la arhitectură la deployment.",
+      "keywords": ["TypeScript", "Next.js", "Prisma", "PostgreSQL", "Anthropic", "TanStack", "Supabase", "Octokit"],
+      "type": "application"
+    },
+    {
+      "name": "ApexFitness",
+      "url": "https://apex-fitness-six.vercel.app",
+      "repo": "https://github.com/Alcrro/apex-fitness",
+      "startDate": "2024-05-01",
+      "problem": "Gym owners juggle separate tools for memberships, payments, and attendance. ApexFitness consolidates all of it — member profiles, subscription billing, and QR check-in — into a single platform.",
+      "problem_ro": "Proprietarii de săli jonglează cu instrumente separate pentru abonamente, plăți și prezență. ApexFitness centralizează totul — profiluri membre, billing abonamente și check-in QR — într-o singură platformă.",
+      "description": "SaaS de gestiune săli de fitness. MERN stack, plăți Stripe, check-in prin QR code, autentificare multi-rol. Deployment hibrid: frontend pe Vercel, backend pe Railway/Render.",
+      "description_en": "Gym management SaaS. MERN stack, Stripe payments, QR check-in, multi-role auth. Hybrid deployment: frontend on Vercel, backend on Railway/Render.",
+      "impact": "Full gym management SaaS shipped independently. Stripe payment integration, QR-based member check-in, multi-role authentication. Hybrid cloud deployment (Vercel + Railway).",
+      "impact_ro": "SaaS complet de gestiune săli de fitness, lansat independent. Integrare Stripe, check-in membri prin QR, autentificare multi-rol. Deployment hibrid cloud (Vercel + Railway).",
+      "keywords": ["MongoDB", "Express", "React", "Node.js", "Stripe"],
+      "type": "application"
+    },
+    {
+      "name": "alexandruroventa",
+      "url": "https://alexandru-roventa.ro",
+      "repo": "https://github.com/Alcrro/alexandruroventa",
+      "startDate": "2024-05-01",
+      "problem": "A personal portfolio and live showcase built to display projects, skills, and experience — with a full CMS-backed admin layer for managing content.",
+      "problem_ro": "Portofoliu personal și showcase live construit pentru a afișa proiecte, abilități și experiență — cu un strat admin CMS-backed pentru gestionarea conținutului.",
+      "description": "Portofoliu personal full-stack. Next.js 14 (App Router), Tailwind CSS + SCSS, Framer Motion, MongoDB + Mongoose, Resend. Deployment pe AWS Amplify cu build pipeline prin Amplify Console.",
+      "description_en": "Personal full-stack portfolio. Next.js 14 (App Router), Tailwind CSS + SCSS, Framer Motion, MongoDB + Mongoose, Resend. Deployed on AWS Amplify with build pipeline via Amplify Console.",
+      "impact": "Full-stack portfolio with a MongoDB-backed content layer (projects, skills, certificates, experience) managed via custom admin routes. Deployed and maintained on AWS Amplify.",
+      "impact_ro": "Portofoliu full-stack cu strat de conținut MongoDB-backed (proiecte, abilități, certificate, experiență) gestionat prin rute admin custom. Deployat și întreținut pe AWS Amplify.",
+      "keywords": ["Next.js", "TypeScript", "MongoDB", "Mongoose", "Tailwind CSS", "SCSS", "Framer Motion", "AWS Amplify"],
+      "type": "application"
+    },
+    {
+      "name": "AlcrroShop",
+      "url": "https://shop.alcrro.ro",
+      "repo": "https://github.com/Alcrro/alcrro-shop",
+      "startDate": "2023-02-01",
+      "problem": "A full e-commerce portfolio project covering the complete user journey — product browsing, cart management, authentication, and Stripe checkout — built and deployed independently.",
+      "problem_ro": "Proiect e-commerce portfolio complet — browsing produse, gestionare coș, autentificare și checkout Stripe — construit și deployat independent.",
+      "description": "Proiect e-commerce portfolio. MERN stack, RTK Query, integrare Stripe.",
+      "description_en": "E-commerce portfolio project. MERN stack, RTK Query, Stripe integration.",
+      "impact": "Full-featured e-commerce platform with cart, authentication and Stripe payments. Built and deployed independently.",
+      "impact_ro": "Platformă e-commerce completă cu coș, autentificare și plăți Stripe. Construită și deployată independent.",
+      "keywords": ["MongoDB", "Express", "React", "Node.js", "RTK Query", "Stripe"],
+      "type": "application"
+    }
+  ],
+  "education": [
+    {
+      "institution": "Universitatea Constantin Brâncuși, Târgu Jiu",
+      "area": "Applied Automation and Informatics",
+      "studyType": "Bachelor",
+      "startDate": "2014-07-31",
+      "endDate": "2018-07-31",
+      "url": "https://www.utgjiu.ro"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Cambridge English Certification C1",
+      "date": "2022-04-05",
+      "issuer": "Cambridge English"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Backend",
+      "keywords": ["Node.js", "Express", "TypeScript", "PostgreSQL", "MongoDB", "Prisma", "Mongoose", "Redis", "Socket.io", "Zod"]
+    },
+    {
+      "name": "Frontend",
+      "keywords": ["React", "Next.js", "TypeScript", "Tailwind CSS", "SCSS", "Zustand", "TanStack Query", "GSAP", "Vite"]
+    },
+    {
+      "name": "Tools & Infra",
+      "keywords": ["Stripe", "OpenAI", "Anthropic", "Supabase", "Docker", "AWS (Amplify · S3 · Lambda)", "Vercel", "Railway", "Render", "Route 53", "Git", "GitHub", "Vitest", "Postman"]
+    }
+  ],
+  "competencies": [
+    { "name": "Full-Stack Product Development" },
+    { "name": "AI Integration (OpenAI, Anthropic)" },
+    { "name": "Cloud Deployment (AWS · Vercel · Railway · Render)" },
+    { "name": "Payment Systems (Stripe)" },
+    { "name": "EdTech & B2B Platforms" },
+    { "name": "Independent End-to-End Delivery" }
+  ],
+  "languages": [
+    {
+      "language": "Romanian",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "English",
+      "fluency": "C1"
+    }
+  ]
+}
