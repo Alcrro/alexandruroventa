@@ -56,7 +56,7 @@ export default function RootLayout({
         </DarkThemeProvider>
         <Toaster position="top-right" />
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-NE6YV8Y33N"
+          src="https://www.googletagmanager.com/gtag/js?id=G-5MXVJFNEHH"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -64,7 +64,7 @@ export default function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-NE6YV8Y33N');
+            gtag('config', 'G-5MXVJFNEHH');
           `}
         </Script>
       </body>
