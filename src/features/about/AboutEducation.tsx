@@ -1,6 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 
+const EASE = [0.25, 0.46, 0.45, 0.94] as const;
+
 const education = [
   {
     institution: "Full Stack Web Development Bootcamp",
@@ -22,19 +24,39 @@ const education = [
   },
 ];
 
+const section = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.12 } },
+};
+
+const heading = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: EASE } },
+};
+
+const card = {
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  visible: {
+    opacity: 1, y: 0, scale: 1,
+    transition: { duration: 0.52, ease: EASE },
+  },
+};
+
 export default function AboutEducation() {
   return (
     <motion.section
       className="about-education"
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      variants={section}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
     >
-      <h2 className="about-section-title">Education</h2>
+      <motion.h2 className="about-section-title" variants={heading}>
+        Education
+      </motion.h2>
       <div className="education-list">
         {education.map((item) => (
-          <div key={item.institution} className="education-card">
+          <motion.div key={item.institution} className="education-card" variants={card}>
             <div className="education-header">
               <span className="education-institution">{item.institution}</span>
               <span className="education-period">{item.period}</span>
@@ -43,11 +65,10 @@ export default function AboutEducation() {
             {"summary" in item && item.summary && (
               <p className="education-summary">{item.summary}</p>
             )}
-{item.note && <span className="education-note">{item.note}</span>}
-          </div>
+            {item.note && <span className="education-note">{item.note}</span>}
+          </motion.div>
         ))}
       </div>
-
     </motion.section>
   );
 }
