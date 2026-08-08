@@ -62,7 +62,7 @@ export default function HeroSection() {
 						className="hero-role"
 						variants={item}
 					>
-						Full Stack Developer
+						Full-Stack Developer · SaaS Products · AI Integration
 					</motion.p>
 
 					<motion.div
@@ -76,9 +76,7 @@ export default function HeroSection() {
 							Contact me
 						</Link>
 						<Link
-							href="https://alexandru-roventa.s3.eu-central-1.amazonaws.com/CV-Alexandru-Roventa-web-developer.pdf"
-							target="_blank"
-							rel="noopener noreferrer"
+							href="/cv"
 							className="btn-secondary"
 						>
 							<i className="bi bi-file-earmark-person" />
