@@ -9,8 +9,21 @@ const nextConfig = {
     MONGO_URI: process.env.MONGO_URI,
   },
 
+  async headers() {
+    return [
+      {
+        source: "/_next/static/(.*)",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+      {
+        source: "/(.*)\\.(woff2|woff|ttf|otf)",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
+
   images: {
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         protocol: "https",

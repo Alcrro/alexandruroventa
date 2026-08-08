@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+/* force font-display swap on Bootstrap Icons to avoid blocking render */
+@font-face {
+  font-family: "bootstrap-icons";
+  font-display: swap;
+}
+
 /* ─── Design Tokens ──────────────────────────────────────────── */
 
 :root {

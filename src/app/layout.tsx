@@ -37,6 +37,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/eu.png" sizes="any" />
+        <link rel="preconnect" href="https://alexandru-roventa.s3.eu-central-1.amazonaws.com" />
+        <link rel="preconnect" href="https://ti-user-certificates.s3.amazonaws.com" />
       </head>
       <body className={`${inter.variable} font-sans`}>
         <DarkThemeProvider>
