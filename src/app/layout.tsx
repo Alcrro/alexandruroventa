@@ -17,6 +17,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXTAUTH_URL ?? "https://alexandru-roventa.ro"),
   title: "Alexandru Roventa - Home",
   description: "Home",
   icons: {

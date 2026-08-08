@@ -26,12 +26,12 @@ export default function ProjectGallery({ screenshots, ogImageUrl, title }: Props
   useEffect(() => {
     if (screenshots.length <= 1) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") prev();
-      else if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") goTo((activeIdx - 1 + screenshots.length) % screenshots.length);
+      else if (e.key === "ArrowRight") goTo((activeIdx + 1) % screenshots.length);
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
-  });
+  }, [goTo, activeIdx, screenshots.length]);
 
   if (screenshots.length === 1) {
     return (

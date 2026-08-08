@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { iExperience } from "@/types";
 
@@ -53,7 +54,7 @@ export default function ExperienceItem({
     >
       <div className="exp-dot">
         {item.companyLogo ? (
-          <img src={item.companyLogo} alt={item.titleDescription} className="exp-logo-img" />
+          <Image src={item.companyLogo} alt={item.titleDescription} className="exp-logo-img" width={22} height={22} unoptimized />
         ) : (
           <i className={`bi ${icon}`} />
         )}
