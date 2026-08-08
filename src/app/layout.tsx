@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import Script from "next/script";
 import "./globals.scss";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../features/navbar/Navbar";
@@ -54,6 +55,18 @@ export default function RootLayout({
           </main>
         </DarkThemeProvider>
         <Toaster position="top-right" />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-NE6YV8Y33N"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NE6YV8Y33N');
+          `}
+        </Script>
       </body>
     </html>
   );
