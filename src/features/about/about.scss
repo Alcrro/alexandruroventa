@@ -95,11 +95,20 @@
   color: var(--text-secondary);
 }
 
+.education-summary {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin: 0.35rem 0 0;
+}
+
+
 .education-note {
   font-size: var(--text-sm);
   color: var(--text-muted);
   font-style: italic;
 }
+
 
 /* ─── Experience summary ──────────────────────────────────────── */
 

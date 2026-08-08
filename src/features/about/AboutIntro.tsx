@@ -39,9 +39,9 @@ export default function AboutIntro() {
         </p>
         <p>
           Outside of coding, I stay active at the gym and spend time with
-          my dog and cat. I&apos;m always looking to grow — currently
-          exploring System Design concepts — and I&apos;m open to new
-          opportunities as a software developer.
+          my dog and cat. Currently exploring System Design concepts and
+          deepening my architecture knowledge — applying it directly to the
+          products I build and run independently.
         </p>
       </div>
     </motion.section>

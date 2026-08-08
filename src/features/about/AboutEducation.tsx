@@ -6,6 +6,8 @@ const education = [
     institution: "Full Stack Web Development Bootcamp",
     field: "React · Next.js · Node.js · MongoDB",
     period: "2022",
+    summary:
+      "Self-paced bootcamp covering the full web development stack — from HTML/CSS and JavaScript through React, Node.js, Express, and MongoDB. The foundation that transitioned me into professional development.",
   },
   {
     institution: "Faculty of Automation and Applied Informatics",
@@ -38,10 +40,14 @@ export default function AboutEducation() {
               <span className="education-period">{item.period}</span>
             </div>
             <span className="education-field">{item.field}</span>
-            {item.note && <span className="education-note">{item.note}</span>}
+            {"summary" in item && item.summary && (
+              <p className="education-summary">{item.summary}</p>
+            )}
+{item.note && <span className="education-note">{item.note}</span>}
           </div>
         ))}
       </div>
+
     </motion.section>
   );
 }
