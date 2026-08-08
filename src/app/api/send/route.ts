@@ -1,27 +1,29 @@
 import { EmailTemplate } from "@/features/contact/EmailTemplate";
 import { Resend } from "resend";
 import { NextRequest } from "next/server";
+import { checkRateLimit } from "@/lib/rateLimit";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-// In-memory rate limit: 1 email per IP per 10 minutes
-const rateLimitMap = new Map<string, number>();
-const RATE_LIMIT_MS = 10 * 60 * 1000;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function POST(req: NextRequest) {
   try {
-    const ip = req.headers.get("x-forwarded-for") ?? "unknown";
-    const lastSent = rateLimitMap.get(ip);
-    if (lastSent && Date.now() - lastSent < RATE_LIMIT_MS) {
+    const rl = await checkRateLimit(req, "contact");
+    if (!rl.allowed) {
       return Response.json({ error: "Too many requests" }, { status: 429 });
     }
-    rateLimitMap.set(ip, Date.now());
 
     const body = await req.json();
     const { email, message } = body;
 
     if (!email || !message) {
       return Response.json({ error: "Missing fields" }, { status: 400 });
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      return Response.json({ error: "Invalid email" }, { status: 400 });
+    }
+    if (typeof message !== "string" || message.length < 10 || message.length > 5000) {
+      return Response.json({ error: "Message must be 10–5000 characters" }, { status: 400 });
     }
 
     const { data, error } = await resend.emails.send({
@@ -37,7 +39,7 @@ export async function POST(req: NextRequest) {
     }
 
     return Response.json(data);
-  } catch (error) {
-    return Response.json({ error }, { status: 500 });
+  } catch {
+    return Response.json({ error: "Internal error" }, { status: 500 });
   }
 }
