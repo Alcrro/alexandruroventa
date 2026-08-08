@@ -1,6 +1,7 @@
 import { connectDB } from "@/config/mongoDB";
 import KnowledgeEntry from "@/models/knowledgeEntry/KnowledgeEntry";
 import { NextRequest, NextResponse } from "next/server";
+import { checkRateLimit, getIp } from "@/lib/rateLimit";
 
 connectDB();
 
@@ -8,6 +9,12 @@ export async function POST(
   req: NextRequest,
   { params }: { params: { category: string; slug: string } }
 ) {
+  const ip = getIp(req);
+  const rl = await checkRateLimit(req, "rating", `${ip}:${params.slug}`);
+  if (!rl.allowed) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
+
   try {
     const { rating } = await req.json();
     if (!Number.isInteger(rating) || rating < 1 || rating > 5) {
