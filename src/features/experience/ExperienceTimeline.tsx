@@ -13,6 +13,9 @@ export default async function ExperienceTimeline() {
 
   return (
     <section className="experience-section">
+      <div className="exp-orb exp-orb--1" aria-hidden />
+      <div className="exp-orb exp-orb--2" aria-hidden />
+      <div className="exp-orb exp-orb--3" aria-hidden />
       <ExperienceHeader experiences={sorted} />
       <ExperienceContainer items={sorted} />
     </section>
