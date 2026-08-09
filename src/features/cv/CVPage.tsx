@@ -125,10 +125,6 @@ export default function CVPage({ theme }: { theme: Theme }) {
               {basics.email}
             </a>
             <span className="cv-contact">
-              <i className="bi bi-telephone" />
-              {basics.phone}
-            </span>
-            <span className="cv-contact">
               <i className="bi bi-geo-alt" />
               {basics.location.city}, {basics.location.countryCode}
             </span>
