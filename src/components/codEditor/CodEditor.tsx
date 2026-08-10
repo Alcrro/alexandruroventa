@@ -1,20 +1,21 @@
-import { Box } from "@chakra-ui/react";
 import { Editor } from "@monaco-editor/react";
 import React from "react";
 import LanguageSelector from "./LanguageSelector";
 
 export default function CodEditor({ content }: { content?: string }) {
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      justifyContent="center"
-      alignItems="center"
-      marginX={"auto"}
-      maxWidth={"50rem"}
-      padding={10}
-      // height={"60vh"}
-      color={"#000"}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginLeft: "auto",
+        marginRight: "auto",
+        maxWidth: "50rem",
+        padding: "2.5rem",
+        color: "#000",
+      }}
     >
       <LanguageSelector />
       <Editor
@@ -32,6 +33,6 @@ export default function CodEditor({ content }: { content?: string }) {
           scrollBeyondLastLine: false,
         }}
       />
-    </Box>
+    </div>
   );
 }

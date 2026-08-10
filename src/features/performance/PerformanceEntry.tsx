@@ -1,6 +1,7 @@
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import "./performance.scss";
+import { BsArrowLeft } from "react-icons/bs";
 
 const MonacoEditor = dynamic(() => import("./MonacoEditor"), { ssr: false });
 const RatingEditor = dynamic(
@@ -43,7 +44,7 @@ export default function PerformanceEntry({
   return (
     <section className="perf-entry-section">
       <Link href={`/performance/${entry.category}`} className="perf-entry-back">
-        <i className="bi bi-arrow-left" />
+        <BsArrowLeft />
         Back to {entry.category}
       </Link>
 

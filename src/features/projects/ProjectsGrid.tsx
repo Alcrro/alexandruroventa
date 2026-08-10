@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { IGithubProject } from "@/types";
 import ProjectCard from "./ProjectCard";
 import { techIconMap, techCategories } from "./techIcons";
+import { BsChevronUp, BsChevronDown, BsCheck2 } from "react-icons/bs";
 
 const container = {
   hidden: {},
@@ -81,7 +82,7 @@ export default function ProjectsGrid({ projects }: { projects: IGithubProject[] 
                   onClick={() => toggleCategory(cat.label)}
                 >
                   <span>{hasActive ? activeFilter : cat.label}</span>
-                  <i className={`bi bi-chevron-${isOpen ? "up" : "down"} tech-filter-chevron`} />
+                  <span className="tech-filter-chevron">{isOpen ? <BsChevronUp /> : <BsChevronDown />}</span>
                 </button>
 
                 <AnimatePresence>
@@ -115,7 +116,7 @@ export default function ProjectsGrid({ projects }: { projects: IGithubProject[] 
                             </span>
                             <span className="tech-filter-option-label">{tech}</span>
                             {isSelected && (
-                              <i className="bi bi-check2 tech-filter-option-check" />
+                              <BsCheck2 className="tech-filter-option-check" />
                             )}
                           </button>
                         );

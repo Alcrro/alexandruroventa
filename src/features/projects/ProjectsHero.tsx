@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { BsGithub } from "react-icons/bs";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 28 },
@@ -132,7 +133,7 @@ export default function ProjectsHero({ count }: { count: number }) {
             rel="noopener noreferrer"
             className="ph-btn-secondary"
           >
-            <i className="bi bi-github" />
+            <BsGithub />
             GitHub
           </a>
         </motion.div>

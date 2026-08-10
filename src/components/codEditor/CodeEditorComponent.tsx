@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import "./editor-container.scss";
-import { Box } from "@chakra-ui/react";
 import CodEditor from "./CodEditor";
-import ChakraProv from "./ChakraProvider";
 import Image from "next/image";
 import RatingEditor from "./rating/RatingEditor";
 import { iDocument } from "@/types";
@@ -56,11 +54,7 @@ export default function CodeEditorComponent({
           collapse ? "activeEditor" : "inactiveEditor"
         }`}
       >
-        <Box>
-          <ChakraProv>
-            <CodEditor content={content} />
-          </ChakraProv>
-        </Box>
+        <CodEditor content={content} />
         <div className="rating-container">
           <RatingEditor />
         </div>

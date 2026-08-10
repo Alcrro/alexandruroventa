@@ -4,6 +4,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import resumeData from "../../../resume.json";
 import "./cv.scss";
+import {
+  BsDownload, BsEnvelope, BsGeoAlt, BsGlobe, BsGithub,
+  BsLinkedin, BsArrowUpRightSquare,
+} from "react-icons/bs";
 
 type Locale = "en" | "ro";
 type Theme = "technical" | "corporate";
@@ -107,7 +111,7 @@ export default function CVPage({ theme }: { theme: Theme }) {
         </div>
 
         <button className="cv-print-btn" onClick={() => window.print()}>
-          <i className="bi bi-download" />
+          <BsDownload />
           {t.download}
         </button>
       </div>
@@ -121,11 +125,11 @@ export default function CVPage({ theme }: { theme: Theme }) {
           </p>
           <div className="cv-contacts">
             <a href={`mailto:${basics.email}`} className="cv-contact">
-              <i className="bi bi-envelope" />
+              <BsEnvelope />
               {basics.email}
             </a>
             <span className="cv-contact">
-              <i className="bi bi-geo-alt" />
+              <BsGeoAlt />
               {basics.location.city}, {basics.location.countryCode}
             </span>
             <a
@@ -134,7 +138,7 @@ export default function CVPage({ theme }: { theme: Theme }) {
               rel="noopener noreferrer"
               className="cv-contact"
             >
-              <i className="bi bi-globe" />
+              <BsGlobe />
               {basics.url.replace("https://", "")}
             </a>
             {theme === "technical" && github && (
@@ -144,7 +148,7 @@ export default function CVPage({ theme }: { theme: Theme }) {
                 rel="noopener noreferrer"
                 className="cv-contact"
               >
-                <i className="bi bi-github" />
+                <BsGithub />
                 {github.username}
               </a>
             )}
@@ -155,7 +159,7 @@ export default function CVPage({ theme }: { theme: Theme }) {
                 rel="noopener noreferrer"
                 className="cv-contact"
               >
-                <i className="bi bi-linkedin" />
+                <BsLinkedin />
                 {linkedin.username}
               </a>
             )}
@@ -232,7 +236,7 @@ export default function CVPage({ theme }: { theme: Theme }) {
                               className="cv-item-link"
                             >
                               {project.name}
-                              <i className="bi bi-arrow-up-right-square" />
+                              <BsArrowUpRightSquare />
                             </a>
                           ) : (
                             project.name
@@ -244,7 +248,7 @@ export default function CVPage({ theme }: { theme: Theme }) {
                               rel="noopener noreferrer"
                               className="cv-item-link cv-item-link--repo"
                             >
-                              <i className="bi bi-github" />
+                              <BsGithub />
                             </a>
                           )}
                         </h3>

@@ -3,13 +3,17 @@ import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { iExperience } from "@/types";
+import {
+  BsMortarboardFill, BsBriefcaseFill, BsGoogle, BsAmazon,
+  BsFacebook, BsBuilding, BsChevronUp, BsChevronDown,
+} from "react-icons/bs";
 
-const iconMap: Record<string, string> = {
-  school: "bi-mortarboard-fill",
-  job: "bi-briefcase-fill",
-  google: "bi-google",
-  amazon: "bi-amazon",
-  facebook: "bi-facebook",
+const iconMap: Record<string, React.ReactNode> = {
+  school: <BsMortarboardFill />,
+  job: <BsBriefcaseFill />,
+  google: <BsGoogle />,
+  amazon: <BsAmazon />,
+  facebook: <BsFacebook />,
 };
 
 function formatDuration(item: iExperience): string {
@@ -34,7 +38,7 @@ export default function ExperienceItem({
   index: number;
 }) {
   const [expanded, setExpanded] = useState(false);
-  const icon = iconMap[item.className] ?? "bi-building";
+  const icon = iconMap[item.className] ?? <BsBuilding />;
   const startYear = new Date(item.startYear).getFullYear();
   const endLabel =
     item.currentYear !== null ? "Present" : new Date(item.endYear!).getFullYear().toString();
@@ -56,7 +60,7 @@ export default function ExperienceItem({
         {item.companyLogo ? (
           <Image src={item.companyLogo} alt={item.titleDescription} className="exp-logo-img" width={22} height={22} unoptimized />
         ) : (
-          <i className={`bi ${icon}`} />
+          icon
         )}
       </div>
 
@@ -109,7 +113,7 @@ export default function ExperienceItem({
             aria-expanded={expanded}
           >
             <span>{expanded ? "Collapse" : "Show details"}</span>
-            <i className={`bi bi-chevron-${expanded ? "up" : "down"}`} />
+            {expanded ? <BsChevronUp /> : <BsChevronDown />}
           </button>
         )}
       </motion.div>

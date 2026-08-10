@@ -11,19 +11,20 @@ import toast from "react-hot-toast";
 import Link from "next/link";
 import sendEmail from "@/_lib/send";
 import "./contact.scss";
+import { BsLinkedin, BsGithub, BsCheck2, BsClipboard, BsArrowRepeat, BsSend } from "react-icons/bs";
 
 const BUSINESS_EMAIL = "alex.roventa94@gmail.com";
 
-const socialLinks = [
+const socialLinks: { label: string; href: string; icon: React.ReactNode }[] = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/alexandru-roventa/",
-    icon: "bi-linkedin",
+    icon: <BsLinkedin />,
   },
   {
     label: "GitHub",
     href: "https://github.com/Alcrro",
-    icon: "bi-github",
+    icon: <BsGithub />,
   },
 ];
 
@@ -212,14 +213,16 @@ export default function ContactForm() {
             >
               <span>{BUSINESS_EMAIL}</span>
               <AnimatePresence mode="wait" initial={false}>
-                <motion.i
+                <motion.span
                   key={isCopied ? "check" : "clipboard"}
-                  className={`bi ${isCopied ? "bi-check2" : "bi-clipboard"}`}
+                  style={{ display: "inline-flex", alignItems: "center" }}
                   initial={{ opacity: 0, scale: 0.4, rotate: -15 }}
                   animate={{ opacity: 1, scale: 1, rotate: 0 }}
                   exit={{ opacity: 0, scale: 0.4, rotate: 15 }}
                   transition={{ duration: 0.18, ease: "easeOut" }}
-                />
+                >
+                  {isCopied ? <BsCheck2 /> : <BsClipboard />}
+                </motion.span>
               </AnimatePresence>
             </motion.button>
           </motion.div>
@@ -239,7 +242,7 @@ export default function ContactForm() {
                   aria-label={link.label}
                   className="contact-social-link"
                 >
-                  <i className={`bi ${link.icon}`} />
+                  {link.icon}
                 </Link>
               </motion.div>
             ))}
@@ -308,12 +311,12 @@ export default function ContactForm() {
             >
               {isPending ? (
                 <>
-                  <i className="bi bi-arrow-repeat contact-spinner" />
+                  <BsArrowRepeat className="contact-spinner" />
                   Sending…
                 </>
               ) : (
                 <>
-                  <i className="bi bi-send" />
+                  <BsSend />
                   Send message
                   <span className="submit-shimmer" aria-hidden="true" />
                 </>

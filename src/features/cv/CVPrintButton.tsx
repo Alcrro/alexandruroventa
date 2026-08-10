@@ -1,9 +1,10 @@
 "use client";
+import { BsDownload } from "react-icons/bs";
 
 export default function CVPrintButton() {
   return (
     <button className="cv-print-btn" onClick={() => window.print()}>
-      <i className="bi bi-download" />
+      <BsDownload />
       Download PDF
     </button>
   );

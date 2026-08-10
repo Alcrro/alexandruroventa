@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.scss";
-import "bootstrap-icons/font/bootstrap-icons.css";
 import Navbar from "../features/navbar/Navbar";
 import DarkThemeProvider from "./DarkThemeProvider";
 import Footer from "@/features/footer/Footer";

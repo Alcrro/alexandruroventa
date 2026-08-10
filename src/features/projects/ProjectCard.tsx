@@ -2,6 +2,7 @@ import Link from "next/link";
 import { IGithubProject } from "@/types";
 import TechList from "./TechList";
 import ProjectImage from "./ProjectImage";
+import { BsBoxArrowUpRight, BsGithub } from "react-icons/bs";
 
 export default function ProjectCard({ project }: { project: IGithubProject }) {
   const isWip = project.status === "wip";
@@ -35,7 +36,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
               className="project-live-link"
             >
               {project.link.replace(/^https?:\/\//, "")}
-              <i className="bi bi-box-arrow-up-right" />
+              <BsBoxArrowUpRight />
             </Link>
           )}
         </div>
@@ -55,7 +56,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
                 rel="noopener noreferrer"
                 className="btn-secondary"
               >
-                <i className="bi bi-github" /> Frontend
+                <BsGithub /> Frontend
               </Link>
               <Link
                 href={project.backendRepository}
@@ -63,7 +64,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
                 rel="noopener noreferrer"
                 className="btn-secondary"
               >
-                <i className="bi bi-github" /> Backend
+                <BsGithub /> Backend
               </Link>
             </>
           ) : (
@@ -73,7 +74,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              <i className="bi bi-github" /> GitHub
+              <BsGithub /> GitHub
             </Link>
           )}
           {project.isDeployed && project.link && (
@@ -83,7 +84,7 @@ export default function ProjectCard({ project }: { project: IGithubProject }) {
               rel="noopener noreferrer"
               className="btn-primary"
             >
-              <i className="bi bi-box-arrow-up-right" /> Live
+              <BsBoxArrowUpRight /> Live
             </Link>
           )}
         </div>

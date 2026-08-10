@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { faqs } from "./faqData";
+import { BsArrowRight, BsPlusLg } from "react-icons/bs";
 
 const EASE = [0.25, 0.46, 0.45, 0.94] as const;
 
@@ -72,7 +73,7 @@ export default function HomeFaq() {
             transition={{ duration: 0.45, delay: 0.34, ease: EASE }}
           >
             <Link href="/contact/me" className="faq-cta">
-              Start a project <i className="bi bi-arrow-right" />
+              Start a project <BsArrowRight />
             </Link>
           </motion.div>
         </motion.div>
@@ -105,7 +106,7 @@ export default function HomeFaq() {
                   transition={{ duration: 0.22, ease: EASE }}
                   aria-hidden
                 >
-                  <i className="bi bi-plus-lg" />
+                  <BsPlusLg />
                 </motion.span>
               </button>
 

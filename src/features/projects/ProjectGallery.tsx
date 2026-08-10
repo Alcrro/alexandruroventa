@@ -1,6 +1,7 @@
 "use client";
 import { useState, useCallback, useEffect } from "react";
 import Image from "next/image";
+import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 interface Props {
   screenshots: string[];
@@ -57,7 +58,7 @@ export default function ProjectGallery({ screenshots, ogImageUrl, title }: Props
           onClick={prev}
           aria-label="Previous screenshot"
         >
-          <i className="bi bi-chevron-left" />
+          <BsChevronLeft />
         </button>
 
         <Image
@@ -75,7 +76,7 @@ export default function ProjectGallery({ screenshots, ogImageUrl, title }: Props
           onClick={next}
           aria-label="Next screenshot"
         >
-          <i className="bi bi-chevron-right" />
+          <BsChevronRight />
         </button>
 
         <span className="project-gallery-counter">

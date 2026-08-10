@@ -2,12 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* force font-display swap on Bootstrap Icons to avoid blocking render */
-@font-face {
-  font-family: "bootstrap-icons";
-  font-display: swap;
-}
-
 /* ─── Design Tokens ──────────────────────────────────────────── */
 
 :root {
@@ -148,11 +142,3 @@ main {
 }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* ─── Chakra UI reset ────────────────────────────────────────── */
-
-.chakra-ui-dark :host:not([data-theme]),
-.chakra-ui-dark :root:not([data-theme]),
-.chakra-ui-dark {
-  background: unset;
-  color: unset;
-}

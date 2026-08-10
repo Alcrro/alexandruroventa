@@ -4,6 +4,7 @@ import TechBadge from "./TechBadge";
 import ProjectGallery from "./ProjectGallery";
 import SchemaCards from "./SchemaCards";
 import "./projects.scss";
+import { BsArrowLeft, BsGithub, BsBoxArrowUpRight } from "react-icons/bs";
 
 export default function ProjectDetail({ project }: { project: IGithubProject }) {
   const isWip = project.status === "wip";
@@ -18,7 +19,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
     <article className="project-detail">
       <div className="project-detail-back">
         <Link href="/projects" className="btn-secondary">
-          <i className="bi bi-arrow-left" /> Back to projects
+          <BsArrowLeft /> Back to projects
         </Link>
       </div>
 
@@ -125,7 +126,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              <i className="bi bi-github" /> Frontend
+              <BsGithub /> Frontend
             </Link>
             <Link
               href={project.backendRepository}
@@ -133,7 +134,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
               rel="noopener noreferrer"
               className="btn-secondary"
             >
-              <i className="bi bi-github" /> Backend
+              <BsGithub /> Backend
             </Link>
           </>
         ) : (
@@ -143,7 +144,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
             rel="noopener noreferrer"
             className="btn-secondary"
           >
-            <i className="bi bi-github" /> GitHub
+            <BsGithub /> GitHub
           </Link>
         )}
         {project.isDeployed && project.link && (
@@ -153,7 +154,7 @@ export default function ProjectDetail({ project }: { project: IGithubProject }) 
             rel="noopener noreferrer"
             className="btn-primary"
           >
-            <i className="bi bi-box-arrow-up-right" /> Live site
+            <BsBoxArrowUpRight /> Live site
           </Link>
         )}
       </div>

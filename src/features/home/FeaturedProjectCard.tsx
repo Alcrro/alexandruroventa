@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { IGithubProject } from "@/types";
 import ProjectImage from "../projects/ProjectImage";
+import { BsArrowRight, BsBoxArrowUpRight } from "react-icons/bs";
 
 const SPRING = { stiffness: 260, damping: 28 };
 const MAX_TILT = 8;
@@ -86,7 +87,7 @@ export default function FeaturedProjectCard({ project, index }: Props) {
 
           <div className="featured-card-actions">
             <Link href={`/projects/${project.slug}`} className="featured-details-link">
-              View details <i className="bi bi-arrow-right" />
+              View details <BsArrowRight />
             </Link>
             {project.isDeployed && project.link && (
               <Link
@@ -95,7 +96,7 @@ export default function FeaturedProjectCard({ project, index }: Props) {
                 rel="noopener noreferrer"
                 className="featured-live-link"
               >
-                Live <i className="bi bi-box-arrow-up-right" />
+                Live <BsBoxArrowUpRight />
               </Link>
             )}
           </div>

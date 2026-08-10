@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getGithubProjects } from "@/_lib/github/getGithubProjects";
 import FeaturedProjectCard from "./FeaturedProjectCard";
+import { BsArrowRight } from "react-icons/bs";
 
 export default async function FeaturedProjects() {
   const projects = await getGithubProjects();
@@ -13,7 +14,7 @@ export default async function FeaturedProjects() {
       <div className="featured-header">
         <h2 className="home-section-title">Featured Projects</h2>
         <Link href="/projects" className="see-all-link">
-          See all <i className="bi bi-arrow-right" />
+          See all <BsArrowRight />
         </Link>
       </div>
       <div className="featured-grid">

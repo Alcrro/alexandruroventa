@@ -1,5 +1,6 @@
 import Link from "next/link";
 import "./footer.scss";
+import { BsLinkedin, BsGithub } from "react-icons/bs";
 
 const contactEmails = ["alex.roventa94@gmail.com"];
 
@@ -9,16 +10,16 @@ const projectLinks = [
   { label: "alcrro.ro", href: "https://alcrro.ro" },
 ];
 
-const socialLinks = [
+const socialLinks: { label: string; href: string; icon: React.ReactNode }[] = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/alexandru-roventa/",
-    icon: "bi-linkedin",
+    icon: <BsLinkedin />,
   },
   {
     label: "GitHub",
     href: "https://github.com/Alcrro",
-    icon: "bi-github",
+    icon: <BsGithub />,
   },
 ];
 
@@ -64,7 +65,7 @@ export default function Footer() {
                 aria-label={link.label}
                 className="footer-social-link"
               >
-                <i className={`bi ${link.icon}`} />
+                {link.icon}
               </Link>
             ))}
           </div>

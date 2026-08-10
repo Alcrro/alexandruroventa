@@ -4,6 +4,7 @@ import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import "./performance.scss";
+import { BsSortUp, BsSortDown, BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
 interface Entry {
   _id: string;
@@ -96,7 +97,7 @@ export default function PerformanceList({
             className="perf-sort-btn"
             onClick={() => setParams({ sort: sortAsc ? "desc" : null, page: null })}
           >
-            <i className={`bi bi-sort-${sortAsc ? "up" : "down"}`} />
+            {sortAsc ? <BsSortUp /> : <BsSortDown />}
             {sortAsc ? "Oldest first" : "Newest first"}
           </button>
         </div>
@@ -152,7 +153,7 @@ export default function PerformanceList({
                 onClick={() => setParams({ page: String(Math.max(1, safePage - 1)) })}
                 disabled={safePage === 1}
               >
-                <i className="bi bi-chevron-left" />
+                <BsChevronLeft />
               </button>
               {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => (
                 <button
@@ -168,7 +169,7 @@ export default function PerformanceList({
                 onClick={() => setParams({ page: String(Math.min(totalPages, safePage + 1)) })}
                 disabled={safePage === totalPages}
               >
-                <i className="bi bi-chevron-right" />
+                <BsChevronRight />
               </button>
             </div>
           )}

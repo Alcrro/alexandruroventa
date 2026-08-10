@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import "./home.scss";
+import { BsLinkedin, BsGithub, BsFileEarmarkPerson } from "react-icons/bs";
 
 const container = {
 	hidden: {},
@@ -14,16 +15,16 @@ const item = {
 	visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-const socialLinks = [
+const socialLinks: { label: string; href: string; icon: React.ReactNode }[] = [
 	{
 		label: "LinkedIn",
 		href: "https://www.linkedin.com/in/alexandru-roventa/",
-		icon: "bi-linkedin",
+		icon: <BsLinkedin />,
 	},
 	{
 		label: "GitHub",
 		href: "https://github.com/Alcrro",
-		icon: "bi-github",
+		icon: <BsGithub />,
 	},
 ];
 
@@ -79,7 +80,7 @@ export default function HeroSection() {
 							href="/cv"
 							className="btn-secondary"
 						>
-							<i className="bi bi-file-earmark-person" />
+							<BsFileEarmarkPerson />
 							Open CV
 						</Link>
 					</motion.div>
@@ -97,7 +98,7 @@ export default function HeroSection() {
 								aria-label={link.label}
 								className="social-link"
 							>
-								<i className={`bi ${link.icon}`} />
+								{link.icon}
 							</Link>
 						))}
 					</motion.div>

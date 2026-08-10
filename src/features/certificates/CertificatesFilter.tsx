@@ -1,5 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
+import { BsSortDown, BsSortUp } from "react-icons/bs";
 
 interface Props {
   orgs: string[];
@@ -76,7 +77,7 @@ export default function CertificatesFilter({ orgs, langs, totalDocuments }: Prop
           className="sort-btn"
           onClick={() => setParam("order", currentOrder === "desc" ? "asc" : "desc")}
         >
-          <i className={`bi bi-sort-${currentOrder === "desc" ? "down" : "up"}`} />
+          {currentOrder === "desc" ? <BsSortDown /> : <BsSortUp />}
           {currentOrder === "desc" ? "Newest first" : "Oldest first"}
         </button>
         <span className="certs-count">{totalDocuments} certificates</span>

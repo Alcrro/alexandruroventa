@@ -2,6 +2,7 @@
 import { useTheme } from "next-themes";
 import React, { useEffect, useState } from "react";
 import "./theme.scss";
+import { BsSun, BsMoonStars } from "react-icons/bs";
 
 export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
@@ -19,7 +20,7 @@ export default function ThemeSwitch() {
       aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
       className="theme-toggle"
     >
-      <i className={`bi ${isDark ? "bi-sun" : "bi-moon-stars"}`} />
+      {isDark ? <BsSun /> : <BsMoonStars />}
     </button>
   );
 }
